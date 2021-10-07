@@ -13,7 +13,7 @@
         "languages": [{
             "id": "sc",
             "aliases": ["Script", "sc"],
-            "extensions": [".sc"],
+            "extensions": [":s", ".script"],
             "configuration": "./src/lang-config.json"
         }],
         "grammars": [{
