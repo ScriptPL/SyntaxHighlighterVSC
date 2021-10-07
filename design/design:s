@@ -6,7 +6,7 @@
 
 #*
 
-Go-Like inspired type following, a function per defajlt consists
+Go-Like inspired type following, a function per default consists
 of:
 - The function keyword "fn"
 - The function identifier = a variable name.
