@@ -1,0 +1,228 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Script",
+	"patterns": [{
+		"include": "#code"
+	}],
+	"repository": {
+		"code": {
+			"patterns": [{
+				"include": "#comments"
+			}, {
+				"include": "#strings"
+			},{
+				"include": "#langs"
+			}, {
+				"include": "#syntax"
+			}, {
+				"include": "#special"
+			}, {
+				"include": "#numeric"
+			}, {
+				"include": "#symbols"
+			}, {
+				"include": "#words"
+			}]
+		},
+		"comments": {
+			"patterns": [{
+				"begin": "#\\*",
+				"end": "\\*#",
+				"name": "comment.block.sc",
+				"patterns": [{
+					"include": "#comments"
+				}]
+			}, {
+				"name": "comment.line.sc",
+				"match": "#.*\n"
+			}]
+		},
+		"strings": {
+			"patterns": [{
+				"name": "string.quoted.single",
+				"begin": "'",
+				"end": "\n|(?<!\\\\)'",
+				"patterns": [{
+					"name": "constant.character.escape.sc",
+					"match": "\\\\."
+				}]
+			}, {
+				"name": "string.quoted.double",
+				"begin": "\"",
+				"end": "\n|(?<!\\\\)\"",
+				"patterns": [{
+					"name": "constant.character.escape.sc",
+					"match": "\\\\."
+				}]
+			}, {
+				"begin": "`",
+				"end": "\n|(?<!\\\\)`",
+				"patterns": [{
+					"begin": "(\\$\\()",
+					"end": "(\\))",
+					"patterns": [{
+						"include": "#code"
+					}],
+					"beginCaptures": {
+						"1": {
+							"name": "keyword"
+						}
+					},
+					"endCaptures": {
+						"1": {
+							"name": "keyword"
+						}
+					}
+				}, {
+					"name": "constant.character.escape.sc",
+					"match": "\\\\."
+				}, {
+					"match": ".",
+					"name": "string.sc"
+				}]
+			}]
+		},
+		"syntax": {
+			"patterns": [{
+				"match": "\\b(mtd|attr)\\s+([A-Za-z_][A-Za-z_0-9]*)",
+				"captures": {
+					"1": {
+						"name": "keyword.control.sc"
+					},
+					"2": {
+						"name": "keyword.sc"
+					}
+				}
+			}]
+		},
+		"langs": {
+			"patterns": [{
+				"begin": "<\\/",
+				"end": "\\/>",
+				"patterns": [{
+					"begin": "\\{\\{",
+					"end": "\\}\\}",
+					"patterns": [{
+						"include": "#code"
+					}],
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.sc"
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"name": "keyword.sc"
+						}
+					}
+				}],
+				"beginCaptures": {
+					"0": {
+						"name": "keyword.sc"
+					}
+				},
+				"endCaptures": {
+					"0": {
+						"name": "keyword.sc"
+					}
+				}
+			}, {
+				"begin": "js\\s*\\(",
+				"end": "\\)",
+				"patterns": [{
+					"include": "source.js"
+				}],
+				"beginCaptures": {
+					"0": {
+						"name": "keyword.control.sc"
+					}
+				},
+				"endCaptures": {
+					"0": {
+						"name": "keyword.control.sc"
+					}
+				}
+			}, {
+				"begin": "asm\\s*\\(",
+				"end": "\\)",
+				"beginCaptures": {
+					"0": {
+						"name": "keyword.control.sc"
+					}
+				},
+				"endCaptures": {
+					"0": {
+						"name": "keyword.control.sc"
+					}
+				}
+			}]
+		},
+		"special": {
+			"patterns": [{
+				"name": "keyword.operator.new.sc",
+				"match": "\\bb[A-F0-9]{1,2}\\b"
+			}, {
+				"name": "keyword.operator.new.sc",
+				"match": "\\br[A-D](\\-[fhq])?\\b"
+			}, {
+				"name": "keyword.operator.new.sc",
+				"match": "\\bf[ODITSZAPC]\\b"
+			}]
+		},
+		"numeric": {
+			"name": "constant.numeric.sc",
+			"match": "(\\-)?(\\.\\d+|\\d+(\\.\\d+)?)"
+		},
+		"symbols": {
+			"patterns": [{
+				"name": "keyword.control.sc",
+				"match": "=>|\\->"
+			}, {
+				"name": "keyword.sc",
+				"match": "\\-\\->|\\:\\:\\:?|\\?|~"
+			}, {
+				"name": "keyword.operator.sc",
+				"match": "(:|\\+|\\-|\\*)=|\\!|\\+|\\-|\\%|\\*|/|\\.\\.|\\\\"
+			}]
+		},
+		"words": {
+			"patterns": [{
+				"name": "keyword.control.sc",
+				"match": "(?<!\\.)\\b(mtd|attr|op|fn|comp|scope|struct|ext|do|exit|return|next|if|for|loop|throw|use)\\b"
+			}, {
+				"name": "keyword.sc",
+				"match": "\\b(pub|self|with|in|to|query|true|false|be|new|del|out|sleep|abort)\\b"
+			}, {
+				"name": "variable.other.constant.sc",
+				"match": "\\b(document|window|process)\\b"
+			}, {
+				"name": "support.type.sc",
+				"match": "\\b(any|u?int\\d*|str|char|bool|byte|func|code)\\b"
+			}, {
+				"name": "keyword.control.sc",
+				"match": "\\$[a-zA-Z\\.\\_:]*"
+			}, {
+				"name": "keyword.sc",
+				"match": "@[A-Za-z_][a-zA-Z\\.]*"
+			}, {
+				"name": "support.type.sc",
+				"match": "_*[A-Z][a-zA-Z0-9_]*"
+			}, {
+				"begin": "([A-Za-z_][A-Za-z_0-9]*)\\s*\\(",
+				"end": "\\)",
+				"patterns": [{
+					"include": "#code"
+				}],
+				"beginCaptures": {
+					"0": {
+						"name": "support.function.sc"
+					}
+				}
+			}, {
+				"name": "variable.sc",
+				"match": "_*[a-z_][a-zA-Z0-9_]*"
+			}]
+		}
+	},
+	"scopeName": "source.sc"
+}

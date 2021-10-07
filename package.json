@@ -1,0 +1,25 @@
+{
+    "name": "script-programming-language",
+    "displayName": "Script Programming Language",
+    "description": "Syntax Highlighting for Script",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "sc",
+            "aliases": ["Script", "sc"],
+            "extensions": [".sc"],
+            "configuration": "./src/lang-config.json"
+        }],
+        "grammars": [{
+            "language": "sc",
+            "scopeName": "source.sc",
+            "path": "./src/syntax.json"
+        }]
+    }
+}
