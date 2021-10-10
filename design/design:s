@@ -29,31 +29,9 @@ if x == 5 do x := 4
 fn factorial (n uint) int {
    if n <= 1
       exit 1
-   exit factorial(n - 1) * n
+   # elif
+      exit factorial(n - 1) * n
 }
-
-##############################
-######### CONDITIONS #########
-##############################
-
-#*
-
-It's worth nothing that conditional operators are stackable from
-left to right.
-
-*#
-
-# LEFT-LOWEST (or equality)
-a < b <= c < d       # equivalent to:     a < b && b <= c && c < d
-a == b == c          # equivalent to:     a == b && b == c
-a < b == c < d       # equivalent to:     a < b && b == c && c < d
-
-# RIGHT LOWEST
-a > b > c            # also possible
-
-# ILLEGAL
-a < b > c            # but: could technically be interpreted as a < b && b > a
-a > b < c            # therefore... could be legal?
 
 #####################################
 ######### PRINTING, METHODS #########
@@ -74,27 +52,27 @@ METHOD_TYPE   PARAM1, PARAM2, ...
 
 *#
 
-out factorial(5)
+&out factorial(5)
 
 # Create a method consuming any amount of parameters.
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
-mtd outln (params [...]) {
-   out params, b0A
+mtd &outln (params [...]) {
+   &out params, b0A
 }
 
-mtd with_parameters (i int, j int, k int) {
+mtd &with_parameters (i int, j int, k int) {
    # Do something
 }
 
-mtd without_parameters () {
+mtd &without_parameters () {
    # Do something
 }
 
-outln 'Hello, World!'
-with_parameters 5, 5, 5
-without_parameters
+&outln 'Hello, World!'
+&with_parameters 5, 5, 5
+&without_parameters
 
 ##################################
 ######### RETURN vs EXIT #########
@@ -111,38 +89,25 @@ The function below returns a referenced variable (declaration)
 
 *#
 
-fn primes (max uint) []uint {
-   return be prime_list := [2, 3]
+fn primes (max uint) [uint] {
+   be prime_list := [2, 3]
+   ret prime_list
 
-   for i := (5 to max) += 2 {
+   for i in [5 --> max] += 2 {
       # Generate primes here
    }
 }
-
-#############################
-######### FOR LOOPS #########
-#############################
-
-# General scheme
-for (var =) ((start) to (end)) (jump)
-for i :=    (start   to end)   (+= / -= / *=) increment
-
-# Examples
-for (i := start; i < end; i++)   # Traditional for-loop
-for i := start to end            # for (i = start; i <= end; i++)
-for start to end                 # ^
-for i := element in array        # for .. in
-for element in array             # ^
 
 #######################################
 ######### FIBONACCI GENERATOR #########
 #######################################
 
 # This function will run indefinitely.
-fn fibonacci () []uint {
-   return be f := [0, 1]
+fn fibonacci () [uint] {
+   be f := [0, 1]
+   ret f
 
-   loop {
+   rep {
       f += f[f.l - 1] + f[f.l] # push to f: sum of last two values
    }
 }
@@ -156,10 +121,10 @@ array.len # too
 # Here's an exmple how to force the end of a function
 
 be x := fibonacci()  # Start a fibonacci collector
-sleep 1000           # Sleep main thread for 1000 milliseconds
-x.exit               # End x's function thread. This is a method on a
+&sleep 1000          # Sleep main thread for 1000 milliseconds
+x.&exit              # End x's function thread. This is a method on a
                      # type. More about them, later.
-out x                # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
+&out x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
 
 ##################################################
 ######### INLINE FUNCTIONS - MATH SYNTAX #########
@@ -169,7 +134,7 @@ fn f (x) {
    exit 2 * x + 5
 }
 
-out f(2)
+&out f(2)
 
 # the function is is the same as
 
@@ -186,15 +151,11 @@ fn f (x) -> 2 * x + 5
 ###########################
 
 use (
-   'lib:time'                          # Import as 'time'
+   'time'                              # Import 'time' library
    'pkg:github.com/Something/proj'     # Import as 'proj'
-   'src:path/to/file.sc'               # Import 'file' from source
-   '/path/to/file.sc'                  # Also import from source
+   '/path/to/file.sc'                  # Import from source
    './path/to/file.sc'                 # Import 'file' from current directory
    '../path/to/file.sc'                # Import 'file' from parent directory
-   as  <- 'lib/assert'                 # Import 'assert' as 'as'
-   p   <- 'pkg/@package-manager/pack'  # Import 'pack' as 'p'
-   flt <- '/path/to/filter.sc'         # Import 'filter' from source as 'flt'
 )
 
 # special
@@ -211,25 +172,11 @@ use (*unsafe *asm) # unsafe could support an 'eval' method to execute string as 
 # "asm": assembly input
 #   - assembly coding in code
 
-#######################################
-######### REGULAR EXPRESSIONS #########
-#######################################
-
-be pattern := R'hello world'gi
-out 'Developers love to write "Hello World!" as their first program':find(pattern) # (25, 35) or similar output
-
-be pat1 := r'[\w\d\._%\-]+@[\w\d\._%\-]+\.[\w]{2..64}'gi
-be pat2 := r'p{2 | 4..8}q'gi # Matches ppq, ppppq ... ppppppppq (p can be two or four to eight times)
-
-out 'hello@example.com' * pat1 # string * pattern returns boolean: match or not
-
-
-
 ###########################################
 ######### ENTITY COMPONENT SYSTEM #########
 ###########################################
 
-comp EmptyTag # Component that is just a tag
+comp EmptyTag # Structure without content. 
 
 comp Position {
    x int
@@ -251,17 +198,17 @@ be predefinedComp = Velocity {
 
 be hero int := new (
    EmptyTag
-   Position {
+   Position (
       x = 0
       y = 0
-   }
+   )
    predefinedComp
-   Asset {
-      image = new Image
-   }
+   Asset (
+      image = Image ()
+   )
 )
 
-del hero 
+hero.&del
 
 #
 # Iterate over component-combinations
@@ -292,7 +239,7 @@ for query (Position, Asset) {
 ######### BACK END #########
 ############################
 
-use ('lib/server')
+use 'server'
 
 be app := server()
 
@@ -303,12 +250,12 @@ be app := server()
 @app.get '/'
 @async # In this case technically unused.
 (req, res)  -> {
-   return 'Hello, World!'
+   ret 'Hello, World!'
 }
 
 @app.get '*'
 (req, res) -> {
-   return 404
+   ret 404
 }
 
 # &get '*' -> 404 # Shortcut (?)
@@ -322,7 +269,7 @@ be app := server()
 ##############################
 
 #   @get '...'   { ... }
-attr get (path str) x func<(), int> {
+attr @get (path str) x [func [null, int]] {
    # VERY ABSTRACT!!! ADD THIS TO THE EVENT HANDLER OR SO
    if request == path {
       x()
@@ -352,7 +299,7 @@ attr get (path str) x func<(), int> {
    }
 
    x:$after 'keyword.return' {
-      out 'Returned a variable!'
+      &out 'Returned a variable!'
    }
 }
 
@@ -360,13 +307,13 @@ attr get (path str) x func<(), int> {
 
 ###
 
-attr m () x any {
+attr @m () x any {
    x:$declare {
-      out 'Hello, Apple!'
+      &out 'Hello, Apple!'
    }
 
    x:$set (y) {
-      out 'Value set to ', y
+      &out 'Value set to ', y
    }
 }
 
@@ -387,10 +334,10 @@ be x = 5
 # func() is a function with a null return type
 # code   is an empty code block
 # function inherits from code, hence can also be tested
-attr test () -> x code {
+attr @test () -> x code {
    out 'Test Block', b0A, b0A
 
-   attr expect ( message str ) -> b bool {
+   attr @expect ( message str ) -> b bool {
       out b ? 'PASSED' ~ 'FAILED'
       out ' ', message
    }
@@ -424,18 +371,18 @@ op 'c'
    exit left * 2 + right
 }
 
-out 5 c 4     # 14
-out 5 c 4 c 3 # 14 c 3 = 31 (since stackable)
+&out 5 c 4     # 14
+&out 5 c 4 c 3 # 14 c 3 = 31 (since stackable)
 
 #################################
 # Scalar product of two vectors #
 #################################
 
-be x1 := (1, 2, 3) # <int, int, int> = <int; 3>
+be x1 := (1, 2, 3) # (int, int, int) = (int * 3)
 be x2 := (4, 5, 6)
 
 op 'o' (
-   l <int; 3>, r <int; 3>
+   l (int * 3), r (int * 3)
 ) int -> {
    exit l.0 * r.0 + l.1 * r.1 + l.2 * r.2
 }
@@ -446,13 +393,13 @@ out x1 o x2 # 32
 # Vector #
 ##########
 
-struct Vector [int; 3]
+struct Vector (int * 3)
 
 v1 Vector := (1, 2, 3)
 v2 Vector := (4, 5, 6)
 
 ext Vector {
-   $op '+' (self, v Vector) {
+   op '+' (self, v Vector) {
       exit self.0 + x.0, self.1 + x.1, self.2 + x.2
    }
 }
@@ -562,8 +509,8 @@ $$ {
       exit x
    }
 
-   fn parser(content str) []str {
-      be tokens []str = []
+   fn parser(content str) [str] {
+      be tokens [str] = []
 
       loop {
          if content * '^2' {

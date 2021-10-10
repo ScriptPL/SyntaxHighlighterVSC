@@ -13,8 +13,6 @@
 			},{
 				"include": "#langs"
 			}, {
-				"include": "#syntax"
-			}, {
 				"include": "#special"
 			}, {
 				"include": "#numeric"
@@ -80,19 +78,6 @@
 					"match": ".",
 					"name": "string.sc"
 				}]
-			}]
-		},
-		"syntax": {
-			"patterns": [{
-				"match": "\\b(mtd|attr)\\s+([A-Za-z_][A-Za-z_0-9]*)",
-				"captures": {
-					"1": {
-						"name": "keyword.control.sc"
-					},
-					"2": {
-						"name": "keyword.sc"
-					}
-				}
 			}]
 		},
 		"langs": {
@@ -176,10 +161,10 @@
 		"symbols": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "=>|\\->"
+				"match": "\\->"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\-\\->|\\:\\:\\:?|\\?|~"
+				"match": "\\-\\->|\\:\\:\\:?|\\?|~|=>"
 			}, {
 				"name": "keyword.operator.sc",
 				"match": "(:|\\+|\\-|\\*)=|\\!|\\+|\\-|\\%|\\*|/|\\.\\.|\\\\"
@@ -188,22 +173,25 @@
 		"words": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "(?<!\\.)\\b(mtd|attr|op|fn|comp|scope|struct|ext|do|exit|return|next|if|for|loop|throw|use)\\b"
+				"match": "(?<!\\.)\\b(mtd|attr|op|fn|comp|scope|struct|enum|coll|ext|do|exit|ret|next|end|(el)?if|el|match|for|rep|throw)\\b"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\b(pub|self|with|in|to|query|true|false|be|new|del|out|sleep|abort)\\b"
+				"match": "\\b(use|pkg|pub|self|with|in|to|inf|query|true|false|be|new|null)\\b"
 			}, {
 				"name": "variable.other.constant.sc",
 				"match": "\\b(document|window|process)\\b"
 			}, {
 				"name": "support.type.sc",
-				"match": "\\b(any|u?int\\d*|str|char|bool|byte|func|code)\\b"
+				"match": "\\b(any|u?int\\d*|num|str|char|bool|byte|func|code)\\b"
 			}, {
 				"name": "keyword.control.sc",
-				"match": "\\$[a-zA-Z\\.\\_:]*"
+				"match": "\\$[a-zA-Z\\.\\_:_]*"
+			}, {
+				"name": "keyword.control.sc",
+				"match": "@(async)\\b"
 			}, {
 				"name": "keyword.sc",
-				"match": "@[A-Za-z_][a-zA-Z\\.]*"
+				"match": "[@&][A-Za-z_][a-zA-Z\\._]*"
 			}, {
 				"name": "support.type.sc",
 				"match": "_*[A-Z][a-zA-Z0-9_]*"

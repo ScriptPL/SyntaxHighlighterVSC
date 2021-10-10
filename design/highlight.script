@@ -39,23 +39,23 @@ Abcdef012345, _____HelloWorld
 
 # Non-Type Variables followed by brackets are usually functions
 
-hello ()
+hello (), _hello ()
 
 ######### RESERVED TYPES #########
 
-any, uint64, int, int32, str, bool, byte, func, code
+any, uint64, int, int32, num, str, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-mtd, attr, op, fn, comp, scope, struct, ext, do, exit, return, next, if, for, loop, throw, use
+mtd, attr, op, fn, comp, scope, struct, enum, coll, ext, do, exit, ret, next, end, if, elif, el, match, for, rep, throw
 
 ######### RESERVED KEYWORDS #########
 
-pub, self, with, in, to, query, true, false, be, new
+use, pkg, pub, self, with, in, to, inf, query, true, false, be, new, null
 
-######### RESERVED METHODS (= KEYWORDS) #########
+######### METHODS (= KEYWORDS) #########
 
-del, out, sleep, abort
+&del, &out, &sleep, &abort, ...
 
 ######### RESERVED CONSTANTS #########
 
@@ -64,4 +64,13 @@ window, document, process
 ######### ATTRIBUTES #########
 
 @hello.world
+@async                  # Async sort of special
 $attributiveKeywords
+
+######### EXAMPLE #########
+
+@attr something
+fn name () int {
+    &method
+    exit -123456789.0
+}

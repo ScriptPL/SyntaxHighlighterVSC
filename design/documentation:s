@@ -1,0 +1,138 @@
+
+# DEFINING A PACKAGE
+
+pkg main
+
+# BASICS
+
+&methods
+@attributes
+$definitions
+{ code block }
+( values )
+value
+[ type ]
+
+#########
+# TYPES #
+#########
+
+null            # Type and value
+int             # Integer
+[int]           # List of integers
+[int * 5]       # Array of integers with five elements.
+[int, str * 3]  # Tuple with 1 = integer, followed by three strings
+Type[T]         # Type with type specification
+[int | '0']     # Type Collection -> Quick Enum: Integer or '0'
+
+################
+# CONTROL FLOW #
+################
+
+# Code repetetion / loop
+
+be i int = 5                # for ( i = s;
+rep {
+    (i < end_value) => end  # i < end_value ;
+    # Content
+    i += 1                  # i ++
+}
+
+rep 5 {
+    # repeat five times
+}
+
+rep condition {
+    # while condition
+}
+
+for i = 0; i < end_value; i += 1 {
+    # traditional for loop
+}
+
+for i, e in arr {
+    # for elements of an array
+}
+
+for ... in iter {
+    # for over an iterable
+}
+
+# Range Set
+
+[start_value --> end_value] # Defines a quick range: (start, start + 1, ..., end)
+
+for i, e in [s --> e] { }        # for (i = s; i <= e; i++)
+for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
+
+# Conditional operators are stackable
+
+a < b <= c < d       # equivalent to:     a < b && b <= c && c < d
+a == b == c          # equivalent to:     a == b && b == c
+a < b == c < d       # equivalent to:     a < b && b == c && c < d
+a > b > c            # also possible
+
+# ILLEGAL
+a < b > c            # but: could technically be interpreted as a < b && b > a
+a > b < c            # therefore... could be legal?
+
+if c { }            # if statement
+eif c { }           # else if statement
+el {}               # else statement
+
+(condition) => action # quick if
+
+#########################
+# STRUCTURE DEFINITIONS #
+#########################
+
+# Enum
+
+enum Enum [
+    Element1,
+    Element2,
+    pub Element3
+]
+
+# Usage:
+
+Enum.Element1
+Enum.Element2
+Enum.Element3
+Element3        # pub keyword instantly unpacks content.
+
+# Collection
+
+coll Token [
+    [str],
+    bool,
+    9,
+    'content'
+]
+
+be t Token = 9
+
+# Structures, Component Structures
+
+struct Structure [
+    x int,
+    y bool,
+    z : [
+        z1 int,
+        z2 bool
+    ]
+]
+
+comp Velocity [
+    x num,
+    y num
+]
+
+be x := Structure (
+    x = 5,
+    y = true,
+    z = (
+        z1 = -5,
+        z2 = false
+    )
+)
