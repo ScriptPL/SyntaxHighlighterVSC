@@ -34,17 +34,17 @@ Type[T]         # Type with type specification
 # Code repetetion / loop
 
 be i int = 5                # for ( i = s;
-rep {
+for {                       # standalone; for {} is a while true loop
     if i < end_value do end # i < end_value ;
     # Content
     i += 1                  # i ++
 }
 
-rep 5 {
+for 5 {
     # repeat five times
 }
 
-rep condition {
+for condition {
     # while condition
 }
 

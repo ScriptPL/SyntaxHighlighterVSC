@@ -60,7 +60,7 @@ any, uint64, int, int32, num, str, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-mtd, attr, op, fn, scope, type, do, exit, ret, next, end, if, elif, el, is, for, rep, throw
+mtd, attr, op, fn, scope, type, do, exit, ret, next, end, if, elif, el, is, for, throw
 
 ######### RESERVED KEYWORDS #########
 
@@ -68,11 +68,13 @@ use, pkg, pub, self, with, in, inf, query, true, false, be, new, null
 
 ######### METHODS (= KEYWORDS) #########
 
-; del, out, sleep, abort, ...
+out 'Hello, World!'
+sleep
+abort
 
 ######### RESERVED CONSTANTS #########
 
-window, document, process
+; window, document, process
 
 ######### ATTRIBUTES #########
 
