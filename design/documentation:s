@@ -12,6 +12,8 @@ $definitions
 ( values )
 value
 [ type ]
+value [of type]
+[type conversion for] value
 
 #########
 # TYPES #
@@ -79,6 +81,14 @@ a > b < c            # therefore... could be legal?
 if c { }            # if statement
 elif c { }           # else if statement
 el {}               # else statement
+
+if value {
+    is k {}
+    is m do something
+}
+
+if value is something {}
+if value is something do something
 
 #########################
 # STRUCTURE DEFINITIONS #

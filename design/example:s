@@ -37,18 +37,21 @@ out 'Hello, World!'
 mtd print_element (...params any) {
     for i, e in params {
         if e { # if it's a non-boolean value, act like a switch
-            case k str:
-                out k, b0A
+            is str {
+                out e, b0A
+            }
 
-            case k int:
-                out [str] k, b0A # Parse integer to string
+            is int {
+                out <str> e, b0A # Parse integer to string
+            }
 
-            case k bool:
-                if k == true {
+            is bool {
+                if e {
                     out 'true', b0A
                 } el {
                     out 'false', b0A
                 }
+            }
         }
     }
 }
