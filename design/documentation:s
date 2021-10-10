@@ -90,17 +90,21 @@ if value {
 if value is something {}
 if value is something do something
 
-#########################
-# STRUCTURE DEFINITIONS #
-#########################
+####################
+# TYPE DEFINITIONS #
+####################
+
+# Type without content, a very simple type
+
+type SimpleType
 
 # Enum
 
-enum Enum [
-    Element1,
-    Element2,
-    pub Element3    # Pub unpacks enum type
-    use str         # String Type
+type Enum [
+    type Element1 |
+    type Element2 |
+    pub type Element3 | # Pub unpacks enum type
+    use str             # String Type
 ]
 
 # Usage:
@@ -112,27 +116,27 @@ Element3        # pub keyword instantly unpacks content.
 
 # Collection
 
-enum Token [
-    use [str],
-    use bool,
-    use 9,
-    use 'content'
+type Token [
+    [str], # use indicates
+    bool,
+    9,
+    'content'
 ]
 
 be t Token = 9
 
 # Structures, Component Structures
 
-struct Structure [
+type Structure [
     x int,
     y bool,
-    z : [
+    z [
         z1 int,
         z2 bool
     ]
 ]
 
-struct Velocity [
+type Velocity [
     x num,
     y num
 ]
