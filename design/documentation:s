@@ -19,8 +19,8 @@ value
 
 null            # Type and value
 int             # Integer
-[int]           # List of integers
-[int * 5]       # Array of integers with five elements.
+[]int           # List of integers
+[5]int          # Array of integers with five elements.
 [int, str * 3]  # Tuple with 1 = integer, followed by three strings
 Type[T]         # Type with type specification
 [int | '0']     # Type Collection -> Quick Enum: Integer or '0'
@@ -33,7 +33,7 @@ Type[T]         # Type with type specification
 
 be i int = 5                # for ( i = s;
 rep {
-    (i < end_value) => end  # i < end_value ;
+    if i < end_value do end # i < end_value ;
     # Content
     i += 1                  # i ++
 }
@@ -60,7 +60,7 @@ for ... in iter {
 
 # Range Set
 
-[start_value --> end_value] # Defines a quick range: (start, start + 1, ..., end)
+[start_value --> end_value] # Defines a quick range (invisible array): (start, start + 1, ..., end)
 
 for i, e in [s --> e] { }        # for (i = s; i <= e; i++)
 for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
@@ -77,10 +77,8 @@ a < b > c            # but: could technically be interpreted as a < b && b > a
 a > b < c            # therefore... could be legal?
 
 if c { }            # if statement
-eif c { }           # else if statement
+elif c { }           # else if statement
 el {}               # else statement
-
-(condition) => action # quick if
 
 #########################
 # STRUCTURE DEFINITIONS #
@@ -91,7 +89,8 @@ el {}               # else statement
 enum Enum [
     Element1,
     Element2,
-    pub Element3
+    pub Element3    # Pub unpacks enum type
+    use str         # String Type
 ]
 
 # Usage:
@@ -103,11 +102,11 @@ Element3        # pub keyword instantly unpacks content.
 
 # Collection
 
-coll Token [
-    [str],
-    bool,
-    9,
-    'content'
+enum Token [
+    use [str],
+    use bool,
+    use 9,
+    use 'content'
 ]
 
 be t Token = 9
@@ -123,7 +122,7 @@ struct Structure [
     ]
 ]
 
-comp Velocity [
+struct Velocity [
     x num,
     y num
 ]
@@ -136,3 +135,11 @@ be x := Structure (
         z2 = false
     )
 )
+
+# Type methods
+
+fn Structure.sum() {
+    # Just declare the function of pattern TYPE:METHOD
+}
+
+x.sum()

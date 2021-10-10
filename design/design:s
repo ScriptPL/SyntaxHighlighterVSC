@@ -58,21 +58,21 @@ METHOD_TYPE   PARAM1, PARAM2, ...
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
-mtd &outln (params [...]) {
+mtd outln ([...] params any) {
    &out params, b0A
 }
 
-mtd &with_parameters (i int, j int, k int) {
+mtd with_parameters (i int, j int, k int) {
    # Do something
 }
 
-mtd &without_parameters () {
+mtd without_parameters () {
    # Do something
 }
 
-&outln 'Hello, World!'
-&with_parameters 5, 5, 5
-&without_parameters
+outln 'Hello, World!'
+with_parameters 5, 5, 5
+without_parameters
 
 ##################################
 ######### RETURN vs EXIT #########
@@ -89,8 +89,8 @@ The function below returns a referenced variable (declaration)
 
 *#
 
-fn primes (max uint) [uint] {
-   be prime_list := [2, 3]
+fn primes (max uint) []uint {
+   be prime_list := (2, 3)
    ret prime_list
 
    for i in [5 --> max] += 2 {
@@ -104,11 +104,11 @@ fn primes (max uint) [uint] {
 
 # This function will run indefinitely.
 fn fibonacci () [uint] {
-   be f := [0, 1]
+   be f := (0, 1)
    ret f
 
    rep {
-      f += f[f.l - 1] + f[f.l] # push to f: sum of last two values
+      f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
    }
 }
 
@@ -121,10 +121,10 @@ array.len # too
 # Here's an exmple how to force the end of a function
 
 be x := fibonacci()  # Start a fibonacci collector
-&sleep 1000          # Sleep main thread for 1000 milliseconds
-x.&exit              # End x's function thread. This is a method on a
+sleep 1000          # Sleep main thread for 1000 milliseconds
+x.leave              # End x's function thread. This is a method on a
                      # type. More about them, later.
-&out x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
+out x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
 
 ##################################################
 ######### INLINE FUNCTIONS - MATH SYNTAX #########
@@ -134,7 +134,7 @@ fn f (x) {
    exit 2 * x + 5
 }
 
-&out f(2)
+out f(2)
 
 # the function is is the same as
 
@@ -176,18 +176,18 @@ use (*unsafe *asm) # unsafe could support an 'eval' method to execute string as 
 ######### ENTITY COMPONENT SYSTEM #########
 ###########################################
 
-comp EmptyTag # Structure without content. 
+struct EmptyTag # Structure without content. 
 
-comp Position {
+struct Position {
    x int
    y int
 }
 
-comp Velocity {
+struct Velocity {
    x int, y int
 }
 
-comp Asset {
+struct Asset {
    image Image
 }
 
@@ -196,7 +196,7 @@ be predefinedComp = Velocity {
    y = 5
 }
 
-be hero int := new (
+be hero int = new (
    EmptyTag
    Position (
       x = 0
@@ -241,7 +241,7 @@ for query (Position, Asset) {
 
 use 'server'
 
-be app := server()
+app := server()
 
 #app.get('/', (req, res) -> &async {
 #   return 

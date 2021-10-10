@@ -112,7 +112,7 @@
 					}
 				}
 			}, {
-				"begin": "js\\s*\\(",
+				"begin": "(?<!\\w)js\\s*\\(",
 				"end": "\\)",
 				"patterns": [{
 					"include": "source.js"
@@ -128,7 +128,7 @@
 					}
 				}
 			}, {
-				"begin": "asm\\s*\\(",
+				"begin": "(?<!\\w)asm\\s*\\(",
 				"end": "\\)",
 				"beginCaptures": {
 					"0": {
@@ -164,34 +164,46 @@
 				"match": "\\->"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\-\\->|\\:\\:\\:?|\\?|~|=>"
+				"match": "\\-\\->|\\:\\:\\:?|\\?|~|=>|\\.{3}"
 			}, {
 				"name": "keyword.operator.sc",
 				"match": "(:|\\+|\\-|\\*)=|\\!|\\+|\\-|\\%|\\*|/|\\.\\.|\\\\"
 			}]
 		},
-		"words": {
+		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "(?<!\\.)\\b(mtd|attr|op|fn|comp|scope|struct|enum|coll|ext|do|exit|ret|next|end|(el)?if|el|match|for|rep|throw)\\b"
+				"match": "\\b(mtd|attr|op|fn|scope|struct|enum|do|exit|ret|next|end|(el)?if|el|case|for|rep|throw)\\b"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\b(use|pkg|pub|self|with|in|to|inf|query|true|false|be|new|null)\\b"
+				"match": "\\b(use|pkg|pub|self|with|in|inf|query|true|false|be|new|null)\\b"
 			}, {
 				"name": "variable.other.constant.sc",
 				"match": "\\b(document|window|process)\\b"
 			}, {
 				"name": "support.type.sc",
 				"match": "\\b(any|u?int\\d*|num|str|char|bool|byte|func|code)\\b"
+			}]
+		},
+		"words": {
+			"patterns": [{
+				"include": "#keywords"
 			}, {
 				"name": "keyword.control.sc",
 				"match": "\\$[a-zA-Z\\.\\_:_]*"
 			}, {
-				"name": "keyword.control.sc",
-				"match": "@(async)\\b"
-			}, {
 				"name": "keyword.sc",
-				"match": "[@&][A-Za-z_][a-zA-Z\\._]*"
+				"match": "@[A-Za-z_][a-zA-Z\\._]*"
+			}, {
+				"match": "^\\s*([A-Za-z_0-9\\.\\:]+)\\s*(?!(\\(|\\:?=>?))",
+				"captures": {
+					"1": {
+						"name": "variable.other.constant.sc",
+						"patterns": [{
+							"include": "#keywords"
+						}]
+					}
+				}
 			}, {
 				"name": "support.type.sc",
 				"match": "_*[A-Z][a-zA-Z0-9_]*"

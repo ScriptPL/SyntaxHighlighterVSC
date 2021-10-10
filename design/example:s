@@ -1,0 +1,57 @@
+
+pkg main
+
+##########################################################################################
+#########                            FACTORIAL FUNCTIONS                         #########
+##########################################################################################
+
+fn factorial (n uint) uint {
+    if n <= 1
+        exit 1
+    elif # this line can be comment technically
+        exit this(n - 1) * n # you can "exit self( ..." to indicate calling yourself
+}
+
+fn factorial (n uint) uint {
+    r := 1
+    for i in [1 --> n] {
+        r *= n
+    }
+    ret n
+}
+
+##########################################################################################
+#########                               OUTPUT PRINT                             #########
+##########################################################################################
+
+out 'Hello, World!'
+
+##########################################################################################
+#########                                 METHODS                                #########
+##########################################################################################
+#
+# Functions as set of instructions. No return value, and not stacked. Calling methods to
+# form a repetition circle is disallowed.
+#
+
+mtd print_element (...params any) {
+    for i, e in params {
+        if e { # if it's a non-boolean value, act like a switch
+            case k str:
+                out k, b0A
+
+            case k int:
+                out [str] k, b0A # Parse integer to string
+
+            case k bool:
+                if k == true {
+                    out 'true', b0A
+                } el {
+                    out 'false', b0A
+                }
+        }
+    }
+}
+
+print_element 'Hello', 5, false
+
