@@ -52,14 +52,14 @@ METHOD_TYPE   PARAM1, PARAM2, ...
 
 *#
 
-&out factorial(5)
+out factorial(5)
 
 # Create a method consuming any amount of parameters.
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
 mtd outln ([...] params any) {
-   &out params, b0A
+   out params, b0A
 }
 
 mtd with_parameters (i int, j int, k int) {
@@ -176,25 +176,25 @@ use (*unsafe *asm) # unsafe could support an 'eval' method to execute string as 
 ######### ENTITY COMPONENT SYSTEM #########
 ###########################################
 
-struct EmptyTag # Structure without content. 
+type EmptyTag # Simple Type
 
-struct Position {
+type Position []
    x int
    y int
 }
 
-struct Velocity {
+type Velocity [
    x int, y int
-}
+]
 
-struct Asset {
+type Asset [
    image Image
-}
+]
 
-be predefinedComp = Velocity {
+be predefinedComp = Velocity (
    x = 5
    y = 5
-}
+)
 
 be hero int = new (
    EmptyTag
@@ -208,19 +208,19 @@ be hero int = new (
    )
 )
 
-hero.&del
+hero.del
 
 #
 # Iterate over component-combinations
 #
 
-for eid int := query (Position, Velocity) {
+for eid int in query (Position, Velocity) {
    Position[eid].x += Velocity[eid].x
    Position[eid].y += Velocity[eid].y
 }
 
-for eid int := query (Position, Asset) {
-   Asset[eid].image.render(Position[eid].x, Position[eid].y)
+for eid int in query (Position, Asset) {
+   Asset(eid).image.render(Position[eid].x, Position[eid].y)
 }
 
 # In case for loop is not nested and

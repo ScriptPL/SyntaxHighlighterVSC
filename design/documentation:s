@@ -5,14 +5,14 @@ pkg main
 
 # BASICS
 
-&methods
+methods
 @attributes
 $definitions
 { code block }
 ( values )
-value
+; value
 [ type ]
-value [of type]
+; value [of type]
 [type conversion for] value
 
 #########
@@ -60,6 +60,15 @@ for ... in iter {
     # for over an iterable
 }
 
+for iterable {
+    # for over an iterable function
+}
+
+{
+    next # continue
+    end  # break
+}
+
 # Range Set
 
 [start_value --> end_value] # Defines a quick range (invisible array): (start, start + 1, ..., end)
@@ -69,17 +78,17 @@ for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i +
 
 # Conditional operators are stackable
 
-a < b <= c < d       # equivalent to:     a < b && b <= c && c < d
-a == b == c          # equivalent to:     a == b && b == c
-a < b == c < d       # equivalent to:     a < b && b == c && c < d
-a > b > c            # also possible
+; a < b <= c < d    # equivalent to:     a < b && b <= c && c < d
+; a == b == c       # equivalent to:     a == b && b == c
+; a < b == c < d    # equivalent to:     a < b && b == c && c < d
+; a > b > c         # also possible
 
 # ILLEGAL
-a < b > c            # but: could technically be interpreted as a < b && b > a
-a > b < c            # therefore... could be legal?
+; a < b > c         # but: could technically be interpreted as a < b && b > a
+; a > b < c         # therefore... could be legal?
 
 if c { }            # if statement
-elif c { }           # else if statement
+elif c { }          # else if statement
 el {}               # else statement
 
 if value {
@@ -89,6 +98,7 @@ if value {
 
 if value is something {}
 if value is something do something
+if condition do somthing
 
 ####################
 # TYPE DEFINITIONS #
@@ -101,25 +111,25 @@ type SimpleType
 # Enum
 
 type Enum [
-    type Element1 |
-    type Element2 |
-    pub type Element3 | # Pub unpacks enum type
-    use str             # String Type
+    new Element1 | # New defines a new simply type as subtype of the enum.
+    new Element2 |
+    pub new Element3 | # Pub unpacks enum type
+    str # String Type
 ]
 
 # Usage:
 
-Enum.Element1
-Enum.Element2
-Enum.Element3
-Element3        # pub keyword instantly unpacks content.
+; Enum.Element1
+; Enum.Element2
+; Enum.Element3
+; Element3        # pub keyword instantly unpacks content.
 
 # Collection
 
 type Token [
-    [str], # use indicates
-    bool,
-    9,
+    [str] | # use indicates
+    bool |
+    9 |
     'content'
 ]
 

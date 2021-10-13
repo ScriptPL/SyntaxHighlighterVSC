@@ -60,11 +60,21 @@ any, uint64, int, int32, num, str, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-mtd, attr, op, fn, scope, type, do, exit, ret, next, end, if, elif, el, is, for, throw
+do                  # statement indicator
+mtd, attr, op, fn   # declaration of code
+scope, type         # scope and structure declaration
+for, next, end      # repetetive control flow
+exit, ret
+if, elif, el, is    # conditional control flow
+throw               # control throw
 
 ######### RESERVED KEYWORDS #########
 
-use, pkg, pub, self, with, in, inf, query, true, false, be, new, null
+use, pkg            # package management
+pub                 # visiblity
+true, false, null   # values
+be, new, self,      # other
+with, in, inf
 
 ######### METHODS (= KEYWORDS) #########
 
@@ -86,6 +96,6 @@ $attributiveKeywords
 
 @attr something
 fn name () int {
-    &method
+    method
     exit -123456789.0
 }
