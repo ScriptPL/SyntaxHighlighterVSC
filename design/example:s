@@ -58,3 +58,36 @@ mtd print_element (...params any) {
 
 print_element 'Hello', 5, false
 
+##########################################################################################
+#########                         ENTITY COMPONENT SYSTEM                        #########
+##########################################################################################
+#
+# A built-in entity system is provided. To create a new entity, use the keyword new with
+# a set of type structures.
+#
+
+type Player
+
+type Position [
+    x int
+    y int
+]
+
+type Velocity [
+    x int
+    y int
+]
+
+be player int = new (
+    Player,
+    Position (
+        x = 0,
+        y = 5
+    )
+)
+
+# Queries are compile time optimized.
+for eid int in query (Player, Position, Velocity) {
+   Position(eid).x += Velocity(eid).x
+   Position(eid).y += Velocity(eid).y
+}
