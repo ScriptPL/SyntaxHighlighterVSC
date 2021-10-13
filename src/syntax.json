@@ -5,7 +5,7 @@
 		"include": "#code"
 	}],
 	"repository": {
-		"*": {
+		"type": {
 			"patterns": [{
 				"include": "#comments"
 			}, {
@@ -18,26 +18,48 @@
 				"include": "#symbols"
 			}, {
 				"include": "#keywords"
+			}, {
+				"include": "#words"
+			}, {
+				"begin": "\\[",
+				"end": "\\]",
+				"include": "#type"
 			}]
 		},
 		"value": {
 			"patterns": [{
-				"include": "#*"
+				"include": "#comments"
+			}, {
+				"include": "#strings"
+			}, {
+				"include": "#special"
+			}, {
+				"include": "#numeric"
+			}, {
+				"include": "#symbols"
+			}, {
+				"include": "#keywords"
 			}, {
 				"include": "#words"
 			}, {
 				"begin": "\\(",
 				"end": "\\)",
 				"include": "#value"
-			}, {
-				"begin": "\\[",
-				"end": "\\]",
-				"include": "#value"
 			}]
 		},
 		"code": {
 			"patterns": [{
-				"include": "#*"
+				"include": "#comments"
+			}, {
+				"include": "#strings"
+			}, {
+				"include": "#special"
+			}, {
+				"include": "#numeric"
+			}, {
+				"include": "#symbols"
+			}, {
+				"include": "#keywords"
 			}, {
 				"include": "#langs"
 			}, {
@@ -55,7 +77,7 @@
 			}, {
 				"begin": "\\[",
 				"end": "\\]",
-				"include": "#value"
+				"include": "#type"
 			}]
 		},
 		"comments": {
