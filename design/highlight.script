@@ -32,20 +32,20 @@
 
 # Variables need to start with a letter or underscore,
 # can follow with letters, underscore and numbers.
-; abcdef012345, _____hello_world
+abcdef012345, _____hello_world
 
 # All variables starting with uppercase letters are
 # usually types (but not hardcoded)
-; Abcdef012345, _____HelloWorld
+Abcdef012345, _____HelloWorld
 
 # Non-Type Variables followed by brackets are usually functions
 
-; hello (), _hello ()
+hello (), _hello ()
 
 # The first word on a line is (in most cases) a method
 
-out 'Hello, World!'
-del variable
+out: 'Hello, World!'
+del: variable
 
 # The following are NOT methods
 
@@ -79,13 +79,13 @@ with, in, inf
 
 ######### METHODS (= KEYWORDS) #########
 
-out 'Hello, World!'
-sleep
-abort
+out: 'Hello, World!'
+sleep:
+abort:
 
 ######### RESERVED CONSTANTS #########
 
-; window, document, process
+window, document, process
 
 ######### ATTRIBUTES #########
 
@@ -97,6 +97,6 @@ $attributiveKeywords
 
 @attr something
 fn name () int {
-    method
+    method: method parameters
     exit -123456789.0
 }

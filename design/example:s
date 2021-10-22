@@ -24,7 +24,7 @@ fn factorial (n uint) uint {
 #########                               OUTPUT PRINT                             #########
 ##########################################################################################
 
-out 'Hello, World!'
+out: 'Hello, World!'
 
 ##########################################################################################
 #########                                 METHODS                                #########
@@ -38,25 +38,25 @@ mtd print_element (...params any) {
     for i, e in params {
         if e { # if it's a non-boolean value, act like a switch
             is str {
-                out e, b0A
+                out: e, b0A
             }
 
             is int {
-                out <str> e, b0A # Parse integer to string
+                out: <str> e, b0A # Parse integer to string
             }
 
             is bool {
                 if e {
-                    out 'true', b0A
+                    out: 'true', b0A
                 } el {
-                    out 'false', b0A
+                    out: 'false', b0A
                 }
             }
         }
     }
 }
 
-print_element 'Hello', 5, false
+print_element: 'Hello', 5, false
 
 ##########################################################################################
 #########                         ENTITY COMPONENT SYSTEM                        #########

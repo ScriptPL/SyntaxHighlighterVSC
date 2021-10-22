@@ -10,9 +10,10 @@ methods
 $definitions
 { code block }
 ( values )
-; value
+value
 [ type ]
-; value [of type]
+value [of type]
+method:
 [type conversion for] value
 
 #########
@@ -48,7 +49,7 @@ for condition {
     # while condition
 }
 
-for i = 0; i < end_value; i += 1 {
+for i := 0; i < end_value; i += 1 {
     # traditional for loop
 }
 

@@ -52,14 +52,14 @@ METHOD_TYPE   PARAM1, PARAM2, ...
 
 *#
 
-out factorial(5)
+out: factorial(5)
 
 # Create a method consuming any amount of parameters.
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
 mtd outln ([...] params any) {
-   out params, b0A
+   out: params, b0A
 }
 
 mtd with_parameters (i int, j int, k int) {
@@ -70,9 +70,9 @@ mtd without_parameters () {
    # Do something
 }
 
-outln 'Hello, World!'
-with_parameters 5, 5, 5
-without_parameters
+outln: 'Hello, World!'
+with_parameters: 5, 5, 5
+without_parameters:
 
 ##################################
 ######### RETURN vs EXIT #########
@@ -107,7 +107,7 @@ fn fibonacci () [uint] {
    be f := (0, 1)
    ret f
 
-   rep {
+   for {
       f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
    }
 }
@@ -121,10 +121,10 @@ array.len # too
 # Here's an exmple how to force the end of a function
 
 be x := fibonacci()  # Start a fibonacci collector
-sleep 1000          # Sleep main thread for 1000 milliseconds
-x.leave              # End x's function thread. This is a method on a
+sleep: 1000          # Sleep main thread for 1000 milliseconds
+x.leave:             # End x's function thread. This is a method on a
                      # type. More about them, later.
-out x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
+out: x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
 
 ##################################################
 ######### INLINE FUNCTIONS - MATH SYNTAX #########
@@ -134,7 +134,7 @@ fn f (x) {
    exit 2 * x + 5
 }
 
-out f(2)
+out: f(2)
 
 # the function is is the same as
 
@@ -208,7 +208,7 @@ be hero int = new (
    )
 )
 
-hero.del
+hero.del:
 
 #
 # Iterate over component-combinations
@@ -299,26 +299,26 @@ attr @get (path str) x [func [null, int]] {
    }
 
    x:$after 'keyword.return' {
-      &out 'Returned a variable!'
+      out: 'Returned a variable!'
    }
 }
 
-@get 'path/to/site' () -> return 404
+@get 'path/to/site' () -> ret 404
 
 ###
 
 attr @m () x any {
    x:$declare {
-      &out 'Hello, Apple!'
+      out: 'Hello, Apple!'
    }
 
    x:$set (y) {
-      &out 'Value set to ', y
+      out: 'Value set to ', y
    }
 }
 
 @m () -> {
-   out 'Hello, Banana!'
+   out: 'Hello, Banana!'
    # Hello, Apple!  # Attribute Call
 }
 
@@ -335,11 +335,11 @@ be x = 5
 # code   is an empty code block
 # function inherits from code, hence can also be tested
 attr @test () -> x code {
-   out 'Test Block', b0A, b0A
+   out: 'Test Block', b0A, b0A
 
    attr @expect ( message str ) -> b bool {
-      out b ? 'PASSED' ~ 'FAILED'
-      out ' ', message
+      out: b ? 'PASSED' ~ 'FAILED'
+      out: ' ', message
    }
 }
 
@@ -371,8 +371,8 @@ op 'c'
    exit left * 2 + right
 }
 
-&out 5 c 4     # 14
-&out 5 c 4 c 3 # 14 c 3 = 31 (since stackable)
+out: 5 c 4     # 14
+out: 5 c 4 c 3 # 14 c 3 = 31 (since stackable)
 
 #################################
 # Scalar product of two vectors #
@@ -387,7 +387,7 @@ op 'o' (
    exit l.0 * r.0 + l.1 * r.1 + l.2 * r.2
 }
 
-out x1 o x2 # 32
+out: x1 o x2 # 32
 
 ##########
 # Vector #

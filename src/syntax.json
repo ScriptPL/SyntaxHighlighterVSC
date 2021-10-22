@@ -20,47 +20,11 @@
 				"include": "#words"
 			}]
 		},
-		"type": {
-			"patterns": [{
-				"include": "#*"
-			}, {
-				"match": "[A-Za-z0-9_]+",
-				"name": "variable"
-			}, {
-				"begin": "\\[",
-				"end": "\\]",
-				"include": "#type"
-			}]
-		},
-		"value": {
-			"patterns": [{
-				"include": "#*"
-			}, {
-				"begin": "\\(",
-				"end": "\\)",
-				"include": "#value"
-			}]
-		},
 		"code": {
 			"patterns": [{
 				"include": "#*"
 			}, {
 				"include": "#langs"
-			}, {
-				"match": "^\\w*",
-				"name": "constant"
-			}, {
-				"begin": "\\{",
-				"end": "\\}",
-				"include": "#code"
-			}, {
-				"begin": "\\(",
-				"end": "\\)",
-				"include": "#value"
-			}, {
-				"begin": "\\[",
-				"end": "\\]",
-				"include": "#type"
 			}]
 		},
 		"comments": {
@@ -224,6 +188,9 @@
 			}, {
 				"name": "support.type.sc",
 				"match": "\\b(any|u?int\\d*|num|str|char|bool|byte|func|code)\\b"
+			}, {
+				"name": "support.function.sc",
+				"match": "[a-zA-Z\\._]+:(?![$@])"
 			}, {
 				"name": "keyword.control.sc",
 				"match": "\\$[a-zA-Z\\.\\_:_]*"
