@@ -20,6 +20,7 @@
 "Strings can be opened/closed with double quotation marks or"
 'single quotation marks. Escaping them \' works as flawless.'
 `Template strings $(are) included.`
+´RegEx´
 
 ######### NUMERICS #########
 

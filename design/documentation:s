@@ -166,4 +166,12 @@ fn Structure.sum() {
     # Just declare the function of pattern TYPE:METHOD
 }
 
+# Or enter the type scope and write functions there
+
+Structure {
+    fn sum() {
+        # Anything you wish
+    }
+}
+
 x.sum()
