@@ -91,3 +91,19 @@ for eid int in query (Player, Position, Velocity) {
    Position(eid).x += Velocity(eid).x
    Position(eid).y += Velocity(eid).y
 }
+
+##########################################################################################
+#########                                 STRUCTS                                #########
+##########################################################################################
+
+type Struct [
+    x int
+    y int
+]
+
+be s = Struct (
+    x = 5
+    y = 15
+)
+
+out: s.x
