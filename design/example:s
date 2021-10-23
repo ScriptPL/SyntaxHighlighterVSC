@@ -138,3 +138,18 @@ fn genPrimes (total int) {
 }
 
 out: genPrimes (500)
+
+##########################################################################################
+#########                               EXAMPLE SCOPE                            #########
+##########################################################################################
+
+# Declare an API scope
+# API := {...}
+be API {
+    fn connect () {
+
+    }
+}
+
+# Access functions in the scope
+API.connect()
