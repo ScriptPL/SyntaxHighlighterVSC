@@ -125,7 +125,7 @@ fn genPrimes (total int) {
         for j, e in primes {
             if e % i == 0 {
                 isPrime = false
-                end
+                exit
             }
         }
 

@@ -67,7 +67,7 @@ for iterable {
 
 {
     next # continue
-    end  # break
+    exit # break
 }
 
 # Range Set
