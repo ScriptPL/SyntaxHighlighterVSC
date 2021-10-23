@@ -121,10 +121,14 @@ if value {
 if value is something {}
 
 ##########################################################################################
-#########                                    TYPES                               #########
+#########                                   TYPES                                #########
 ##########################################################################################
 
+######################################### NULL TYPE ######################################
+
 type AbstractType # Acts like a tag
+
+################################ COLLECTION OF EXISTING TYPES ############################
 
 type Collection (
     str |
@@ -134,13 +138,22 @@ type Collection (
 be x Collection = 500
 x = 'Hello!'
 
+########################################### ENUM #########################################
+
 type Enum (
     be Value1 |
     be pub Value2
 )
 
+type StringEnum (
+    'content' |
+    'hello'
+)
+
 z := Enum.Value1
 z = Value2
+
+########################################## STRUCT ########################################
 
 type Struct (
     x int
@@ -150,38 +163,6 @@ type Struct (
 s := Struct (
     x = 5
     y = 'Hello, World!'
-)
-
-# Optional Values
-
-type ComplexStruct (
-    x int
-    y int?
-)
-
-# Complex Types
-
-type Structure (
-    x int,
-    y bool,
-    z (
-        z1 int,
-        z2 bool
-    )
-)
-
-c := Structure (
-    x = 5,
-    y = true,
-    z = (
-        z1 = -5,
-        z2 = false
-    )
-)
-
-type StringEnum (
-    'content' |
-    'hello'
 )
 
 ##########################################################################################

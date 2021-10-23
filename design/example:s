@@ -5,14 +5,14 @@ pkg main
 #########                           FACTORIAL FUNCTION                           #########
 ##########################################################################################
 
-fn factorial (n uint) uint {
+fn factorial (n <uint>) <uint> {
     if n <= 1
         exit 1
     elif # this line can be comment technically
         exit this(n - 1) * n # you can "exit self( ..." to indicate calling yourself
 }
 
-fn factorial (n uint) uint {
+fn factorial (n <uint>) <uint> {
     r := 1
     for i in 1 -> n {
         r *= n
@@ -35,7 +35,7 @@ out: 'Hello, World!'
 # hello: params     # Method
 #
 
-fn print_element (...params any) {
+fn print_element (params ...) {
     for i, e in params {
         if e { # if it's a non-boolean value, act like a switch
             is str {
@@ -79,7 +79,7 @@ type Velocity (
     y int
 )
 
-player int := new (
+player <int> := new (
     Player,
     Position (
         x = 0,
@@ -94,26 +94,6 @@ for eid int in query (Player, Position, Velocity) {
 }
 
 ##########################################################################################
-#########                                 STRUCTS                                #########
-##########################################################################################
-
-type Struct (
-    x int
-    y int
-)
-
-s := Struct (
-    x = 5
-    y = 15
-)
-
-MetaType := type (
-    z str
-)
-
-out: s.x
-
-##########################################################################################
 #########                               OPERATIONS                               #########
 ##########################################################################################
 
@@ -122,9 +102,8 @@ out: s.x
 string str := 'Hello, World!'
 
 string += ' Add more!'      # "Hello World! Add more!"              += add string
-string =- 10                # "Hello World!"                        =- remove n characters from end
-string -= 6                 # "World!"                              -= remove n characters from start
-string *= 3                 # "World!World!World!"                  *= repeat string n times
+string -= 0 -> 6            # "World! Add more!"                    -= remove character or character range
+string *= 2                 # "World! Add more!World! Add more!"    *= repeat string n times
 
 ######################################### ARRAYS #########################################
 
