@@ -176,3 +176,57 @@ Structure {
 }
 
 x.sum()
+
+##########################################################################################
+#########                                    TYPES                               #########
+##########################################################################################
+
+type AbstractType # Acts like a tag
+
+type Collection (
+    str |
+    int
+)
+
+be x Collection = 500
+x = 'Hello!'
+
+type Enum (
+    be Value1 |
+    be pub Value2
+)
+
+z := Enum.Value1
+z = Value2
+
+type Struct (
+    x int
+    y str
+)
+
+s := Struct (
+    x = 5
+    y = 'Hello, World!'
+)
+
+type MultipleStructs (
+    x int
+    y int
+    |
+    x int
+)
+
+x := MultipleStructs (
+    x = 5
+)
+
+x := MultipleStructs (
+    x = 5
+    y = 5
+)
+
+# Optional Values
+type MultipleStructs2 (
+    x int
+    y int?
+)
