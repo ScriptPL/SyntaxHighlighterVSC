@@ -173,7 +173,7 @@
 		"words": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "\\b(mtd|attr|op|fn|type|do|exit|ret|next|(el)?if|el|is|for|throw)\\b"
+				"match": "\\b(mtd|attr|op|fn|type|exit|ret|next|(el)?if|el|is|for|throw)\\b"
 			}, {
 				"name": "keyword.sc",
 				"match": "\\b(use|pkg|pub|self|with|in|inf|true|false|be|new|null)\\b"

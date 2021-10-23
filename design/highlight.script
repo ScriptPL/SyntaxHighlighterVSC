@@ -61,7 +61,6 @@ any, uint64, int, int32, num, str, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-do                  # statement indicator
 mtd, attr, op, fn   # declaration of code
 type                # structure/enum/type declaration
 for, next           # repetetive control flow

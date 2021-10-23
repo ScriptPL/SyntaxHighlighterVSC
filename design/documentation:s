@@ -35,7 +35,7 @@ Type[T]         # Type with type specification
 
 be i int = 5                # for ( i = s;
 for {                       # standalone; for {} is a while true loop
-    if i < end_value do end # i < end_value ;
+    if i < end_value exit   # i < end_value ;
     # Content
     i += 1                  # i ++
 }
@@ -105,12 +105,10 @@ el {}
 
 if value {
     is k {}
-    is m do something
+    is m {}
 }
 
 if value is something {}
-if value is something do something
-if condition do somthing
 
 ##########################################################################################
 #########                                    TYPES                               #########
