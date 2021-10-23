@@ -58,15 +58,15 @@ out: factorial(5)
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
-mtd outln ([...] params any) {
+fn outln ([...] params any) {
    out: params, b0A
 }
 
-mtd with_parameters (i int, j int, k int) {
+fn with_parameters (i int, j int, k int) {
    # Do something
 }
 
-mtd without_parameters () {
+fn without_parameters () {
    # Do something
 }
 

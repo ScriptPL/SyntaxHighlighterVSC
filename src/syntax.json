@@ -173,7 +173,7 @@
 		"words": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "\\b(mtd|attr|op|fn|type|exit|ret|next|(el)?if|el|is|for|throw)\\b"
+				"match": "\\b(attr|op|fn|type|exit|ret|next|(el)?if|el|is|for|throw)\\b"
 			}, {
 				"name": "keyword.sc",
 				"match": "\\b(use|pkg|pub|self|with|in|inf|true|false|be|new|null)\\b"
@@ -184,7 +184,7 @@
 				"name": "support.type.sc",
 				"match": "\\b(any|u?int\\d*|num|str|char|bool|byte|func|code)\\b"
 			}, {
-				"name": "variable.other.constant.sc",
+				"name": "support.function.sc",
 				"match": "[a-zA-Z_]+:(?![$@\\w])"
 			}, {
 				"name": "keyword.control.sc",

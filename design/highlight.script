@@ -61,7 +61,7 @@ any, uint64, int, int32, num, str, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-mtd, attr, op, fn   # declaration of code
+attr, op, fn        # declaration of code
 type                # structure/enum/type declaration
 for, next           # repetetive control flow
 exit, ret           # exit scope or return to parent scope

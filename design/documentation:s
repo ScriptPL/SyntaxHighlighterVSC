@@ -273,10 +273,31 @@ for query (Player, Position, Velocity) {
 ##########################################################################################
 
 # iterable functions
-fn iter(a int, b int) <int, int> {
-    
+fn iter(a int = 0, b int = 10) <int, int> {
+    pub i = a   # pub i makes the variable visible inside the loop scope
+
+    $before {
+        exit a < b  # if true, continue looping, otherwise, break
+    }
+
+    $after {
+        a += 1
+    }
 }
 
 for a, b in iter {
+    out: i  # 0, 1, 9
+}
+
+##########################################################################################
+#########                           QUICK FUNCTION CALLS                         #########
+##########################################################################################
+
+fn execute (x code) {
+    x.exec()
+}
+
+execute: {
 
 }
+
