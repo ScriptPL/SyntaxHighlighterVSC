@@ -21,17 +21,42 @@ value <of type>
 
 null            # value/type null
 int             # Integer
-[]int           # List of integers
-[5]int          # Array of integers with five elements.
+int<>           # List of integers
+int<5>          # Array of integers with five elements.
 [int, str * 3]  # Tuple with 1 = integer, followed by three strings: TYPE * AMOUNT
 Type[T]         # Type with type specification
 [int | '0']     # Type Collection -> Quick Enum: Integer or '0'
 
 ##########################################################################################
+#########                                  FUNCTIONS                             #########
+##########################################################################################
+
+fn name (parameter int = default, ...) return_type {
+    # do smt
+    ret return_value
+    exit exit_value
+}
+
+##########################################################################################
 #########                                    LOOPS                               #########
 ##########################################################################################
 
-# Code repetetion / loop
+for {
+    # loop indefinitely
+}
+
+for number {
+    # repeat n times
+}
+
+for condition {
+    # while condition
+}
+
+for i := start_value; i < end_value; i += 1 {
+    # traditional for loop
+}
+
 
 be i int = 5                # for ( i = s;
 for {                       # standalone; for {} is a while true loop
@@ -40,17 +65,6 @@ for {                       # standalone; for {} is a while true loop
     i += 1                  # i ++
 }
 
-for 5 {
-    # repeat five times
-}
-
-for condition {
-    # while condition
-}
-
-for i := 0; i < end_value; i += 1 {
-    # traditional for loop
-}
 
 for i, e in arr {
     # for elements of an array
@@ -202,3 +216,67 @@ Structure {
 be x Structure
 
 x.sum()
+
+##########################################################################################
+#########                               EXAMPLE SCOPE                            #########
+##########################################################################################
+
+# Just the scope "API"
+API {
+    fn connect () {
+
+    }
+}
+
+# Access functions in the scope
+API.connect()
+
+##########################################################################################
+#########                                 LAZY LOGIC                             #########
+##########################################################################################
+
+if k for if y {
+    # if k  # if k  # if k equals true enter "next scope"
+    # for   # for   # and loop indefinitely.
+    # if y  # if y  # if y is true, run the code block, otherwise continue
+
+    ###
+}
+
+# is the same as
+
+if k {
+    for {
+        if y {
+            ###
+        }
+    }
+}
+
+
+##########################################################################################
+#########                               QUICK SYNTAX                             #########
+##########################################################################################
+
+k := true ? 'True' : 'False'
+
+############################## SHORT ENTITY COMPONENT SYSTEM #############################
+
+# Without specifying the entity id, just quickly operate over all
+for query (Player, Position, Velocity) {
+   Position.x += Velocity.x
+   Position.y += Velocity.y
+}
+
+##########################################################################################
+#########                                 ITERABLES                              #########
+##########################################################################################
+
+# iterable functions
+fn iter(a int, b int) <int, int> {
+    
+}
+
+for a, b in iter {
+
+}
