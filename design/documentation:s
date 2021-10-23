@@ -78,8 +78,10 @@ for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i +
 
 
 ##########################################################################################
-#########                                 CONDITIONS                             #########
+#########                              CONDITIONS                                #########
 ##########################################################################################
+
+################################### BOOLEAN STATEMENTS ###################################
 
 a < b <= c < d    # equivalent to:     a < b && b <= c && c < d
 a == b == c       # equivalent to:     a == b && b == c
@@ -90,9 +92,16 @@ a > b > c         # also possible
 a < b > c         # but: could technically be interpreted as a < b && b > a
 a > b < c         # therefore... could be legal?
 
-if c { }            # if statement
-elif c { }          # else if statement
-el {}               # else statement
+##################################### CONTROL FLOW ######################################
+
+# if statement
+if c {}
+# else if statement
+elif c {}
+# else statement
+el {}
+
+###################################### SWITCH CASE ######################################
 
 if value {
     is k {}
