@@ -69,12 +69,8 @@ for iterable {
     exit # break
 }
 
-# Range Set
-
-[start_value --> end_value] # Defines a quick range (invisible array): (start, start + 1, ..., end)
-
-for i, e in [s --> e] { }        # for (i = s; i <= e; i++)
-for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
+for i, e in s -> e { }        # for (i = s; i <= e; i++)
+for i in 5 -> inf +> 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
 
 
 ##########################################################################################
@@ -170,7 +166,7 @@ c := Structure (
 )
 
 type StringEnum (
-    'content',
+    'content' |
     'hello'
 )
 
@@ -178,7 +174,14 @@ type StringEnum (
 #########                               GENERATED TYPES                          #########
 ##########################################################################################
 
-[ ??? ]
+################################# NUMERIC ARRAYS / RANGES ################################
+
+# start_value -> end_value +> step
+5 -> 10        # (5, 6, 7, 8, 9, 10)
+(5 -> 10) *= 2 # (10, 12, 14, 16, 18, 20) # array *= n creates new array, acts like filter
+5 -> 10 +> 2   # (5, 7, 9)
+
+################################# NUMERIC ARRAYS / RANGES ################################
 
 ##########################################################################################
 #########                                   METHODS                              #########

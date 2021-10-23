@@ -93,7 +93,7 @@ fn primes (max uint) []uint {
    be prime_list := (2, 3)
    ret prime_list
 
-   for i in [5 --> max] += 2 {
+   for i in 5 -> max +> 2 {
       # Generate primes here
    }
 }

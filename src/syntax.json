@@ -161,10 +161,10 @@
 		"symbols": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "\\->"
+				"match": "=>"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\-\\->|\\:\\:\\:?|~|=>|\\.{3}"
+				"match": "\\->|\\+>|\\:\\:\\:?|~|\\.{3}"
 			}, {
 				"name": "keyword.operator.sc",
 				"match": "(:|\\+|\\-|\\*)=|\\!|\\+|\\-|\\%|\\*|/|\\.\\.|\\\\"

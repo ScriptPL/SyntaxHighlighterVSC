@@ -14,7 +14,7 @@ fn factorial (n uint) uint {
 
 fn factorial (n uint) uint {
     r := 1
-    for i in [1 --> n] {
+    for i in 1 -> n {
         r *= n
     }
     ret n
@@ -113,13 +113,51 @@ MetaType := type (
 out: s.x
 
 ##########################################################################################
+#########                               OPERATIONS                               #########
+##########################################################################################
+
+######################################### STRINGS ########################################
+
+string str := 'Hello, World!'
+
+string += ' Add more!'      # "Hello World! Add more!"              += add string
+string =- 10                # "Hello World!"                        =- remove n characters from end
+string -= 6                 # "World!"                              -= remove n characters from start
+string *= 3                 # "World!World!World!"                  *= repeat string n times
+
+######################################### ARRAYS #########################################
+
+array []int := (1, 2, 3, 4)
+
+array += 5                  # (1, 2, 3, 4, 5)                       += push
+array /= I == 0 || V > 3    # (2, 3); I is index, V is element      /= quick filter
+array += 4, 5, 6            # (2, 3, 4, 5, 6)
+array -= 2, 3               # (2, 3, 6)                             -= remove elements at pos
+
+######################################### BOOLEAN ########################################
+
+k := true
+
+k!  # Set the boolean to the opposite 
+
+######################################### NUMERIC ########################################
+
+k := 50000
+
+k +=   500  # each represent arithmetic operations
+k -=  1000
+k *= 2
+k /= 100
+k %= 990    # 0
+
+##########################################################################################
 #########                             PRIME GENERATION                           #########
 ##########################################################################################
 
 fn genPrimes (total int) {
     primes []int := (2, 3)
 
-    for i in (5 --> total) += 2 {
+    for i in 5 -> total +> 2 {
         isPrime := true
 
         for j, e in primes {
@@ -133,6 +171,29 @@ fn genPrimes (total int) {
             primes += i
         }
     }
+
+    exit primes
+}
+
+out: genPrimes (500)
+
+################################# NUMERIC ARRAYS / RANGES ################################
+
+fn genPrimes (total int) {
+    primes := 2 -> total
+
+    for i in primes {
+        if i == 0 next
+
+        for j in 2 * i -> total +> i {
+            # ALL variables in this language are passed down as references
+            # Cloning goes with the & attribute
+            i = 0
+        }
+    }
+
+    # /= Filter out by condition
+    primes /= V != 0
 
     exit primes
 }
@@ -153,3 +214,40 @@ be API {
 
 # Access functions in the scope
 API.connect()
+
+##########################################################################################
+#########                                 LAZY LOGIC                             #########
+##########################################################################################
+
+if k for if y {
+    # if k  # if k  # if k equals true enter "next scope"
+    # for   # for   # and loop indefinitely.
+    # if y  # if y  # if y is true, run the code block, otherwise continue
+
+    ###
+}
+
+# is the same as
+
+if k {
+    for {
+        if y {
+            ###
+        }
+    }
+}
+
+##########################################################################################
+#########                               QUICK SYNTAX                             #########
+##########################################################################################
+
+k := true ? 'True' : 'False'
+
+############################## SHORT ENTITY COMPONENT SYSTEM #############################
+
+# Without specifying the entity id, just quickly operate over all
+for query (Player, Position, Velocity) {
+   Position.x += Velocity.x
+   Position.y += Velocity.y
+}
+
