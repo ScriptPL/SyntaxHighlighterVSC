@@ -135,26 +135,9 @@ s := Struct (
     y = 'Hello, World!'
 )
 
-type MultipleStructs (
-    (   x int
-        y int
-    ) | (
-        x int
-    )
-)
-
-x := MultipleStructs (
-    x = 5
-)
-
-x := MultipleStructs (
-    x = 5
-    y = 5
-)
-
 # Optional Values
 
-type MultipleStructs2 (
+type ComplexStruct (
     x int
     y int?
 )
