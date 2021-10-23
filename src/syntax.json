@@ -189,8 +189,8 @@
 				"name": "support.type.sc",
 				"match": "\\b(any|u?int\\d*|num|str|char|bool|byte|func|code)\\b"
 			}, {
-				"name": "support.function.sc",
-				"match": "[a-zA-Z\\._]+:(?![$@])"
+				"name": "variable.other.constant.sc",
+				"match": "[a-zA-Z_]+:(?![$@\\w])"
 			}, {
 				"name": "keyword.control.sc",
 				"match": "\\$[a-zA-Z\\.\\_:_]*"
@@ -204,7 +204,7 @@
 				"begin": "([A-Za-z_][A-Za-z_0-9]*)\\s*\\(",
 				"end": "\\)",
 				"patterns": [{
-					"include": "#value"
+					"include": "#code"
 				}],
 				"beginCaptures": {
 					"0": {

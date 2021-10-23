@@ -78,7 +78,7 @@ type Velocity [
     y int
 ]
 
-be player int = new (
+player int := new (
     Player,
     Position (
         x = 0,
@@ -101,9 +101,36 @@ type Struct [
     y int
 ]
 
-be s = Struct (
+s := Struct (
     x = 5
     y = 15
 )
 
 out: s.x
+
+##########################################################################################
+#########                             PRIME GENERATION                           #########
+##########################################################################################
+
+fn genPrimes (max int) {
+    primes []int := (2, 3)
+
+    for i in (5 --> max) += 2 {
+        isPrime := true
+
+        for j, e in primes {
+            if e % i == 0 {
+                isPrime = false
+                end
+            }
+        }
+
+        if isPrime {
+            primes += i
+        }
+    }
+
+    exit primes
+}
+
+out: genPrimes (500)

@@ -5,7 +5,7 @@ pkg main
 
 # BASICS
 
-methods
+methods:
 @attributes
 $definitions
 { code block }
@@ -13,7 +13,6 @@ $definitions
 value
 [ type ]
 value [of type]
-method:
 [type conversion for] value
 
 #########
@@ -79,14 +78,14 @@ for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i +
 
 # Conditional operators are stackable
 
-; a < b <= c < d    # equivalent to:     a < b && b <= c && c < d
-; a == b == c       # equivalent to:     a == b && b == c
-; a < b == c < d    # equivalent to:     a < b && b == c && c < d
-; a > b > c         # also possible
+a < b <= c < d    # equivalent to:     a < b && b <= c && c < d
+a == b == c       # equivalent to:     a == b && b == c
+a < b == c < d    # equivalent to:     a < b && b == c && c < d
+a > b > c         # also possible
 
 # ILLEGAL
-; a < b > c         # but: could technically be interpreted as a < b && b > a
-; a > b < c         # therefore... could be legal?
+a < b > c         # but: could technically be interpreted as a < b && b > a
+a > b < c         # therefore... could be legal?
 
 if c { }            # if statement
 elif c { }          # else if statement
@@ -120,10 +119,10 @@ type Enum [
 
 # Usage:
 
-; Enum.Element1
-; Enum.Element2
-; Enum.Element3
-; Element3        # pub keyword instantly unpacks content.
+Enum.Element1
+Enum.Element2
+Enum.Element3
+Element3        # pub keyword instantly unpacks content.
 
 # Collection
 
@@ -134,7 +133,7 @@ type Token [
     'content'
 ]
 
-be t Token = 9
+t Token := 9
 
 # Structures, Component Structures
 
@@ -152,7 +151,7 @@ type Velocity [
     y num
 ]
 
-be x := Structure (
+x := Structure (
     x = 5,
     y = true,
     z = (
