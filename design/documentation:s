@@ -19,8 +19,7 @@ value <of type>
 # TYPES #
 #########
 
-null            # value null
-<null>          # type null
+null            # value/type null
 int             # Integer
 []int           # List of integers
 [5]int          # Array of integers with five elements.
@@ -28,9 +27,9 @@ int             # Integer
 Type[T]         # Type with type specification
 [int | '0']     # Type Collection -> Quick Enum: Integer or '0'
 
-################
-# CONTROL FLOW #
-################
+##########################################################################################
+#########                                    LOOPS                               #########
+##########################################################################################
 
 # Code repetetion / loop
 
@@ -77,7 +76,10 @@ for iterable {
 for i, e in [s --> e] { }        # for (i = s; i <= e; i++)
 for i in [5 --> inf] += 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
 
-# Conditional operators are stackable
+
+##########################################################################################
+#########                                 CONDITIONS                             #########
+##########################################################################################
 
 a < b <= c < d    # equivalent to:     a < b && b <= c && c < d
 a == b == c       # equivalent to:     a == b && b == c
@@ -100,82 +102,6 @@ if value {
 if value is something {}
 if value is something do something
 if condition do somthing
-
-####################
-# TYPE DEFINITIONS #
-####################
-
-# Type without content, a very simple type
-
-type SimpleType
-
-# Enum
-
-type Enum (
-    new Element1 | # New defines a new simply type as subtype of the enum.
-    new Element2 |
-    pub new Element3 | # Pub unpacks enum type
-    str # String Type
-)
-
-# Usage:
-
-Enum.Element1
-Enum.Element2
-Enum.Element3
-Element3        # pub keyword instantly unpacks content.
-
-# Collection
-
-type Token (
-    [str] | # use indicates
-    bool |
-    9 |
-    'content'
-)
-
-t Token := 9
-
-# Structures, Component Structures
-
-type Structure (
-    x int,
-    y bool,
-    z (
-        z1 int,
-        z2 bool
-    )
-)
-
-type Velocity (
-    x num,
-    y num
-)
-
-x := Structure (
-    x = 5,
-    y = true,
-    z = (
-        z1 = -5,
-        z2 = false
-    )
-)
-
-# Type methods
-
-fn Structure.sum() {
-    # Just declare the function of pattern TYPE:METHOD
-}
-
-# Or enter the type scope and write functions there
-
-Structure {
-    fn sum() {
-        # Anything you wish
-    }
-}
-
-x.sum()
 
 ##########################################################################################
 #########                                    TYPES                               #########
@@ -210,10 +136,11 @@ s := Struct (
 )
 
 type MultipleStructs (
-    x int
-    y int
-    |
-    x int
+    (   x int
+        y int
+    ) | (
+        x int
+    )
 )
 
 x := MultipleStructs (
@@ -226,7 +153,59 @@ x := MultipleStructs (
 )
 
 # Optional Values
+
 type MultipleStructs2 (
     x int
     y int?
 )
+
+# Complex Types
+
+type Structure (
+    x int,
+    y bool,
+    z (
+        z1 int,
+        z2 bool
+    )
+)
+
+c := Structure (
+    x = 5,
+    y = true,
+    z = (
+        z1 = -5,
+        z2 = false
+    )
+)
+
+type StringEnum (
+    'content',
+    'hello'
+)
+
+##########################################################################################
+#########                               GENERATED TYPES                          #########
+##########################################################################################
+
+[ ??? ]
+
+##########################################################################################
+#########                                   METHODS                              #########
+##########################################################################################
+
+fn Structure.sum() {
+    # Just declare the function of pattern TYPE:METHOD
+}
+
+# Or enter the type scope and write functions there
+
+Structure {
+    fn sum() {
+        # Anything you wish
+    }
+}
+
+be x Structure
+
+x.sum()
