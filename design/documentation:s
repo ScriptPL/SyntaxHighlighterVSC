@@ -23,7 +23,7 @@ null            # Type and value
 int             # Integer
 []int           # List of integers
 [5]int          # Array of integers with five elements.
-[int, str * 3]  # Tuple with 1 = integer, followed by three strings
+[int, str * 3]  # Tuple with 1 = integer, followed by three strings: TYPE * AMOUNT
 Type[T]         # Type with type specification
 [int | '0']     # Type Collection -> Quick Enum: Integer or '0'
 

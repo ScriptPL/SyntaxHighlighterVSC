@@ -112,10 +112,10 @@ out: s.x
 #########                             PRIME GENERATION                           #########
 ##########################################################################################
 
-fn genPrimes (max int) {
+fn genPrimes (total int) {
     primes []int := (2, 3)
 
-    for i in (5 --> max) += 2 {
+    for i in (5 --> total) += 2 {
         isPrime := true
 
         for j, e in primes {
