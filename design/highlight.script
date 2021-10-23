@@ -63,7 +63,7 @@ any, uint64, int, int32, num, str, bool, byte, func, code
 
 do                  # statement indicator
 mtd, attr, op, fn   # declaration of code
-scope, type         # scope and structure declaration
+type                # structure/enum/type declaration
 for, next           # repetetive control flow
 exit, ret
 if, elif, el, is    # conditional control flow
