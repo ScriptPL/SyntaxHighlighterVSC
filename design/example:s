@@ -68,15 +68,15 @@ print_element: 'Hello', 5, false
 
 type Player
 
-type Position [
+type Position (
     x int
     y int
-]
+)
 
-type Velocity [
+type Velocity (
     x int
     y int
-]
+)
 
 player int := new (
     Player,
@@ -96,14 +96,18 @@ for eid int in query (Player, Position, Velocity) {
 #########                                 STRUCTS                                #########
 ##########################################################################################
 
-type Struct [
+type Struct (
     x int
     y int
-]
+)
 
 s := Struct (
     x = 5
     y = 15
+)
+
+MetaType := type (
+    z str
 )
 
 out: s.x

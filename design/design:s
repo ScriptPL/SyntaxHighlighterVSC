@@ -178,18 +178,18 @@ use (*unsafe *asm) # unsafe could support an 'eval' method to execute string as 
 
 type EmptyTag # Simple Type
 
-type Position []
+type Position (
    x int
    y int
-}
+)
 
-type Velocity [
+type Velocity (
    x int, y int
-]
+)
 
-type Asset [
+type Asset (
    image Image
-]
+)
 
 be predefinedComp = Velocity (
    x = 5
@@ -215,12 +215,12 @@ hero.del:
 #
 
 for eid int in query (Position, Velocity) {
-   Position[eid].x += Velocity[eid].x
-   Position[eid].y += Velocity[eid].y
+   Position(eid).x += Velocity(eid).x
+   Position(eid).y += Velocity(eid).y
 }
 
 for eid int in query (Position, Asset) {
-   Asset(eid).image.render(Position[eid].x, Position[eid].y)
+   Asset(eid).image.render(Position(eid).x, Position(eid).y)
 }
 
 # In case for loop is not nested and
@@ -404,7 +404,7 @@ ext Vector {
    }
 }
 
-out v1 + v2 # Vector (5, 7, 9)
+out: v1 + v2 # Vector (5, 7, 9)
 
 ############################
 ######### ASSEMBLY #########

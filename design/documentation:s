@@ -9,17 +9,18 @@ methods:
 @attributes
 $definitions
 { code block }
-( values )
-value
-[ type ]
-value [of type]
-[type conversion for] value
+( values or types )
+
+type ( type_content )
+value <of type>
+<type conversion for> value
 
 #########
 # TYPES #
 #########
 
-null            # Type and value
+null            # value null
+<null>          # type null
 int             # Integer
 []int           # List of integers
 [5]int          # Array of integers with five elements.
@@ -110,12 +111,12 @@ type SimpleType
 
 # Enum
 
-type Enum [
+type Enum (
     new Element1 | # New defines a new simply type as subtype of the enum.
     new Element2 |
     pub new Element3 | # Pub unpacks enum type
     str # String Type
-]
+)
 
 # Usage:
 
@@ -126,30 +127,30 @@ Element3        # pub keyword instantly unpacks content.
 
 # Collection
 
-type Token [
+type Token (
     [str] | # use indicates
     bool |
     9 |
     'content'
-]
+)
 
 t Token := 9
 
 # Structures, Component Structures
 
-type Structure [
+type Structure (
     x int,
     y bool,
-    z [
+    z (
         z1 int,
         z2 bool
-    ]
-]
+    )
+)
 
-type Velocity [
+type Velocity (
     x num,
     y num
-]
+)
 
 x := Structure (
     x = 5,
