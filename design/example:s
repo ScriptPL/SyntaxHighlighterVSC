@@ -79,7 +79,7 @@ type Velocity (
     y int
 )
 
-player <int> := new (
+player := new (
     Player,
     Position (
         x = 0,
@@ -88,7 +88,7 @@ player <int> := new (
 )
 
 # Queries are compile time optimized.
-for eid int in query (Player, Position, Velocity) {
+for eid <uint> in query (Player, Position, Velocity) {
    Position(eid).x += Velocity(eid).x
    Position(eid).y += Velocity(eid).y
 }
@@ -99,7 +99,7 @@ for eid int in query (Player, Position, Velocity) {
 
 ######################################### STRINGS ########################################
 
-string str := 'Hello, World!'
+string <str> := 'Hello, World!'
 
 string += ' Add more!'      # "Hello World! Add more!"              += add string
 string -= 0 -> 6            # "World! Add more!"                    -= remove character or character range
@@ -107,7 +107,7 @@ string *= 2                 # "World! Add more!World! Add more!"    *= repeat st
 
 ######################################### ARRAYS #########################################
 
-array []int := (1, 2, 3, 4)
+array <()int> := (1, 2, 3, 4)
 
 array += 5                  # (1, 2, 3, 4, 5)                       += push
 array /= I == 0 || V > 3    # (2, 3); I is index, V is element      /= quick filter
@@ -134,8 +134,8 @@ k %= 990    # 0
 #########                             PRIME GENERATION                           #########
 ##########################################################################################
 
-fn genPrimes (total int) {
-    primes []int := (2, 3)
+fn genPrimes (total <int>) <()int> {
+    primes <()int> := (2, 3)
 
     for i in 5 -> total +> 2 {
         isPrime := true
@@ -159,7 +159,7 @@ out: genPrimes (500)
 
 ################################# NUMERIC ARRAYS / RANGES ################################
 
-fn genPrimes (total int) {
+fn genPrimes (total <int>) <()uint> {
     primes := 2 -> total
 
     for i in primes {
@@ -188,11 +188,11 @@ out: genPrimes (500)
 
 App {
     be canvas
-    be x, y int
-    be keys Tags<str>
+    be x, y <int>
+    be keys <Tags<str>>
 
     fn init() {
-        canvas = document.getElementById('#canvas')
+        canvas = <HTMLCanvasElement> document.getElementById('#canvas')
 
         x = canvas.width * .5
         y = canvas.height * .5

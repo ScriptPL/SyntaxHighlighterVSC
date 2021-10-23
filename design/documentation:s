@@ -3,29 +3,36 @@
 
 pkg main
 
-# BASICS
+##########################################################################################
+#########                                  BASICS                                #########
+##########################################################################################
 
-methods:
+# Functions
+hello: params
+hello(params)
+
+# Code block is defined with figure brackets.
+
+{
+    code
+}
+
+# Round brackets define values, structures or tuples. A tuple with one element is
+# just a priority marker.
+
+(
+    values: definitions
+)
+
+type (
+
+)
+
+be value <of type> = <type conversion> value
+
+# Other
 @attributes
-$definitions
-{ code block }
-( values or types )
-
-type ( type_content )
-value <of type>
-<type conversion for> value
-
-#########
-# TYPES #
-#########
-
-null            # value/type null
-int             # Integer
-int<>           # List of integers
-int<5>          # Array of integers with five elements.
-[int, str * 3]  # Tuple with 1 = integer, followed by three strings: TYPE * AMOUNT
-Type[T]         # Type with type specification
-[int | '0']     # Type Collection -> Quick Enum: Integer or '0'
+$special
 
 ##########################################################################################
 #########                                  FUNCTIONS                             #########
@@ -126,7 +133,8 @@ if value is something {}
 
 ######################################### NULL TYPE ######################################
 
-type AbstractType # Acts like a tag
+type AbstractType   # Acts like a tag
+k := null           # k = null
 
 ################################ COLLECTION OF EXISTING TYPES ############################
 
@@ -164,6 +172,42 @@ s := Struct (
     x = 5
     y = 'Hello, World!'
 )
+
+########################################## ARRAYS ########################################
+
+s := (2, 4, 104, 12)    # Upon compile time reads as value = (2, 4, 104, 12).
+                        # You can then make a [int, uint, int7 (or more) or uint7 (or
+                        # more) or num] <()int>, <(4)int>: It will keep acting like a
+                        # integer array with 4 elements unless it is extended
+                        # Limit of extension: <()num>
+
+be k <()str> = ('Hello!', 'Za Warudo!', 'World!')
+# be k <(3)str>
+
+########################################## TUPLES ########################################
+
+type Tuple (int, str, bool)
+
+be y Tuple = (5, 'Something', true) # technically the same as
+y := Tuple (5, 'Something', true)   # conversion vs assignment
+
+type AnotherTuple (int, str * 3)
+
+be z AnotherTuple = (5, 'A', 'BC', 'DEF')
+
+##################################### COLLECTIVE ENUM ###################################
+
+type Result<Success, Error> (
+    be Ok(Success) |
+    be Err(Error)
+)
+
+be k <Result<int, str>> = Result.Ok(200)
+k = Result.Err('Could not connect!')
+
+if k is Result.Err(m) {
+    out: m
+}
 
 ##########################################################################################
 #########                               GENERATED TYPES                          #########
