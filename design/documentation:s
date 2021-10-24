@@ -33,6 +33,7 @@ be value <of type> = <type conversion> value
 # Other
 @attributes
 $special
+label-for # loop with label
 
 ##########################################################################################
 #########                                  FUNCTIONS                             #########
@@ -93,6 +94,17 @@ for iterable {
 for i, e in s -> e { }        # for (i = s; i <= e; i++)
 for i in 5 -> inf +> 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
 
+###################################### SCOPE LABEL #######################################
+
+be value
+
+y = label-for x {
+    for y {
+        label-exit value
+    }
+}
+
+out: y == value # true
 
 ##########################################################################################
 #########                              CONDITIONS                                #########
@@ -139,8 +151,8 @@ k := null           # k = null
 ################################ COLLECTION OF EXISTING TYPES ############################
 
 type Collection (
-    str |
-    int
+    <str> |
+    <int>
 )
 
 be x Collection = 500
@@ -164,8 +176,8 @@ z = Value2
 ########################################## STRUCT ########################################
 
 type Struct (
-    x int
-    y str
+    x <int>
+    y <str>
 )
 
 s := Struct (

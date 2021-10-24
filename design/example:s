@@ -2,6 +2,26 @@
 pkg main
 
 ##########################################################################################
+#########                                  GCD                                   #########
+##########################################################################################
+
+fn gdc(a uint, b uint) {
+    # JS: https://stackoverflow.com/a/17445307/16002144
+    if a == 0 exit b
+
+    for b != 0 {
+        if a > b
+            a -= b
+        el
+            b -= a
+    }
+
+    exit a
+}
+
+out: gcd(2, 5, 6)
+
+##########################################################################################
 #########                           FACTORIAL FUNCTION                           #########
 ##########################################################################################
 
@@ -35,7 +55,7 @@ out: 'Hello, World!'
 # hello: params     # Method
 #
 
-fn print_element (params ...) {
+fn print_element (params <...>) { # params <...any>
     for i, e in params {
         if e { # if it's a non-boolean value, act like a switch
             is str {
@@ -70,13 +90,13 @@ print_element: 'Hello', 5, false
 type Player
 
 type Position (
-    x int
-    y int
+    x <int>
+    y <int>
 )
 
 type Velocity (
-    x int
-    y int
+    x <int>
+    y <int>
 )
 
 player := new (
@@ -235,3 +255,53 @@ App {
 window.onload: {
     App.init()
 }
+
+##########################################################################################
+#########            IMPROVED REGEX CAPABILITIES ~ QUICK HTML PARSER             #########
+##########################################################################################
+#
+# PROPOSAL ONLY WITH UNFINISHED DESIGN !!!
+#
+# CODE WITHOUT CONSTRUCTED LOGIC!
+#
+
+type HtmlElement (
+    name <str>
+    content <()self>
+)
+
+be text := '<b><i>Hello</i>, <u>World</u>!</b>'
+
+fn parseHTML (t <str>) <str> {
+    be output HtmlElement = (
+        name = 'div',
+        content = ()
+    )
+
+    be latest <ref ()HtmlElement> = output.content
+
+    # ´<\/?\w+>´
+    be tagOpen = ´<\w>´
+    be tagClose = ´<\/\w>´
+
+    # if function
+    if text.startsWith {
+        # treats 'is' as the first parameter, where with are return values
+        is tagOpen with v {
+            latest.push(HtmlElement (
+                name = v,
+                content = ()
+            ))
+            latest = latest.last.content
+        }
+
+        is tagClose with v {
+            latest = latest.super
+            if latest.super.name != v throw `</$(v)> closes `
+        }
+    } el {
+        
+    }
+}
+
+out: parseHTML(text)

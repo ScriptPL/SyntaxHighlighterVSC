@@ -21,6 +21,7 @@
 'single quotation marks. Escaping them \' works as flawless.'
 `Template strings $(are) included.`
 ´RegEx´
+´\w[\.\w]*@\w[\.\w]*\.com´
 
 ######### NUMERICS #########
 
@@ -42,7 +43,7 @@ Abcdef012345, _____HelloWorld
 
 hello (), _hello ()
 
-# The first word on a line is (in most cases) a method
+# Variable names ending with the double dot are methods (special kind of functions)
 
 out: 'Hello, World!'
 del: variable
@@ -64,6 +65,7 @@ any, uint64, int, int32, num, str, bool, byte, func, code
 attr, op, fn        # declaration of code
 type                # structure/enum/type declaration
 for, next           # repetetive control flow
+label-for           # labelled control flow
 exit, ret           # exit scope or return to parent scope
                     # continuing everything on a separate thread
 if, elif, el, is    # conditional control flow
@@ -74,7 +76,8 @@ throw               # control throw
 use, pkg            # package management
 pub                 # visiblity
 true, false, null   # values
-be, new, self,      # other
+be, new, ref        # other
+self, super         # recursive self or parent calling
 with, in, inf
 
 ######### METHODS (= KEYWORDS) #########
