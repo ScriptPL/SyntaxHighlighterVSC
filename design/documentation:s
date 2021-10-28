@@ -40,21 +40,21 @@ label-for # loop with label
 ##########################################################################################
 
 a {
-    # you're in: a
+    # self = a
     b.c {
-        # you're in: a.b.c
+        # self = a.b.c
         d {
-            # you're in: a.b.c.d
+            # self = a.b.c.d
         }
     }
 
     fn e () {
-        # function a.e
+        # fn a.e
     }
 }
 
 fn a.b.f () {
-    # function a.b.f
+    # fn a.b.f
 }
 
 ##########################################################################################
@@ -221,7 +221,36 @@ type TypeName (
     3 str
 )
 
-######################################### NULL TYPE ######################################
+####################################### SCOPE TYPE #######################################
+# AND
+####################################  RECURSIVE TYPES ####################################
+
+type Array<T> {
+    <*M(T, self)> |
+    <*E>
+}
+
+Array<T> {
+    fn push (element T) {
+        be latest <ref Array<T>> = self
+        for {
+            if latest {
+                is Array.M {
+                    latest = latest.1
+                }
+
+                is Array.E {
+                    latest = Array.M(element, Array.E)
+                }
+            }
+        }
+    }
+}
+
+arr #*Array<str>*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)))
+arr.push() # Array<T.push> with self
+
+######################################## NULL TYPE #######################################
 
 type AbstractType   # Acts like a tag
 k := null           # k = null
@@ -300,19 +329,8 @@ if k is Result.Err(m) {
 }
 
 ##################################### REFERENCE TYPE #####################################
-#################################### RECURSIVE TYPES #####################################
-#
-# M ( M ( M ( E ) ) )
-#
-# E - end, M - middle
-#
 
-type Array<T> (
-    <*M(T, self)> |
-    <*E>
-)
-
-be arr Array(str) = Array.M ('Hello',  Array.M('everyone!', Array.E) )
+ref
 
 ##########################################################################################
 #########                             GENERATED TYPES                            #########
