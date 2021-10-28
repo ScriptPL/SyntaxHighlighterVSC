@@ -139,9 +139,65 @@ if value {
 
 if value is something {}
 
+############################### SWITCH CASE WITH FUNCTIONS ###############################
+#
+# if <func<any "input"><bool "output", "with" params>> {
+#     is input with params {
+#         # if the first "bool" return of the function is true, continue here
+#     }
+# }
+#
+
+fn str.equalsSize(i int) bool, str {
+    if self.len == i {
+        exit true, 'V is this string'
+    }
+    exit false, ''
+}
+
+if 'Hello, World!'.equalsSize {
+    is 13 with v {
+        out: v
+    }
+}
+
+####################################### UNPACK ENUM ######################################
+
+type A (*B | *C(str))
+
+k := A.B
+k := A.C ('Hello!')
+
+if k is A.B {
+    # Does nothing
+} elif k is A.C(v) {
+    out: v  # Hello!
+}
+
 ##########################################################################################
 #########                                   TYPES                                #########
 ##########################################################################################
+
+# Type Collection
+type TypeName (
+    # Use existing types into a collection
+    <str>
+    | <int>
+
+    | # Or create new enum components with a star
+    <*Hello>
+
+    | # Struct: Collection of parameters
+
+    var Type,
+    anotherVar DifferentType
+
+    | # Tuple
+
+    1 Type
+    2 SecondType
+    3 str
+)
 
 ######################################### NULL TYPE ######################################
 
@@ -161,8 +217,8 @@ x = 'Hello!'
 ########################################### ENUM #########################################
 
 type Enum (
-    be Value1 |
-    be pub Value2
+    <*Value1> |
+    <pub *Value2>
 )
 
 type StringEnum (
@@ -207,7 +263,7 @@ type AnotherTuple (int, str * 3)
 
 be z AnotherTuple = (5, 'A', 'BC', 'DEF')
 
-##################################### COLLECTIVE ENUM ###################################
+#################################### COLLECTIVE ENUM ####################################
 
 type Result<Success, Error> (
     be Ok(Success) |
@@ -221,8 +277,23 @@ if k is Result.Err(m) {
     out: m
 }
 
+##################################### REFERENCE TYPE #####################################
+#################################### RECURSIVE TYPES #####################################
+#
+# M ( M ( M ( E ) ) )
+#
+# E - end, M - middle
+#
+
+type Array<T> (
+    <*M(T, self)> |
+    <*E>
+)
+
+be arr Array(str) = Array.M ('Hello',  Array.M('everyone!', Array.E) )
+
 ##########################################################################################
-#########                               GENERATED TYPES                          #########
+#########                             GENERATED TYPES                            #########
 ##########################################################################################
 
 ################################# NUMERIC ARRAYS / RANGES ################################
@@ -235,7 +306,7 @@ if k is Result.Err(m) {
 ################################# NUMERIC ARRAYS / RANGES ################################
 
 ##########################################################################################
-#########                                   METHODS                              #########
+#########                                  METHODS                               #########
 ##########################################################################################
 
 fn Structure.sum() {
