@@ -21,7 +21,7 @@
 'single quotation marks. Escaping them \' works as flawless.'
 `Template strings $(are) included.`
 ´RegEx´
-´\w[\.\w]*@\w[\.\w]*\.com´
+´\w[\.\w]{0-}@\w[\.\w]{0-*1}\.com´
 
 ######### NUMERICS #########
 
@@ -57,12 +57,13 @@ Xxxxxxx()
 xXXXXXX ()
 
 ######### RESERVED TYPES #########
+# Numeric types can followed with any digit
 
-any, uint64, int, int32, num, str, bool, byte, func, code
+any, uint64, int, int32, num, str, regex, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-attr, op, fn        # declaration of code
+attr, fn            # declaration of code
 type                # structure/enum/type declaration
 for, next           # repetetive control flow
 label-for           # labelled control flow

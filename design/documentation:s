@@ -449,3 +449,37 @@ execute: {
 
 }
 
+##########################################################################################
+#########                                 REGEX                                  #########
+##########################################################################################
+
+#
+# Repetition Notation:
+# {0-}          *   zero or more
+# {1-}          +   one or more
+# {-1}, {0-1}   ?   zero or one
+# {}
+#
+
+´\e{0-1*1}´
+
+#
+# custom regex char set or
+# other regex insertions
+#
+
+be w #*<regex.set>*# = regex.set('0', '1') # regex.set(('0', '1')): one bracket for function, one for array "technically"
+
+´$(w){1-}´ # will match 0, 1, 01, etc.
+
+############################# MACRO ON THE REGEX SET EXAMPLE #############################
+
+regex {
+    set = type (<()char>)
+
+    #fn set (chars <... char>) {
+    #    exit chars
+    #}
+
+    # Since tuples with one value evaporate their brackets, regex.set('0', '1') is a type followed by an array.
+}

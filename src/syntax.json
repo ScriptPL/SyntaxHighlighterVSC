@@ -87,7 +87,49 @@
 					"match": "\\\\\\w"
 				}, {
 					"name": "constant.regexp.escape.sc",
-					"match": "(?<!\\\\)[\\.\\+\\-\\*\\?]"
+					"match": "(?<!\\\\)[\\.]"
+				}, {
+					"begin": "(\\$\\()",
+					"end": "(\\))",
+					"patterns": [{
+						"include": "#*"
+					}],
+					"beginCaptures": {
+						"1": {
+							"name": "keyword"
+						}
+					},
+					"endCaptures": {
+						"1": {
+							"name": "keyword"
+						}
+					}
+				}, {
+					"name": "keyword.control.sc",
+					"match": "(\\{)(\\d+)?(\\-)(\\d+)?((\\*)\\d+)?(\\})",
+					"captures": {
+						"1": {
+							"name": "keyword.sc"
+						},
+						"2": {
+							"name": "constant.numeric.sc"
+						},
+						"3": {
+							"name": "keyword.operator.sc"
+						},
+						"4": {
+							"name": "constant.numeric.sc"
+						},
+						"5": {
+							"name": "constant.numeric.sc"
+						},
+						"6": {
+							"name": "keyword.sc"
+						},
+						"7": {
+							"name": "keyword.sc"
+						}
+					}
 				}, {
 					"name": "constant.character.escape.sc",
 					"match": "(?<!\\\\)[\\(\\)\\[\\]\\{\\}]"
@@ -194,7 +236,7 @@
 		"words": {
 			"patterns": [{
 				"name": "keyword.control.sc",
-				"match": "\\b(attr|op|fn|type|exit|ret|next|(el)?if|el|is|for|throw)\\b"
+				"match": "\\b(attr|fn|type|exit|ret|next|(el)?if|el|is|for|throw)\\b"
 			}, {
 				"name": "keyword.sc",
 				"match": "\\b(use|pkg|pub|self|super|with|in|inf|true|false|be|new|null|ref)\\b"
@@ -203,7 +245,7 @@
 				"match": "\\b(document|window|process)\\b"
 			}, {
 				"name": "support.type.sc",
-				"match": "\\b(any|u?int\\d*|num|str|char|bool|byte|func|code)\\b"
+				"match": "\\b(any|u?int\\d*|num|str|regex|char|bool|byte|func|code)\\b"
 			}, {
 				"match": "([A-Za-z_][a-zA-Z0-9_]*)(\\-(for|exit|ret)\\b|\\-\\-)",
 				"captures": {
