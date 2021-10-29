@@ -280,8 +280,15 @@
 		},
 		"words": {
 			"patterns": [{
-				"name": "keyword.control.sc",
-				"match": "\\b([A-Za-z_][a-zA-Z0-9_]*\\-)*(attr|fn|type|exit|ret|next|if|el|is|for|throw)(\\-[A-Za-z_][a-zA-Z0-9_]*)*\\b"
+				"match": "\\b([A-Za-z_][a-zA-Z0-9_]*\\-)*(attr|fn|type|exit|ret|next|(el)?if|el|is|for|throw)\\b",
+				"captures": {
+					"1": {
+						"name": "keyword.sc"
+					},
+					"2": {
+						"name": "keyword.control.sc"
+					}
+				}
 			}, {
 				"name": "keyword.sc",
 				"match": "\\b(use|pkg|pub|self|super|with|in|inf|true|false|be|new|null|ref)\\b"

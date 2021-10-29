@@ -64,11 +64,22 @@ any, uint64, int, int32, num, str, regex, bool, byte, func, code
 attr, fn            # declaration of code
 type                # structure/enum/type declaration
 for, next           # repetetive control flow
-label-for           # labelled control flow
 exit, ret           # exit scope or return to parent scope
                     # continuing everything on a separate thread
-if, el-if, el, is   # conditional control flow
+if, elif, el, is    # conditional control flow
 throw               # control throw
+
+######### LABELLED CONTROL KEYWORDS #########
+
+set-fn  # setter
+get-fn  # getter
+d-throw # deprecation warning
+p-throw # panic
+throw   # throw & end program
+
+random-for {
+    random-exit # Labels are directly merged into keywords
+}
 
 ######### RESERVED KEYWORDS #########
 
