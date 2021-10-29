@@ -134,7 +134,7 @@ a > b < c         # therefore... could be legal?
 # if statement
 if c {}
 # else if statement
-elif c {}
+el-if c {}
 # else statement
 el {}
 
@@ -178,7 +178,7 @@ k := A.C ('Hello!')
 
 if k is A.B {
     # Does nothing
-} elif k is A.C(v) {
+} el-if k is A.C(v) {
     out: v  # Hello!
 }
 

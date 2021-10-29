@@ -67,7 +67,7 @@ for, next           # repetetive control flow
 label-for           # labelled control flow
 exit, ret           # exit scope or return to parent scope
                     # continuing everything on a separate thread
-if, elif, el, is    # conditional control flow
+if, el-if, el, is   # conditional control flow
 throw               # control throw
 
 ######### RESERVED KEYWORDS #########
