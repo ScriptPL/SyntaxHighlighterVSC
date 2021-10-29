@@ -61,8 +61,8 @@ any, uint64, int, int32, num, str, regex, bool, byte, func, code
 
 ######### RESERVED CONTROL KEYWORDS #########
 
-attr, fn            # declaration of code
-type                # structure/enum/type declaration
+fn                  # universal declaration of code: first-class function, attributes, etc.
+type                # universal structure/enum/type declaration
 for, next           # repetetive control flow
 exit, ret           # exit scope or return to parent scope
                     # continuing everything on a separate thread

@@ -14,7 +14,6 @@ call(params)
 call: params
 
 # Other
-@attributes
 $special
 label-for # loop with label
 
