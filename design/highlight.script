@@ -67,15 +67,11 @@ for, next           # repetetive control flow
 exit, ret           # exit scope or return to parent scope
                     # continuing everything on a separate thread
 if, elif, el, is    # conditional control flow
-throw               # control throw
 
 ######### LABELLED CONTROL KEYWORDS #########
 
 set-fn  # setter
 get-fn  # getter
-d-throw # deprecation warning
-p-throw # panic
-throw   # throw & end program
 
 random-for {
     random-exit # Labels are directly merged into keywords

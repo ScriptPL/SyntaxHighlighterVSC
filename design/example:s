@@ -329,3 +329,34 @@ fn parseHTML (t <str>) <str> {
 }
 
 out: parseHTML(text)
+
+##########################################################################################
+#########                     EXAMPLE PACKAGE: THROW MODULE                      #########
+##########################################################################################
+#
+# @throw:s
+#
+
+throw {
+    fn self(error <str>) {
+        out: error
+        asm (
+            mov eax, 0 # interrupt code
+            mov ebx, 0 # argument, in this case: return value
+            int b80
+        )
+    }
+
+    fn dep(error <str>) {
+        out: 'Deprecation Warning! ', error
+    }
+}
+
+#
+# index:s
+#
+
+use '@throw'
+
+throw: 'Throwing an error'
+throw.dep: 'This will only output a deprecation warning!'
