@@ -28,7 +28,7 @@ out: gcd(2, 5, 6)
 fn factorial (n <uint>) <uint> {
     if n <= 1
         exit 1
-    elif # this line can be comment technically
+    el # this line can be comment technically
         exit this(n - 1) * n # you can "exit self( ..." to indicate calling yourself
 }
 
