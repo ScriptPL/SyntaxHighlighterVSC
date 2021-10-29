@@ -7,7 +7,8 @@ pkg main
 
 fn gdc(a <uint>, b <uint>) {
     # JS: https://stackoverflow.com/a/17445307/16002144
-    if a == 0 exit b
+    if a == 0
+        exit b
 
     for b != 0 {
         if a > b
@@ -19,7 +20,7 @@ fn gdc(a <uint>, b <uint>) {
     exit a
 }
 
-out: gcd(2, 5, 6)
+out: gcd(2, 5)
 
 ##########################################################################################
 #########                           FACTORIAL FUNCTION                           #########
@@ -39,6 +40,25 @@ fn factorial (n <uint>) <uint> {
     }
     ret n
 }
+
+##########################################################################################
+#########                               FIBONACCI                                #########
+##########################################################################################
+
+use '@thread'
+
+fn fibonacci () <()uint> {
+   ret be f := (0, 1)
+
+   for {
+      f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
+   }
+}
+
+be k = fibonacci()
+
+thread.sleep: 5000
+out: <str> k
 
 ##########################################################################################
 #########                               OUTPUT PRINT                             #########

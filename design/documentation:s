@@ -171,7 +171,7 @@ if 'Hello, World!'.equalsSize {
 
 ####################################### UNPACK ENUM ######################################
 
-type A (*B | *C(str))
+type A <<*B> | <*C(str)>>
 
 k := A.B
 k := A.C ('Hello!')
@@ -467,7 +467,7 @@ be w #*<regex.set>*# = regex.set('0', '1') # regex.set(('0', '1')): one bracket 
 ############################# MACRO ON THE REGEX SET EXAMPLE #############################
 
 regex {
-    set = type (<()char>)
+    type set <()char>
 
     #fn set (chars <... char>) {
     #    exit chars

@@ -178,18 +178,18 @@ use (*unsafe *asm) # unsafe could support an 'eval' method to execute string as 
 
 type EmptyTag # Simple Type
 
-type Position (
+type Position <
    x int
    y int
-)
+>
 
-type Velocity (
+type Velocity <
    x int, y int
-)
+>
 
-type Asset (
+type Asset <
    image Image
-)
+>
 
 be predefinedComp = Velocity (
    x = 5
