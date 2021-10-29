@@ -55,6 +55,16 @@
 			}, {
 				"begin": "`",
 				"end": "\n|(?<!\\\\)`",
+				"beginCaptures": {
+					"0": {
+						"name": "string.sc"
+					}
+				},
+				"endCaptures": {
+					"0": {
+						"name": "string.sc"
+					}
+				},
 				"patterns": [{
 					"begin": "(\\$\\()",
 					"end": "(\\))",
@@ -79,9 +89,18 @@
 					"name": "string.sc"
 				}]
 			}, {
-				"name": "string.regexp.sc",
 				"begin": "´",
 				"end": "\n|(?<!\\\\)´",
+				"beginCaptures": {
+					"0": {
+						"name": "string.regexp.sc"
+					}
+				},
+				"endCaptures": {
+					"0": {
+						"name": "string.regexp.sc"
+					}
+				},
 				"patterns": [{
 					"name": "constant.regexp.escape.sc",
 					"match": "\\\\\\w"
@@ -105,8 +124,7 @@
 						}
 					}
 				}, {
-					"name": "keyword.control.sc",
-					"match": "(\\{)(\\d+)?(\\-)(\\d+)?((\\*)\\d+)?(\\})",
+					"match": "(\\{)(?:(\\d*)|([A-Za-z_][a-zA-Z0-9_]*))?(?:\\-(\\d*)|([A-Za-z_][a-zA-Z0-9_]*))?(\\})",
 					"captures": {
 						"1": {
 							"name": "keyword.sc"
@@ -115,18 +133,39 @@
 							"name": "constant.numeric.sc"
 						},
 						"3": {
-							"name": "keyword.operator.sc"
+							"name": "variable.sc"
 						},
 						"4": {
 							"name": "constant.numeric.sc"
 						},
 						"5": {
-							"name": "constant.numeric.sc"
+							"name": "variable.sc"
 						},
 						"6": {
 							"name": "keyword.sc"
-						},
-						"7": {
+						}
+					}
+				}, {
+					"begin": "\\$\\{",
+					"end": "\\}",
+					"patterns": [{
+						"match": "\\b(i|s)\\s*:\\s*([A-Za-z_][a-zA-Z0-9_]*)",
+						"captures": {
+							"1": {
+								"name": "keyword.control.sc"
+							},
+							"2": {
+								"name": "variable.sc"
+							}
+						}
+					}],
+					"beginCaptures": {
+						"0": {
+							"name": "keyword.sc"
+						}
+					},
+					"endCaptures": {
+						"0": {
 							"name": "keyword.sc"
 						}
 					}
@@ -140,6 +179,9 @@
 							"name": "constant.regexp.escape.sc"
 						}
 					}
+				}, {
+					"match": ".",
+					"name": "string.regexp.sc"
 				}]
 			}]
 		},

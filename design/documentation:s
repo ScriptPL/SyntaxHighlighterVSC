@@ -485,3 +485,20 @@ regex {
 
     # Since tuples with one value evaporate their brackets, regex.set('0', '1') is a type followed by an array.
 }
+
+####################################### AAA BBB CCC ######################################
+
+be n int
+be proof = 'aaabbbccc'
+
+out: proof * ´a${i:n}b{n}c{n}´  # true
+out: n                          # 3
+
+#
+# a${i:n}   # Scan for "i"nteger amount of "a"'s, write into variable n
+# b{n}      # Expect "b", n times
+# c{n}      # Expect "c", n times
+#
+
+# ${}:      write into code
+# $(), {}:  read from code
