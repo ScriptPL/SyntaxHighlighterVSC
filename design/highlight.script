@@ -33,11 +33,12 @@
 
 # Variables need to start with a letter or underscore,
 # can follow with letters, underscore and numbers.
-abcdef012345, _____hello_world
+# the underscore at start indicates variable privacy.
+abcdef012345, _hello_world
 
 # All variables starting with uppercase letters are
 # usually types (but not hardcoded)
-Abcdef012345, _____HelloWorld
+Abcdef012345, _HelloWorld
 
 # Non-Type Variables followed by brackets are usually functions
 
@@ -46,15 +47,12 @@ hello (), _hello ()
 # Variable names ending with the double dot are methods (special kind of functions)
 
 out: 'Hello, World!'
-del: variable
+_del: variable
 
-# The following are NOT methods
-
-xxxxxxx := y
-xXXXXXX = y
+var_iable := y
+_private_var = y
 xXXXXXx => y
 Xxxxxxx()
-xXXXXXX ()
 
 ######### RESERVED TYPES #########
 # Numeric types can followed with any digit

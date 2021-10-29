@@ -285,11 +285,13 @@ z = Value2
 type Struct (
     x <int>
     y <str>
+    _z <bool> # Values starting with an underscore make the variable private.
 )
 
 s := Struct (
     x = 5
-    y = 'Hello, World!'
+    y = 'Hello, World!',
+    _z = true
 )
 
 ########################################## ARRAYS ########################################
