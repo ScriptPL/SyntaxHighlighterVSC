@@ -307,7 +307,7 @@
 				}
 			}, {
 				"name": "keyword.sc",
-				"match": "\\b(use|pkg|pub|self|super|with|in|inf|true|false|be|new|null|ref)\\b"
+				"match": "\\b(use|pub|self|super|in|inf|true|false|be|new|ref)\\b"
 			}, {
 				"name": "variable.other.constant.sc",
 				"match": "\\b(document|window|process)\\b"

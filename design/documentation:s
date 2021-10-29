@@ -1,7 +1,4 @@
 
-# DEFINING A PACKAGE
-
-pkg main
 
 ##########################################################################################
 #########                                  BASICS                                #########
@@ -164,7 +161,7 @@ fn str.equalsSize(i <int>) <bool>, <str> {
 }
 
 if 'Hello, World!'.equalsSize {
-    is 13 with v {
+    is 13 -> v {
         out: v
     }
 }
@@ -240,10 +237,9 @@ Array(T) {
 arr #*Array<str>*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)))
 arr.push() # Array<T.push> with self
 
-######################################## NULL TYPE #######################################
+######################################### TAG TYPE #######################################
 
 type AbstractType   # Acts like a tag
-k := null           # k = null
 
 ################################ COLLECTION OF EXISTING TYPES ############################
 

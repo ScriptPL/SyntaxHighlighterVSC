@@ -79,12 +79,12 @@ random-for {
 
 ######### RESERVED KEYWORDS #########
 
-use, pkg            # package management
-pub                 # visiblity
-true, false, null   # values
-be, new, ref        # other
-self, super         # recursive self or parent calling
-with, in, inf
+use             # package management
+pub             # visiblity
+true, false     # values
+be, new, ref    # other
+self, super     # recursive self or parent calling
+in, inf
 
 ######### METHODS (= KEYWORDS) #########
 

@@ -1,5 +1,4 @@
 
-pkg main
 
 ##########################################################################################
 #########                                  GCD                                   #########
@@ -45,7 +44,7 @@ fn factorial (n <uint>) <uint> {
 #########                               FIBONACCI                                #########
 ##########################################################################################
 
-use '@thread'
+use '@lib/thread'
 
 fn fibonacci () <()uint> {
    ret be f := (0, 1)
@@ -311,7 +310,7 @@ fn parseHTML (t <str>) <str> {
     # if function
     if text.startsWith {
         # treats 'is' as the first parameter, where with are return values
-        is tagOpen with v {
+        is tagOpen -> v {
             latest.push(HtmlElement (
                 name = v,
                 content = ()
@@ -319,7 +318,7 @@ fn parseHTML (t <str>) <str> {
             latest = latest.last.content
         }
 
-        is tagClose with v {
+        is tagClose -> v {
             latest = latest.super
             if latest.super.name != v throw `</$(v)> closes `
         }
@@ -356,7 +355,30 @@ throw {
 # index:s
 #
 
-use '@throw'
+use '@lib/throw'
 
 throw: 'Throwing an error'
 throw.dep: 'This will only output a deprecation warning!'
+
+##########################################################################################
+#########                        CREATING A QUICK OPTION                         #########
+##########################################################################################
+
+use '@lib/throw'
+
+type Option(T) <
+    <*Some(T)>
+    <*Null>
+>
+
+Option(T) {
+    fn unwrap() <T> {
+        if self is Option(value) {
+            exit value
+        }
+        throw: 'Panicked! Trying to unwrap on a null value!'
+    }
+}
+
+be k = Option.Some('Hello!')
+out: k.unwrap()                 # Hello!
