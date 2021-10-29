@@ -7,28 +7,14 @@ pkg main
 #########                                  BASICS                                #########
 ##########################################################################################
 
+# Brackets
+{code}
+(value)
+<type>
+
 # Functions
-hello: params
-hello(params)
-
-# Code block is defined with figure brackets.
-
-{
-    code
-}
-
-# Round brackets define values, structures or tuples. A tuple with one element is
-# just a priority marker.
-
-(
-    values: definitions
-)
-
-type (
-
-)
-
-be value <of type> = <type conversion> value
+call(params)
+call: params
 
 # Other
 @attributes
@@ -61,7 +47,7 @@ fn a.b.f () {
 #########                               FUNCTIONS                               #########
 ##########################################################################################
 
-fn name (parameter int = default, ...) return_type {
+fn name (parameter <int> = default, ...) <return_type> {
     # do smt
     ret return_value
     exit exit_value
@@ -170,7 +156,7 @@ if value is something {}
 # }
 #
 
-fn str.equalsSize(i int) bool, str {
+fn str.equalsSize(i <int>) <bool>, <str> {
     if self.len == i {
         exit true, 'V is this string'
     }
@@ -201,7 +187,7 @@ if k is A.B {
 ##########################################################################################
 
 # Type Collection
-type TypeName (
+type TypeName <
     # Use existing types into a collection
     <str>
     | <int>
@@ -219,18 +205,22 @@ type TypeName (
     1 Type
     2 SecondType
     3 str
-)
+
+    | # Quick Tuple
+
+    Type, SecondType, str
+>
 
 ####################################### SCOPE TYPE #######################################
 # AND
 ####################################  RECURSIVE TYPES ####################################
 
-type Array<T> {
+type Array(T) <
     <*M(T, self)> |
     <*E>
-}
+>
 
-Array<T> {
+Array(T) {
     fn push (element T) {
         be latest <ref Array<T>> = self
         for {
@@ -257,36 +247,36 @@ k := null           # k = null
 
 ################################ COLLECTION OF EXISTING TYPES ############################
 
-type Collection (
+type Collection <
     <str> |
     <int>
-)
+>
 
 be x Collection = 500
 x = 'Hello!'
 
 ########################################### ENUM #########################################
 
-type Enum (
+type Enum <
     <*Value1> |
     <pub *Value2>
-)
+>
 
-type StringEnum (
+type StringEnum <
     'content' |
     'hello'
-)
+>
 
 z := Enum.Value1
 z = Value2
 
 ########################################## STRUCT ########################################
 
-type Struct (
+type Struct <
     x <int>
     y <str>
     _z <bool> # Values starting with an underscore make the variable private.
-)
+>
 
 s := Struct (
     x = 5
@@ -307,21 +297,21 @@ be k <()str> = ('Hello!', 'Za Warudo!', 'World!')
 
 ########################################## TUPLES ########################################
 
-type Tuple (int, str, bool)
+type Tuple <int, str, bool>
 
-be y Tuple = (5, 'Something', true) # technically the same as
+be y <Tuple> = (5, 'Something', true) # technically the same as
 y := Tuple (5, 'Something', true)   # conversion vs assignment
 
-type AnotherTuple (int, str * 3)
+type AnotherTuple <int, str * 3>
 
 be z AnotherTuple = (5, 'A', 'BC', 'DEF')
 
 #################################### COLLECTIVE ENUM ####################################
 
-type Result<Success, Error> (
-    be Ok(Success) |
-    be Err(Error)
-)
+type Result(Success, Error) <
+    <*Ok(Success)> |
+    <*Err(Error)>
+>
 
 be k <Result<int, str>> = Result.Ok(200)
 k = Result.Err('Could not connect!')
@@ -491,7 +481,7 @@ regex {
 be n int
 be proof = 'aaabbbccc'
 
-out: proof * ´a${i:n}b{n}c{n}´  # true
+out: proof * ´(a)${i:n}(b){n}(c){n}´  # true
 out: n                          # 3
 
 #
@@ -502,3 +492,13 @@ out: n                          # 3
 
 # ${}:      write into code
 # $(), {}:  read from code
+
+be map <Map(str, str)>
+be k = 'h="Hello";g="World";z="Ocean";'
+
+for key, value in k * ´(\w)${1}="(\w)${2}";´ {
+    map(key) = value 
+}
+
+out: map('h') .. ', ' .. map('g')    # Hello, World!
+

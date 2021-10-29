@@ -5,7 +5,7 @@ pkg main
 #########                                  GCD                                   #########
 ##########################################################################################
 
-fn gdc(a uint, b uint) {
+fn gdc(a <uint>, b <uint>) {
     # JS: https://stackoverflow.com/a/17445307/16002144
     if a == 0 exit b
 
@@ -89,15 +89,15 @@ print_element: 'Hello', 5, false
 
 type Player
 
-type Position (
+type Position <
     x <int>
     y <int>
-)
+>
 
-type Velocity (
+type Velocity <
     x <int>
     y <int>
-)
+>
 
 player := new (
     Player,
@@ -124,6 +124,10 @@ string <str> := 'Hello, World!'
 string += ' Add more!'      # "Hello World! Add more!"              += add string
 string -= 0 -> 6            # "World! Add more!"                    -= remove character or character range
 string *= 2                 # "World! Add more!World! Add more!"    *= repeat string n times
+
+string ? ´regex´            # Returns boolean: String matches or not
+string * ´regex´            # Returns an iterable
+string % ´regex´            # :shrug: maybe run string through regex
 
 ######################################### ARRAYS #########################################
 
@@ -207,12 +211,12 @@ out: genPrimes (500)
 # use html
 
 App {
-    be canvas
+    be canvas <HTMLCanvasElement>
     be x, y <int>
     be keys <Tags<str>>
 
     fn init() {
-        canvas = <HTMLCanvasElement> document.getElementById('#canvas')
+        canvas = document.getElementById('#canvas')
 
         x = canvas.width * .5
         y = canvas.height * .5
@@ -265,15 +269,15 @@ window.onload: {
 # CODE WITHOUT CONSTRUCTED LOGIC!
 #
 
-type HtmlElement (
+type HtmlElement <
     name <str>
     content <()self>
-)
+>
 
 be text := '<b><i>Hello</i>, <u>World</u>!</b>'
 
 fn parseHTML (t <str>) <str> {
-    be output HtmlElement = (
+    be output <HtmlElement> = (
         name = 'div',
         content = ()
     )

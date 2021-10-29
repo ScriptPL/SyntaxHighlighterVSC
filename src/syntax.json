@@ -149,6 +149,9 @@
 					"begin": "\\$\\{",
 					"end": "\\}",
 					"patterns": [{
+						"match": "\\d+",
+						"name": "constant.numeric.sc"
+					}, {
 						"match": "\\b(i|s)\\s*:\\s*([A-Za-z_][a-zA-Z0-9_]*)",
 						"captures": {
 							"1": {
@@ -171,11 +174,11 @@
 					}
 				}, {
 					"name": "constant.character.escape.sc",
-					"match": "(?<!\\\\)[\\(\\)\\[\\]\\{\\}]"
+					"match": "(?<!\\\\)[\\(\\)\\[\\]\\{\\}\\|]"
 				}, {
 					"match": "(\\\\).",
 					"captures": {
-						"1": {
+						"0": {
 							"name": "constant.regexp.escape.sc"
 						}
 					}
