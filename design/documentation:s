@@ -134,7 +134,7 @@ a > b < c         # therefore... could be legal?
 # if statement
 if c {}
 # else if statement
-el-if c {}
+elif c {}
 # else statement
 el {}
 
