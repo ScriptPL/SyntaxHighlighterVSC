@@ -59,32 +59,20 @@ Xxxxxxx()
 
 any, uint64, int, int32, num, str, regex, bool, byte, func, code
 
-######### RESERVED CONTROL KEYWORDS #########
+######### RESERVED KEYWORDS #########
+
+use                 # package management
 
 fn                  # universal declaration of code: first-class function, attributes, etc.
 type                # universal structure/enum/type declaration
-for, next           # repetetive control flow
+for, in, next       # repetetive control flow
 exit, ret           # exit scope or return to parent scope
                     # continuing everything on a separate thread
 if, elif, el, is    # conditional control flow
 
-######### LABELLED CONTROL KEYWORDS #########
-
-set-fn  # setter
-get-fn  # getter
-
-random-for {
-    random-exit # Labels are directly merged into keywords
-}
-
-######### RESERVED KEYWORDS #########
-
-use             # package management
-pub             # visiblity
-true, false     # values
-be, new, ref    # other
-self, super     # recursive self or parent calling
-in, inf
+true, false         # values
+be                  # other
+self, super         # recursive self or parent reference
 
 ######### METHODS (= KEYWORDS) #########
 

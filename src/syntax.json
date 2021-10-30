@@ -288,7 +288,7 @@
 				"match": "=>"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\->|\\+>|\\:\\:\\:?|~|\\.{3}"
+				"match": "\\?|~|\\.{3}"
 			}, {
 				"name": "keyword.operator.sc",
 				"match": "(:|\\+|\\-|\\*)=|\\!|\\+|\\-|\\%|\\*|/|\\.\\.|\\\\"
@@ -296,18 +296,11 @@
 		},
 		"words": {
 			"patterns": [{
-				"match": "\\b([A-Za-z_][a-zA-Z0-9_]*\\-)*(fn|type|exit|ret|next|(el)?if|el|is|for)\\b",
-				"captures": {
-					"1": {
-						"name": "keyword.sc"
-					},
-					"2": {
-						"name": "keyword.control.sc"
-					}
-				}
+				"name": "keyword.control.sc",
+				"match": "\\b(fn|type|exit|ret|next|(el)?if|el|is|for)(:[A-Za-z_][A-Za-z_0-9]*)?\\b"
 			}, {
 				"name": "keyword.sc",
-				"match": "\\b(use|pub|self|super|in|inf|true|false|be|new|ref)\\b"
+				"match": "\\b(use|self|super|in|true|false|be)(:[A-Za-z_][A-Za-z_0-9]*)?\\b"
 			}, {
 				"name": "variable.other.constant.sc",
 				"match": "\\b(document|window|process)\\b"

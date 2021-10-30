@@ -34,7 +34,7 @@ fn factorial (n <uint>) <uint> {
 
 fn factorial (n <uint>) <uint> {
     r := 1
-    for i in 1 -> n {
+    for i in (begin = 1, end = n) {
         r *= n
     }
     ret n
@@ -74,24 +74,14 @@ out: 'Hello, World!'
 # hello: params     # Method
 #
 
-fn print_element (params <...>) { # params <...any>
+fn print_element (params <(...)>) { # params <...any>
     for i, e in params {
-        if e { # if it's a non-boolean value, act like a switch
-            is str {
-                out: e, b0A
-            }
-
-            is int {
-                out: <str> e, b0A # Parse integer to string
-            }
-
-            is bool {
-                if e {
-                    out: 'true', b0A
-                } el {
-                    out: 'false', b0A
-                }
-            }
+        if e is str { # if it's a non-boolean value, act like a switch
+            out: e, b0A
+        } elif e is int {
+            out: <str> e, b0A # Parse integer to string
+        } elif e is bool {
+            out: e ? 'true' ~ 'false', b0A
         }
     }
 }
@@ -106,6 +96,20 @@ print_element: 'Hello', 5, false
 # a set of type structures.
 #
 
+be:g id <uint> = 0
+
+fn entity (components <(...)T>) {
+    ret id += 1
+    # Something to organise components i suppose
+}
+
+fn query (components <(...)T>) <func> {
+    
+    ret fn (i <uint>) <uint> {
+
+    }
+}
+
 type Player
 
 type Position <
@@ -118,7 +122,7 @@ type Velocity <
     y <int>
 >
 
-player := new (
+player := entity (
     Player,
     Position (
         x = 0,
@@ -126,8 +130,7 @@ player := new (
     )
 )
 
-# Queries are compile time optimized.
-for eid <uint> in query (Player, Position, Velocity) {
+for be eid <uint> in query (Player, Position, Velocity) {
    Position(eid).x += Velocity(eid).x
    Position(eid).y += Velocity(eid).y
 }
@@ -141,12 +144,6 @@ for eid <uint> in query (Player, Position, Velocity) {
 string <str> := 'Hello, World!'
 
 string += ' Add more!'      # "Hello World! Add more!"              += add string
-string -= 0 -> 6            # "World! Add more!"                    -= remove character or character range
-string *= 2                 # "World! Add more!World! Add more!"    *= repeat string n times
-
-string ? ´regex´            # Returns boolean: String matches or not
-string * ´regex´            # Returns an iterable
-string % ´regex´            # :shrug: maybe run string through regex
 
 ######################################### ARRAYS #########################################
 
@@ -180,7 +177,7 @@ k %= 990    # 0
 fn genPrimes (total <int>) <()int> {
     primes <()int> := (2, 3)
 
-    for i in 5 -> total +> 2 {
+    for i in (begin = 5, end = total, jump = 2) {
         isPrime := true
 
         for j, e in primes {
@@ -194,29 +191,6 @@ fn genPrimes (total <int>) <()int> {
             primes += i
         }
     }
-
-    exit primes
-}
-
-out: genPrimes (500)
-
-################################# NUMERIC ARRAYS / RANGES ################################
-
-fn genPrimes (total <int>) <()uint> {
-    primes := 2 -> total
-
-    for i in primes {
-        if i == 0 next
-
-        for j in 2 * i -> total +> i {
-            # ALL variables in this language are passed down as references
-            # Cloning goes with the & attribute
-            i = 0
-        }
-    }
-
-    # /= Filter out by condition
-    primes /= V != 0
 
     exit primes
 }
@@ -301,7 +275,7 @@ fn parseHTML (t <str>) <str> {
         content = ()
     )
 
-    be latest <ref ()HtmlElement> = output.content
+    be latest <@()HtmlElement> = output.content
 
     # ´<\/?\w+>´
     be tagOpen = ´<\w>´
@@ -320,7 +294,8 @@ fn parseHTML (t <str>) <str> {
 
         is tagClose -> v {
             latest = latest.super
-            if latest.super.name != v throw `</$(v)> closes `
+            if latest.super.name != v
+                throw: `</$(v)> closes `
         }
     } el {
         

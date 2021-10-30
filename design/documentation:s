@@ -69,7 +69,6 @@ for i := start_value; i < end_value; i += 1 {
     # traditional for loop
 }
 
-
 be i int = 5                # for ( i = s;
 for {                       # standalone; for {} is a while true loop
     if i < end_value exit   # i < end_value ;
@@ -91,20 +90,22 @@ for iterable {
 }
 
 {
-    next # continue
-    exit # break
+    next    # continue
+    ret     # break, but keep running in a nameless thread
+    exit    # break
 }
 
-for i, e in s -> e { }        # for (i = s; i <= e; i++)
-for i in 5 -> inf +> 2 { }    # for (i = 5; true; i += 2); i = 5, while { i += 2 }
+for i in (begin = 5, jump = 2) {
+    # for in <struct>: begin: start; end: last accepted value or inf; jump: increment
+}
 
 ###################################### SCOPE LABEL #######################################
 
 be value
 
-y = label-for x {
-    for y {
-        label-exit value
+for:x y {
+    for z {
+        exit:x value
     }
 }
 
@@ -218,7 +219,7 @@ type Array(T) <
 
 Array(T) {
     fn push (element T) {
-        be latest <ref Array<T>> = self
+        be latest <@Array<T>> = self
         for {
             if latest {
                 is Array.M {
@@ -254,7 +255,7 @@ x = 'Hello!'
 
 type Enum <
     <*Value1> |
-    <pub *Value2>
+    <*Value2>
 >
 
 type StringEnum <
@@ -315,22 +316,9 @@ if k is Result.Err(m) {
     out: m
 }
 
-##################################### REFERENCE TYPE #####################################
+######################################## REFERENCE #######################################
 
-ref
-
-##########################################################################################
-#########                             GENERATED TYPES                            #########
-##########################################################################################
-
-################################# NUMERIC ARRAYS / RANGES ################################
-
-# start_value -> end_value +> step
-5 -> 10        # (5, 6, 7, 8, 9, 10)
-(5 -> 10) *= 2 # (10, 12, 14, 16, 18, 20) # array *= n creates new array, acts like filter
-5 -> 10 +> 2   # (5, 7, 9)
-
-################################# NUMERIC ARRAYS / RANGES ################################
+<@Type> # a pointer
 
 ##########################################################################################
 #########                                  METHODS                               #########
@@ -409,7 +397,7 @@ for query (Player, Position, Velocity) {
 
 # iterable functions
 fn iter(a int = 0, b int = 10) <int, int> {
-    pub i = a   # pub i makes the variable visible inside the loop scope
+    be:g i = a
 
     $before {
         exit a < b  # if true, continue looping, otherwise, break
