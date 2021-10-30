@@ -98,8 +98,6 @@ window, document, process
 
 ######### ATTRIBUTES #########
 
-@hello.world
-@async                  # Async sort of special
 $attributiveKeywords
 
 ######### EXAMPLE #########
