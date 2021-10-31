@@ -41,19 +41,19 @@ RawList(T) {
         exit latestChild.0
     }
 
-    fn:a push (element T){
+    fn<a> push (element T){
         be latestChild @List<T> = self
         for {
             if latestChild.1 is List.Element { # while the next child is an element, update the pointer.
                 latestChild = latestChild.1
             } el { # if the next child isn't an element, make it one.
                 latestChild = RawList.Element(element, RawList.Endpoint)
-                exit:a 
+                exit<a>
             }
         }
     }
 
-    fn:a pop () T {
+    fn<a> pop () T {
         be latestChild @List<T> = self
         for {
             if latestChild.1 is List.Element { # while the next child is an element, update the pointer.
@@ -61,7 +61,7 @@ RawList(T) {
             } el { # if the next child is the endpoint, then make the current node an endpoint
                 # latestChild.0 COLLECT GARBAGE?
                 latestChild = RawList.Endpoint
-                exit:a 
+                exit<a>
             }
         }
     }

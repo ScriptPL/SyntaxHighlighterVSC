@@ -14,7 +14,7 @@ call(params)
 call: params
 
 # Other
-for:label # loop with label
+for<label> # loop with label
 
 be:g    # declare a global
 be:c    # declare a constant
