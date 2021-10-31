@@ -40,15 +40,6 @@ abcdef012345, _hello_world
 # usually types (but not hardcoded)
 Abcdef012345, _HelloWorld
 
-# Non-Type Variables followed by brackets are usually functions
-
-hello (), _hello ()
-
-# Variable names ending with the double dot are methods (special kind of functions)
-
-out: 'Hello, World!'
-_del: variable
-
 var_iable := y
 _private_var = y
 xXXXXXx => y
@@ -75,12 +66,6 @@ is, case        # conditional control flow
 true, false     # values
 be              # other
 self, super     # recursive self or parent reference
-
-######### METHODS (= KEYWORDS) #########
-
-out: 'Hello, World!'
-sleep:
-abort:
 
 ######### RESERVED CONSTANTS #########
 

@@ -333,31 +333,9 @@
 					}
 				}
 			}, {
-				"name": "support.function.sc",
-				"match": "(_)?[a-zA-Z_]+:(?![$@\\w])",
-				"captures": {
-					"1": {
-						"name": "keyword.sc"
-					}
-				}
-			}, {
 				"name": "support.type.sc",
 				"match": "(_)?[A-Z][a-zA-Z0-9_]*",
 				"captures": {
-					"1": {
-						"name": "keyword.sc"
-					}
-				}
-			}, {
-				"begin": "(_)?([A-Za-z][A-Za-z_0-9]*)\\s*\\(",
-				"end": "\\)",
-				"patterns": [{
-					"include": "#*"
-				}],
-				"beginCaptures": {
-					"0": {
-						"name": "support.function.sc"
-					},
 					"1": {
 						"name": "keyword.sc"
 					}

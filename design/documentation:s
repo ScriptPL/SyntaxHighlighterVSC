@@ -7,7 +7,7 @@
 # Brackets
 {code}
 (value)
-<type>
+(type)
 
 # Functions
 call(params)
@@ -46,11 +46,19 @@ fn a.b.f () {
 #########                               FUNCTIONS                               #########
 ##########################################################################################
 
-fn name (parameter <int> = default, ...) <return_type> {
+fn name (parameter int = default, ...) return_type {
     # do smt
     ret return_value
     exit exit_value
 }
+
+###################################### MANY OUTPUTS ######################################
+
+fn example () int, str, bool {
+    exit 5, 'Hi!', true
+}
+
+be a, b, c = example()
 
 ##########################################################################################
 #########                                 LOOPS                                  #########
@@ -72,7 +80,7 @@ for be i = start_value; i < end_value; i += 1 {
     # traditional for loop
 }
 
-i <int> = 5                 # for ( i = s;
+i int = 5                 # for ( i = s;
 for {                       # standalone; for {} is a while true loop
     if i < end_value exit   # i < end_value ;
     # Content
@@ -106,9 +114,9 @@ for i in (begin = 5, jump = 2) {
 
 be value
 
-for:x y {
+for<x> y {
     for z {
-        exit:x value
+        exit<x> value
     }
 }
 
@@ -169,7 +177,7 @@ if value is something {}
 # }
 #
 
-fn str.equalsSize(i <int>) <bool>, <str> {
+fn str.equalsSize(i int) bool, str {
     if self.len == i {
         exit true, 'V is this string'
     }
@@ -184,7 +192,7 @@ if 'Hello, World!'.equalsSize {
 
 ####################################### UNPACK ENUM ######################################
 
-type A <<*B> | <*C(str)>>
+type A (*B | *C(str))
 
 k = A.B
 k = A.C ('Hello!')
@@ -196,46 +204,91 @@ if k is A.B {
 }
 
 ##########################################################################################
-#########                                   TYPES                                #########
+#########                                  TYPES                                 #########
 ##########################################################################################
 
+######################################## TAG TYPE ########################################
+
+type AbstractType   # Acts like a tag
+
+####################################### TYPE = TYPE ######################################
+
+type Type = DifferentType(More)
+
+be k Type = ...
+
+####################################### TYPE = ENUM ######################################
+
+type Enum (
+    *Member1 |
+    *Member2(More)
+    *Member3(AndMore)
+)
+
+be k Enum = Enum.Member1
+be k = Enum.Member1         # This language is not to be verbose! Everything that's obvious is obvious!!!
+
+#################################### TYPE = COLLECTION ###################################
+
+type Values (
+    str |
+    num |
+    bool |
+)
+
+be k Values = 'Hello!'
+
+###################################### TYPE = STRUCT #####################################
+
+type Struct (
+    abc Type1
+    def Type2
+)
+
+be k Struct = Struct (abc = ..., def = ...)
+be k Struct = (abc = ..., def = ...)
+be k = Struct (abc = ..., def = ...)
+
+###################################### TYPE = TUPLE ######################################
+
+type Tuple (Type1, Type2, Type3)
+
+be k Tuple = Tuple (a, b, ...)
+be k Tuple = (a, b, ...)
+be k = Tuple (a, b, ...)
+
+###################################### COMPLEX TYPE ######################################
+
 # Type Collection
-type TypeName <
-    # Use existing types into a collection
-    <str>
-    | <int>
+type ComplexType (
+    str | int | *Hello
 
-    | # Or create new enum components with a star
-    <*Hello>
+    |
+    var Type,
+    anotherVar DifferentType
 
-    | # Struct: Collection of parameters
+    |
+    Type, SecondType, str
+)
 
-    var <Type>,
-    anotherVar <DifferentType>
+be k ComplexType
+k = 'string'
+k = 500
+k = ComplexType.Hello
+k = (var = ..., anotherVar = ...)
+k = (Type, SecondType, ...)
 
-    | # Tuple
-
-    1 <Type>
-    2 <SecondType>
-    3 <str>
-
-    | # Quick Tuple
-
-    <Type>, <SecondType>, <str>
->
-
-####################################### SCOPE TYPE #######################################
-# AND
 ####################################  RECURSIVE TYPES ####################################
 
-type Array(T) <
-    <*M(T, self)> |
-    <*E>
->
+type Array: T (*M(T, self) | * E)
 
-Array(T) {
+Array<T> {
+    fn self (pos uint) T {
+        # Get element at pos
+    }
+
     fn push (element T) {
-        be latest <@Array<T>> = self
+        be latest @Array(T) = self
         for {
             if latest {
                 case Array.M {
@@ -251,56 +304,8 @@ Array(T) {
 }
 
 arr #*Array<str>*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)))
-arr.push() # Array<T.push> with self
-
-######################################### TAG TYPE #######################################
-
-type AbstractType   # Acts like a tag
-
-################################ COLLECTION OF EXISTING TYPES ############################
-
-type Collection <
-    <str> |
-    <int>
->
-
-be x <Collection> = 500
-x = 'Hello!'
-
-########################################### ENUM #########################################
-
-type Enum <
-    <*Value1> |
-    <*Value2>
->
-
-type StringEnum <
-    'content' |
-    'hello'
->
-
-z = Enum.Value1
-z = Value2
-
-########################################## STRUCT ########################################
-
-type Struct <
-    x <int>
-    y <str>
-    _z <bool> # Values starting with an underscore make the variable private.
->
-
-s = Struct (
-    x = 5
-    y = 'Hello, World!',
-    _z = true
-)
-
-s <Struct> = (
-    x = 5
-    y = 'Hello, World!',
-    _z = true
-)
+arr.push()  # Array<T>.push fn push {}
+arr(0)      # Array<T>()    fn self (int) {}
 
 ########################################## ARRAYS ########################################
 
@@ -310,28 +315,25 @@ s = (2, 4, 104, 12) # Upon compile time reads as value = (2, 4, 104, 12).
                     # integer array with 4 elements unless it is extended
                     # Limit of extension: <()num>
 
-be k <()str> = ('Hello!', 'Za Warudo!', 'World!')
+be k List<str> = ('Hello!', 'Za Warudo!', 'World!')
 # be k <(3)str>
 
-########################################## TUPLES ########################################
+######################################### TUPLES #########################################
 
-type Tuple <int, str, bool>
+type Tuple (int, str, bool)
 
-be y <Tuple> = (5, 'Something', true) # technically the same as
+be y Tuple = (5, 'Something', true) # technically the same as
 y = Tuple (5, 'Something', true)   # conversion vs assignment
 
-type AnotherTuple <int, str * 3>
+type AnotherTuple (int, str * 3)
 
 be z AnotherTuple = (5, 'A', 'BC', 'DEF')
 
 #################################### COLLECTIVE ENUM ####################################
 
-type Result(Success, Error) <
-    <*Ok(Success)> |
-    <*Err(Error)>
->
+type Result: Success, Error (*Ok(Success), *Err(Error))
 
-be k <Result<int, str>> = Result.Ok(200)
+be k Result<int, str> = Result.Ok(200)
 k = Result.Err('Could not connect!')
 
 if k is Result.Err(m) {
@@ -340,27 +342,7 @@ if k is Result.Err(m) {
 
 ######################################## REFERENCE #######################################
 
-<@Type> # a pointer
-
-##########################################################################################
-#########                                  METHODS                               #########
-##########################################################################################
-
-fn Structure.sum() {
-    # Just declare the function of pattern TYPE:METHOD
-}
-
-# Or enter the type scope and write functions there
-
-Structure {
-    fn sum() {
-        # Anything you wish
-    }
-}
-
-be x Structure
-
-x.sum()
+@Type # a pointer
 
 ##########################################################################################
 #########                               EXAMPLE SCOPE                            #########
@@ -418,7 +400,7 @@ for query (Player, Position, Velocity) {
 ##########################################################################################
 
 # iterable functions
-fn iter(a int = 0, b int = 10) <int, int> {
+fn iter(a int = 0, b int = 10) int, int {
     be:g i = a
 
     $["before"]
@@ -474,7 +456,7 @@ be w #*<regex.set>*# = regex.set('0', '1') # regex.set(('0', '1')): one bracket 
 ############################# MACRO ON THE REGEX SET EXAMPLE #############################
 
 regex {
-    type set <()char>
+    type set List<char>
 
     #fn set (chars <... char>) {
     #    exit chars
@@ -500,7 +482,7 @@ out: n                          # 3
 # ${}:      write into code
 # $(), {}:  read from code
 
-be map <Map(str, str)>
+be map Map<str, str>
 be k = 'h="Hello";g="World";z="Ocean";'
 
 for key, value in k * ´(\w)${1}="(\w)${2}";´ {
