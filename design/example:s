@@ -253,50 +253,46 @@ window.onload: {
 ##########################################################################################
 #########            IMPROVED REGEX CAPABILITIES ~ QUICK HTML PARSER             #########
 ##########################################################################################
-#
-# PROPOSAL ONLY WITH UNFINISHED DESIGN !!!
-#
-# CODE WITHOUT CONSTRUCTED LOGIC!
-#
 
-type HtmlElement (name str, content List<self>)
+type HtmlElement (name str, content (List<self> | str))
 
 be text = '<b><i>Hello</i>, <u>World</u>!</b>'
 
-fn parseHTML (t str) str {
-    be output HtmlElement = (
-        name = 'div',
-        content = ()
-    )
+fn parseHTML (t str) List<HtmlElement> {
+    be output List<HtmlElement> = ()
 
-    be latest @List<HtmlElement> = output.content
+    be tokens = t.tokenize(´<\w>|<\/\w>|[/<]+´) # List<str>
+    be position @List<HtmlElement> = output
 
-    # ´<\/?\w+>´
-    be tagOpen = ´<\w>´
-    be tagClose = ´<\/\w>´
-
-    # if function
-    if text.startsWith {
-        # treats 'is' as the first parameter, where with are return values
-        case tagOpen -> v
-            latest.push(HtmlElement (
-                name = v,
-                content = ()
-            ))
-            latest = latest.last.content
-        
-
-        case tagClose -> v
-            latest = latest.super
-            if latest.super.name != v
-                throw `</$(v)> closes `
-        
-    } el {
-        
+    for _, e in tokens {
+        be k str
+        if e * ´<(\w)${s:k}>´ {
+            position.push(name = k, content = ())
+            position = position.last().content
+        } elif e *´<\/(\w)${s:k}>´ {
+            position = position.super
+            if position.name != k throw `</$(k)> closes <$(position.name)>`
+        } el {
+            position.push(e)
+        }
     }
+
+    exit output
 }
 
 out: parseHTML(text)
+
+#
+# b {
+#   i {
+#     "Hello"
+#   }
+#   ","
+#   u {
+#     "World"
+#   }
+#   "!"
+# }
 
 ##########################################################################################
 #########                                  THROW                                 #########

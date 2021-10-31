@@ -451,7 +451,7 @@ be w #*<regex.set>*# = regex.set('0', '1') # regex.set(('0', '1')): one bracket 
 
 ´$(w){1-}´ # will match 0, 1, 01, etc.
 
-############################# MACRO ON THE REGEX SET EXAMPLE #############################
+####################################### REGEX SET #######################################
 
 regex {
     type set List<char>
@@ -462,6 +462,10 @@ regex {
 
     # Since tuples with one value evaporate their brackets, regex.set('0', '1') is a type followed by an array.
 }
+
+#
+# regex set: [included / not included]
+#
 
 ####################################### AAA BBB CCC ######################################
 
