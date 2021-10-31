@@ -60,8 +60,8 @@ for, in, next   # repetetive control flow
 exit, ret       # exit scope or return to parent scope
                 # continuing everything on a separate thread
 throw           # program throw
-if, elif, el
-case            # conditional control flow
+if, elif, el    # conditional control flow
+case
 
 true, false     # values
 be              # other

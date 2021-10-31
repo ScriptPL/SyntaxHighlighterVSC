@@ -167,13 +167,6 @@ if value {
 }
 
 ############################### SWITCH CASE WITH FUNCTIONS ###############################
-#
-# if <func<any "input"><bool "output", "with" params>> {
-#     is input with params {
-#         # if the first "bool" return of the function is true, continue here
-#     }
-# }
-#
 
 fn str.equalsSize(i int) bool, str {
     if self.len == i {
@@ -195,9 +188,9 @@ type A (*B | *C(str))
 k = A.B
 k = A.C ('Hello!')
 
-if A.B = k {
+if be A.B = k {
     # Does nothing
-} elif A.C(v) = k {
+} elif be A.C(v) = k {
     out: v  # Hello!
 }
 
@@ -334,7 +327,7 @@ type Result: Success, Error (*Ok(Success), *Err(Error))
 be k Result<int, str> = Result.Ok(200)
 k = Result.Err('Could not connect!')
 
-if Result.Err(m) = k {
+if be Result.Err(m) = k {
     out: m
 }
 
@@ -417,18 +410,6 @@ for a, b in iter {
 }
 
 ##########################################################################################
-#########                           QUICK FUNCTION CALLS                         #########
-##########################################################################################
-
-fn execute (x code) {
-    x.exec()
-}
-
-execute: {
-
-}
-
-##########################################################################################
 #########                                 REGEX                                  #########
 ##########################################################################################
 
@@ -437,52 +418,42 @@ execute: {
 # {0-}          *   zero or more
 # {1-}          +   one or more
 # {-1}, {0-1}   ?   zero or one
-# {}
+# {n-n}         {n,n} exactly n
 #
 
-´\e{0-1*1}´
+´\e{0-1}´
 
 #
 # custom regex char set or
 # other regex insertions
 #
 
-be w #*<regex.set>*# = regex.set('0', '1') # regex.set(('0', '1')): one bracket for function, one for array "technically"
+be w = ´[01]´
 
 ´$(w){1-}´ # will match 0, 1, 01, etc.
-
-####################################### REGEX SET #######################################
-
-regex {
-    type set List<char>
-
-    #fn set (chars <... char>) {
-    #    exit chars
-    #}
-
-    # Since tuples with one value evaporate their brackets, regex.set('0', '1') is a type followed by an array.
-}
-
-#
-# regex set: [included / not included]
-#
 
 ####################################### AAA BBB CCC ######################################
 
 be n int
 be proof = 'aaabbbccc'
 
-out: proof * ´(a)${i:n}(b){n}(c){n}´  # true
+out: proof * ´(a)${l:n}(b){n}(c){n}´  # true
 out: n                          # 3
 
 #
-# a${i:n}   # Scan for "i"nteger amount of "a"'s, write into variable n
+# a${l:n}   # Scan for "l"ength of "a"'s, write into variable n
 # b{n}      # Expect "b", n times
 # c{n}      # Expect "c", n times
 #
 
 # ${}:      write into code
 # $(), {}:  read from code
+
+#
+# ${l:var}  capture group length
+# ${s:var}  capture group string
+# ${b:var}  is the capture group emitted?: E.g. ´(bool)?${b:var}vvv´ returns true for 'boolvvv', but not 'vvv'
+#
 
 be map Map<str, str>
 be k = 'h="Hello";g="World";z="Ocean";'
