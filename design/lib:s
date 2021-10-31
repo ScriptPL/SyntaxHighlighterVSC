@@ -34,7 +34,7 @@ RawList(T) {
         be latestChild @List<T> = self
         for i in (begin = 0, end = pos) {
             # Bypasses the parser force-assuming a boolean to be true
-            $[trust true] List.Element = latestChild.1
+            $[trust] be List.Element = latestChild.1
             # Index in the array.
             latestChild = latestChild.1
         }
