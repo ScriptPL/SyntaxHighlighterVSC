@@ -306,26 +306,15 @@ throw 'Throwing an error'
 throw:d 'This will only output a deprecation warning!'
 
 ##########################################################################################
-#########                        CREATING A QUICK OPTION                         #########
+#########            ADDING DEFAULT ARITHMETIC OPERATIONS TO A CLASS             #########
 ##########################################################################################
 
-type Option(T) <
-    <*Some(T)>
-    <*Null>
->
+type Vector (num * 3)
 
-Option(T) {
-    fn unwrap() T {
-        if Option(value) = self {
-            exit value
-        }
-        throw:p 'Panicked! Trying to unwrap on a null value!'
+Vector {
+    fn:sum (self, v Vector) Vector {
+        exit Vector (self.0 + v.0, self.1 + v.1, self.2 + v.2)
     }
 }
 
-be k = Option.Some('Hello!')
-out: k.unwrap()                 # Hello!
-
-##########################################################################################
-#########            ADDING DEFAULT ARITHMETIC OPERATIONS TO A CLASS             #########
-##########################################################################################
+out: Vector(2, 3, 4) + Vector(3, 4, 5)
