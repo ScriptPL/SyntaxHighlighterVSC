@@ -33,7 +33,7 @@ fn factorial (n <uint>) <uint> {
 }
 
 fn factorial (n <uint>) <uint> {
-    r := 1
+    be r = 1
     for i in (begin = 1, end = n) {
         r *= n
     }
@@ -47,7 +47,7 @@ fn factorial (n <uint>) <uint> {
 use '@lib/thread'
 
 fn fibonacci () <()uint> {
-   ret be f := (0, 1)
+   ret be f = (0, 1)
 
    for {
       f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
@@ -76,13 +76,24 @@ out: 'Hello, World!'
 
 fn print_element (params <(...)>) { # params <...any>
     for i, e in params {
-        if e is str { # if it's a non-boolean value, act like a switch
+        if:s e {
+            case str
+                out: e, b0A
+            
+            case int
+                out: e.to(<str>), b0A
+
+            case bool
+                out: e ? 'true' ~ false, b0A
+        }
+
+        #*if e is str { # if it's a non-boolean value, act like a switch
             out: e, b0A
         } elif e is int {
             out: <str> e, b0A # Parse integer to string
         } elif e is bool {
             out: e ? 'true' ~ 'false', b0A
-        }
+        }*#
     }
 }
 
@@ -122,7 +133,7 @@ type Velocity <
     y <int>
 >
 
-player := entity (
+player = entity (
     Player,
     Position (
         x = 0,
@@ -141,13 +152,13 @@ for be eid <uint> in query (Player, Position, Velocity) {
 
 ######################################### STRINGS ########################################
 
-string <str> := 'Hello, World!'
+be string <str> = 'Hello, World!'
 
 string += ' Add more!'      # "Hello World! Add more!"              += add string
 
 ######################################### ARRAYS #########################################
 
-array <()int> := (1, 2, 3, 4)
+array <()int> = (1, 2, 3, 4)
 
 array += 5                  # (1, 2, 3, 4, 5)                       += push
 array /= I == 0 || V > 3    # (2, 3); I is index, V is element      /= quick filter
@@ -156,13 +167,13 @@ array -= 2, 3               # (2, 3, 6)                             -= remove el
 
 ######################################### BOOLEAN ########################################
 
-k := true
+k = true
 
 k!  # Set the boolean to the opposite 
 
 ######################################### NUMERIC ########################################
 
-k := 50000
+k = 50000
 
 k +=   500  # each represent arithmetic operations
 k -=  1000
@@ -175,10 +186,10 @@ k %= 990    # 0
 ##########################################################################################
 
 fn genPrimes (total <int>) <()int> {
-    primes <()int> := (2, 3)
+    primes <()int> = (2, 3)
 
     for i in (begin = 5, end = total, jump = 2) {
-        isPrime := true
+        isPrime = true
 
         for j, e in primes {
             if e % i == 0 {
@@ -267,7 +278,7 @@ type HtmlElement <
     content <()self>
 >
 
-be text := '<b><i>Hello</i>, <u>World</u>!</b>'
+be text = '<b><i>Hello</i>, <u>World</u>!</b>'
 
 fn parseHTML (t <str>) <str> {
     be output <HtmlElement> = (
@@ -282,21 +293,21 @@ fn parseHTML (t <str>) <str> {
     be tagClose = ´<\/\w>´
 
     # if function
-    if text.startsWith {
+    if:s text.startsWith {
         # treats 'is' as the first parameter, where with are return values
-        is tagOpen -> v {
+        case tagOpen -> v
             latest.push(HtmlElement (
                 name = v,
                 content = ()
             ))
             latest = latest.last.content
-        }
+        
 
-        is tagClose -> v {
+        case tagClose -> v
             latest = latest.super
             if latest.super.name != v
                 throw: `</$(v)> closes `
-        }
+        
     } el {
         
     }
@@ -357,3 +368,7 @@ Option(T) {
 
 be k = Option.Some('Hello!')
 out: k.unwrap()                 # Hello!
+
+##########################################################################################
+#########            ADDING DEFAULT ARITHMETIC OPERATIONS TO A CLASS             #########
+##########################################################################################

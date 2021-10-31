@@ -296,11 +296,16 @@
 		},
 		"words": {
 			"patterns": [{
-				"name": "keyword.control.sc",
-				"match": "\\b(fn|type|exit|ret|next|(el)?if|el|is|for)(:[A-Za-z_][A-Za-z_0-9]*)?\\b"
+				"name": "keyword.sc",
+				"match": "\\b(fn|type|exit|ret|next|(el)?if|el|is|case|for)(:[A-Za-z_][A-Za-z_0-9]*)*\\b",
+				"captures": {
+					"1": {
+						"name": "keyword.control.sc"
+					}
+				}
 			}, {
 				"name": "keyword.sc",
-				"match": "\\b(use|self|super|in|true|false|be)(:[A-Za-z_][A-Za-z_0-9]*)?\\b"
+				"match": "\\b(use|self|super|in|true|false|be)(:[A-Za-z_][A-Za-z_0-9]*)*\\b"
 			}, {
 				"name": "variable.other.constant.sc",
 				"match": "\\b(document|window|process)\\b"
@@ -325,9 +330,6 @@
 						"name": "keyword.sc"
 					}
 				}
-			}, {
-				"name": "keyword.control.sc",
-				"match": "\\$[a-zA-Z\\.\\_:_]*"
 			}, {
 				"name": "support.type.sc",
 				"match": "(_)?[A-Z][a-zA-Z0-9_]*",

@@ -90,7 +90,7 @@ The function below returns a referenced variable (declaration)
 *#
 
 fn primes (max uint) []uint {
-   be prime_list := (2, 3)
+   be prime_list = (2, 3)
    ret prime_list
 
    for i in 5 -> max +> 2 {
@@ -104,7 +104,7 @@ fn primes (max uint) []uint {
 
 # This function will run indefinitely.
 fn fibonacci () [uint] {
-   be f := (0, 1)
+   be f = (0, 1)
    ret f
 
    for {
@@ -120,7 +120,7 @@ array.len # too
 
 # Here's an exmple how to force the end of a function
 
-be x := fibonacci()  # Start a fibonacci collector
+be x = fibonacci()  # Start a fibonacci collector
 sleep: 1000          # Sleep main thread for 1000 milliseconds
 x.leave:             # End x's function thread. This is a method on a
                      # type. More about them, later.
@@ -241,12 +241,12 @@ for query (Position, Asset) {
 
 struct Vector (int * 3)
 
-v1 Vector := (1, 2, 3)
-v2 Vector := (4, 5, 6)
+v1 <Vector> = (1, 2, 3)
+v2 <Vector> = (4, 5, 6)
 
-ext Vector {
-   op '+' (self, v Vector) {
-      exit self.0 + x.0, self.1 + x.1, self.2 + x.2
+Vector {
+   fn:sum (self, Vector) {
+
    }
 }
 
@@ -376,7 +376,7 @@ $$ {
 
    # You can also return a string, and raw Script code.
    $execute (content str) code {
-      be tokens := parser(content)
+      be tokens = parser(content)
       exit {
          out tokens.filter(e -> e == '2').len
       }

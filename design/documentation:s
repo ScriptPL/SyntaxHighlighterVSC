@@ -14,8 +14,11 @@ call(params)
 call: params
 
 # Other
-$special
-label-for # loop with label
+for:label # loop with label
+
+be:g    # declare a global
+be:c    # declare a constant
+be:g:c  # declare a global constant
 
 ##########################################################################################
 #########                                 SCOPES                                 #########
@@ -65,11 +68,11 @@ for condition {
     # while condition
 }
 
-for i := start_value; i < end_value; i += 1 {
+for be i = start_value; i < end_value; i += 1 {
     # traditional for loop
 }
 
-be i int = 5                # for ( i = s;
+i <int> = 5                 # for ( i = s;
 for {                       # standalone; for {} is a while true loop
     if i < end_value exit   # i < end_value ;
     # Content
@@ -137,9 +140,11 @@ el {}
 
 ###################################### SWITCH CASE ######################################
 
-if value {
-    is k {}
-    is m {}
+if:s value { # s stays for switch
+    case k
+        # code
+    case m
+        # code
 }
 
 if value is something {}
@@ -160,8 +165,8 @@ fn str.equalsSize(i <int>) <bool>, <str> {
     exit false, ''
 }
 
-if 'Hello, World!'.equalsSize {
-    is 13 -> v {
+if:s 'Hello, World!'.equalsSize {
+    case 13 -> v {
         out: v
     }
 }
@@ -170,12 +175,12 @@ if 'Hello, World!'.equalsSize {
 
 type A <<*B> | <*C(str)>>
 
-k := A.B
-k := A.C ('Hello!')
+k = A.B
+k = A.C ('Hello!')
 
 if k is A.B {
     # Does nothing
-} el-if k is A.C(v) {
+} elif k is A.C(v) {
     out: v  # Hello!
 }
 
@@ -221,12 +226,12 @@ Array(T) {
     fn push (element T) {
         be latest <@Array<T>> = self
         for {
-            if latest {
-                is Array.M {
+            if:s latest {
+                case Array.M {
                     latest = latest.1
                 }
 
-                is Array.E {
+                case Array.E {
                     latest = Array.M(element, Array.E)
                 }
             }
@@ -248,7 +253,7 @@ type Collection <
     <int>
 >
 
-be x Collection = 500
+be x <Collection> = 500
 x = 'Hello!'
 
 ########################################### ENUM #########################################
@@ -263,7 +268,7 @@ type StringEnum <
     'hello'
 >
 
-z := Enum.Value1
+z = Enum.Value1
 z = Value2
 
 ########################################## STRUCT ########################################
@@ -274,7 +279,13 @@ type Struct <
     _z <bool> # Values starting with an underscore make the variable private.
 >
 
-s := Struct (
+s = Struct (
+    x = 5
+    y = 'Hello, World!',
+    _z = true
+)
+
+s <Struct> = (
     x = 5
     y = 'Hello, World!',
     _z = true
@@ -282,11 +293,11 @@ s := Struct (
 
 ########################################## ARRAYS ########################################
 
-s := (2, 4, 104, 12)    # Upon compile time reads as value = (2, 4, 104, 12).
-                        # You can then make a [int, uint, int7 (or more) or uint7 (or
-                        # more) or num] <()int>, <(4)int>: It will keep acting like a
-                        # integer array with 4 elements unless it is extended
-                        # Limit of extension: <()num>
+s = (2, 4, 104, 12) # Upon compile time reads as value = (2, 4, 104, 12).
+                    # You can then make a [int, uint, int7 (or more) or uint7 (or
+                    # more) or num] <()int>, <(4)int>: It will keep acting like a
+                    # integer array with 4 elements unless it is extended
+                    # Limit of extension: <()num>
 
 be k <()str> = ('Hello!', 'Za Warudo!', 'World!')
 # be k <(3)str>
@@ -296,7 +307,7 @@ be k <()str> = ('Hello!', 'Za Warudo!', 'World!')
 type Tuple <int, str, bool>
 
 be y <Tuple> = (5, 'Something', true) # technically the same as
-y := Tuple (5, 'Something', true)   # conversion vs assignment
+y = Tuple (5, 'Something', true)   # conversion vs assignment
 
 type AnotherTuple <int, str * 3>
 
@@ -381,7 +392,7 @@ if k {
 #########                               QUICK SYNTAX                             #########
 ##########################################################################################
 
-k := true ? 'True' : 'False'
+k = true ? 'True' ~ 'False'
 
 ############################## SHORT ENTITY COMPONENT SYSTEM #############################
 
@@ -399,11 +410,11 @@ for query (Player, Position, Velocity) {
 fn iter(a int = 0, b int = 10) <int, int> {
     be:g i = a
 
-    $before {
+    fn:before {
         exit a < b  # if true, continue looping, otherwise, break
     }
 
-    $after {
+    fn:after {
         a += 1
     }
 }

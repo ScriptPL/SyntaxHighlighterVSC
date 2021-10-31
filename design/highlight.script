@@ -61,18 +61,19 @@ any, uint64, int, int32, num, str, regex, bool, byte, func, code
 
 ######### RESERVED KEYWORDS #########
 
-use                 # package management
+use             # package management
 
-fn                  # universal declaration of code: first-class function, attributes, etc.
-type                # universal structure/enum/type declaration
-for, in, next       # repetetive control flow
-exit, ret           # exit scope or return to parent scope
-                    # continuing everything on a separate thread
-if, elif, el, is    # conditional control flow
+fn              # universal declaration of code: first-class function, attributes, etc.
+type            # universal structure/enum/type declaration
+for, in, next   # repetetive control flow
+exit, ret       # exit scope or return to parent scope
+                # continuing everything on a separate thread
+if, elif, el
+is, case        # conditional control flow
 
-true, false         # values
-be                  # other
-self, super         # recursive self or parent reference
+true, false     # values
+be              # other
+self, super     # recursive self or parent reference
 
 ######### METHODS (= KEYWORDS) #########
 
@@ -83,10 +84,6 @@ abort:
 ######### RESERVED CONSTANTS #########
 
 window, document, process
-
-######### ATTRIBUTES #########
-
-$attributiveKeywords
 
 ######### EXAMPLE #########
 
