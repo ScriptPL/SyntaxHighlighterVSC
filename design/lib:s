@@ -12,8 +12,6 @@ type Option(T) <
 #########                               THE ARRAY                                #########
 ##########################################################################################
 
-use '@lib/throw'
-
 $[prim "list"]
 type List(T) <
     _list <RawList(T)>
@@ -29,16 +27,15 @@ RawList(T) {
     fn getElementAtPos (pos <uint>) <T> {
         be latestChild <@List<T>> = self
         for i in (begin = 0, end = pos) {
-            if latestChild.1 is List.Element {
-                latestChild = latestChild.1
-            } el {
-                throw: 'Panicked! Index of array out of bounds!'
-            }
+            # Bypasses the parser force-assuming a boolean to be true
+            $[trust true] latestChild.1 is List.Element
+            # Index in the array.
+            latestChild = latestChild.1
         }
         exit latestChild.0
     }
 
-    fn:a push (element <T>) <uint> {
+    fn:a push (element <T>){
         be latestChild <@List<T>> = self
         for {
             if latestChild.1 is List.Element { # while the next child is an element, update the pointer.
@@ -65,11 +62,41 @@ RawList(T) {
 }
 
 List(T) {
+    $['compile time']
+    fn $[assign] (content <()T>) {
+        self = (
+            len = content.len,
+            #_list = [tree ????] ????
+        )
+    }
+
     # fn self: SELF.()
     fn self (pos <uint>) <T> {
-        exit self.getElementAtPos(pos)
+        $['compile time'] if pos > self.len {
+            throw "Index out of range!"
+        }
+        exit self._list.getElementAtPos(pos)
+    }
+
+    fn push (element <T>) {
+        self._list.push(element)
+        exit self.len += 1
+    }
+
+    fn pop () {
+        if self.len == 0 exit
+        self._list.pop:
+        exit self.len -= 1
     }
 }
+
+# Usage:
+be k <List(uint)> = ()
+k.push(50)  # 0
+k.push(100) # 1
+k.push(150) # 2
+
+out: k(1)  # 100
 
 ##########################################################################################
 #########                               THE STRING                               #########

@@ -68,6 +68,7 @@ type            # universal structure/enum/type declaration
 for, in, next   # repetetive control flow
 exit, ret       # exit scope or return to parent scope
                 # continuing everything on a separate thread
+throw           # program throw
 if, elif, el
 is, case        # conditional control flow
 

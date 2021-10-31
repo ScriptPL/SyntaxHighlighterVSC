@@ -306,7 +306,7 @@ fn parseHTML (t <str>) <str> {
         case tagClose -> v
             latest = latest.super
             if latest.super.name != v
-                throw: `</$(v)> closes `
+                throw `</$(v)> closes `
         
     } el {
         
@@ -316,41 +316,15 @@ fn parseHTML (t <str>) <str> {
 out: parseHTML(text)
 
 ##########################################################################################
-#########                     EXAMPLE PACKAGE: THROW MODULE                      #########
+#########                                  THROW                                 #########
 ##########################################################################################
-#
-# @throw:s
-#
 
-throw {
-    fn self(error <str>) {
-        out: error
-        asm (
-            mov eax, 0 # interrupt code
-            mov ebx, 0 # argument, in this case: return value
-            int b80
-        )
-    }
-
-    fn dep(error <str>) {
-        out: 'Deprecation Warning! ', error
-    }
-}
-
-#
-# index:s
-#
-
-use '@lib/throw'
-
-throw: 'Throwing an error'
-throw.dep: 'This will only output a deprecation warning!'
+throw 'Throwing an error'
+throw:d 'This will only output a deprecation warning!'
 
 ##########################################################################################
 #########                        CREATING A QUICK OPTION                         #########
 ##########################################################################################
-
-use '@lib/throw'
 
 type Option(T) <
     <*Some(T)>
@@ -362,7 +336,7 @@ Option(T) {
         if self is Option(value) {
             exit value
         }
-        throw: 'Panicked! Trying to unwrap on a null value!'
+        throw:p 'Panicked! Trying to unwrap on a null value!'
     }
 }
 
