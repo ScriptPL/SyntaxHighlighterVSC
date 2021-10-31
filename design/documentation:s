@@ -181,19 +181,6 @@ if 'Hello, World!'.equalsSize {
     }
 }
 
-####################################### UNPACK ENUM ######################################
-
-type A (*B | *C(str))
-
-k = A.B
-k = A.C ('Hello!')
-
-if be A.B = k {
-    # Does nothing
-} elif be A.C(v) = k {
-    out: v  # Hello!
-}
-
 ##########################################################################################
 #########                                  TYPES                                 #########
 ##########################################################################################
@@ -212,12 +199,22 @@ be k Type = ...
 
 type Enum (
     *Member1 |
-    *Member2(More)
+    *Member2(More) |
     *Member3(AndMore)
 )
 
 be k Enum = Enum.Member1
-be k = Enum.Member1         # This language is not to be verbose! Everything that's obvious is obvious!!!
+be k = Enum.Member1 # This language is not to be verbose! Everything that's obvious is obvious!!!
+
+# UNPACK ENUM #
+
+k = Enum.Member2(More)
+
+if be Enum.Member2(content) = k {
+    # Unpacks content from the enum
+} elif be Enum.Member1 = k {
+    # k = Enum.Member1
+}
 
 #################################### TYPE = COLLECTION ###################################
 
