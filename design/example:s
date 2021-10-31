@@ -77,23 +77,15 @@ out: 'Hello, World!'
 fn print_element (params <(...)>) { # params <...any>
     for i, e in params {
         if e {
-            case is str
+            case:t str
                 out: e, b0A
             
-            case is int
-                out: e.to(<str>), b0A
+            case:t int
+                out: e.to(str), b0A
 
-            case is bool
+            case:t bool
                 out: e ? 'true' ~ false, b0A
         }
-
-        #*if e is str { # if it's a non-boolean value, act like a switch
-            out: e, b0A
-        } elif e is int {
-            out: <str> e, b0A # Parse integer to string
-        } elif e is bool {
-            out: e ? 'true' ~ 'false', b0A
-        }*#
     }
 }
 
@@ -324,7 +316,7 @@ type Option(T) <
 
 Option(T) {
     fn unwrap() T {
-        if self is Option(value) {
+        if Option(value) = self {
             exit value
         }
         throw:p 'Panicked! Trying to unwrap on a null value!'

@@ -159,14 +159,12 @@ if value {
     case val1, val2, val3
         # Match val1, val2 or val3
 
-    case is Type
+    case:t Type
         # Match if is type
 
     el
         # Nothing matched
 }
-
-if value is something {}
 
 ############################### SWITCH CASE WITH FUNCTIONS ###############################
 #
@@ -197,9 +195,9 @@ type A (*B | *C(str))
 k = A.B
 k = A.C ('Hello!')
 
-if k is A.B {
+if A.B = k {
     # Does nothing
-} elif k is A.C(v) {
+} elif A.C(v) = k {
     out: v  # Hello!
 }
 
@@ -336,7 +334,7 @@ type Result: Success, Error (*Ok(Success), *Err(Error))
 be k Result<int, str> = Result.Ok(200)
 k = Result.Err('Could not connect!')
 
-if k is Result.Err(m) {
+if Result.Err(m) = k {
     out: m
 }
 

@@ -61,7 +61,7 @@ exit, ret       # exit scope or return to parent scope
                 # continuing everything on a separate thread
 throw           # program throw
 if, elif, el
-is, case        # conditional control flow
+case            # conditional control flow
 
 true, false     # values
 be              # other

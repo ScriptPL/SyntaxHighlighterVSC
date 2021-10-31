@@ -7,7 +7,7 @@ type Option : T (*Some(T), Null)
 
 Option<T> {
     fn unwrap() T {
-        if self is Option.Some(value) {
+        if Option.Some(value) = self {
             exit value
         }
         throw:p 'Panicked! Unwrapped value is `Null`'
@@ -34,7 +34,7 @@ RawList(T) {
         be latestChild @List<T> = self
         for i in (begin = 0, end = pos) {
             # Bypasses the parser force-assuming a boolean to be true
-            $[trust true] latestChild.1 is List.Element
+            $[trust true] List.Element = latestChild.1
             # Index in the array.
             latestChild = latestChild.1
         }
@@ -44,7 +44,7 @@ RawList(T) {
     fn<a> push (element T){
         be latestChild @List<T> = self
         for {
-            if latestChild.1 is List.Element { # while the next child is an element, update the pointer.
+            if List.Element = latestChild.1 { # while the next child is an element, update the pointer.
                 latestChild = latestChild.1
             } el { # if the next child isn't an element, make it one.
                 latestChild = RawList.Element(element, RawList.Endpoint)
@@ -56,7 +56,7 @@ RawList(T) {
     fn<a> pop () T {
         be latestChild @List<T> = self
         for {
-            if latestChild.1 is List.Element { # while the next child is an element, update the pointer.
+            if List.Element = latestChild.1 { # while the next child is an element, update the pointer.
                 latestChild = latestChild.1
             } el { # if the next child is the endpoint, then make the current node an endpoint
                 # latestChild.0 COLLECT GARBAGE?
