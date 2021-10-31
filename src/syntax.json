@@ -16,8 +16,6 @@
 				"name": "keyword.operator.new.sc",
 				"match": "\\bb[A-F0-9]{1,2}\\b"
 			}, {
-				"include": "#symbols"
-			}, {
 				"include": "#langs"
 			}, {
 				"include": "#words"
@@ -281,18 +279,6 @@
 		"numeric": {
 			"name": "constant.numeric.sc",
 			"match": "(\\-)?(\\.\\d+|\\d+(\\.\\d+)?)"
-		},
-		"symbols": {
-			"patterns": [{
-				"name": "keyword.control.sc",
-				"match": "=>"
-			}, {
-				"name": "keyword.sc",
-				"match": "\\?|~|\\.{3}"
-			}, {
-				"name": "keyword.operator.sc",
-				"match": "(:|\\+|\\-|\\*)=|\\!|\\+|\\-|\\%|\\*|/|\\.\\.|\\\\"
-			}]
 		},
 		"words": {
 			"patterns": [{

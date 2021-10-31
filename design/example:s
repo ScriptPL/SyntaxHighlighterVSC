@@ -76,14 +76,14 @@ out: 'Hello, World!'
 
 fn print_element (params <(...)>) { # params <...any>
     for i, e in params {
-        if:s e {
-            case str
+        if e {
+            case is str
                 out: e, b0A
             
-            case int
+            case is int
                 out: e.to(<str>), b0A
 
-            case bool
+            case is bool
                 out: e ? 'true' ~ false, b0A
         }
 
@@ -293,7 +293,7 @@ fn parseHTML (t <str>) <str> {
     be tagClose = ´<\/\w>´
 
     # if function
-    if:s text.startsWith {
+    if text.startsWith {
         # treats 'is' as the first parameter, where with are return values
         case tagOpen -> v
             latest.push(HtmlElement (

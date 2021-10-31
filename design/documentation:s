@@ -140,11 +140,22 @@ el {}
 
 ###################################### SWITCH CASE ######################################
 
-if:s value { # s stays for switch
+if value { # s stays for switch
     case k
         # code
     case m
         # code
+}
+
+if value {
+    case val1, val2, val3
+        # Match val1, val2 or val3
+
+    case is Type
+        # Match if is type
+
+    el
+        # Nothing matched
 }
 
 if value is something {}
@@ -165,7 +176,7 @@ fn str.equalsSize(i <int>) <bool>, <str> {
     exit false, ''
 }
 
-if:s 'Hello, World!'.equalsSize {
+if 'Hello, World!'.equalsSize {
     case 13 -> v {
         out: v
     }
@@ -226,7 +237,7 @@ Array(T) {
     fn push (element T) {
         be latest <@Array<T>> = self
         for {
-            if:s latest {
+            if latest {
                 case Array.M {
                     latest = latest.1
                 }
