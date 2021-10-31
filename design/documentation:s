@@ -210,18 +210,18 @@ type TypeName <
 
     | # Struct: Collection of parameters
 
-    var Type,
-    anotherVar DifferentType
+    var <Type>,
+    anotherVar <DifferentType>
 
     | # Tuple
 
-    1 Type
-    2 SecondType
-    3 str
+    1 <Type>
+    2 <SecondType>
+    3 <str>
 
     | # Quick Tuple
 
-    Type, SecondType, str
+    <Type>, <SecondType>, <str>
 >
 
 ####################################### SCOPE TYPE #######################################
@@ -421,11 +421,13 @@ for query (Player, Position, Velocity) {
 fn iter(a int = 0, b int = 10) <int, int> {
     be:g i = a
 
-    fn:before {
+    $["before"]
+    fn {
         exit a < b  # if true, continue looping, otherwise, break
     }
 
-    fn:after {
+    $["after"]
+    fn {
         a += 1
     }
 }

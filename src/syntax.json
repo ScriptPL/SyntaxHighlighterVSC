@@ -18,6 +18,27 @@
 			}, {
 				"include": "#langs"
 			}, {
+				"begin": "(\\$)\\[",
+				"end": "\\]",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.control.sc"
+					}
+				},
+				"patterns": [{
+					"include": "#comments"
+				}, {
+					"include": "#strings"
+				}, {
+					"include": "#numeric"
+				}, {
+					"match": "\\b(prim|opt|if|dep)\\b",
+					"name": "keyword.control.sc"
+				}, {
+					"match": "\\b[A-Za-z_0-9]+\\b",
+					"name": "keyword.sc"
+				}]
+			}, {
 				"include": "#words"
 			}]
 		},
