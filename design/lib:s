@@ -29,7 +29,7 @@ type RawList : T (
     *Endpoint
 )
 
-RawList(T) {
+RawList<T> {
     fn getElementAtPos (pos uint) T {
         be latestChild @List<T> = self
         for i in (begin = 0, end = pos) {
@@ -67,7 +67,7 @@ RawList(T) {
     }
 }
 
-List(T) {
+List<T> {
     $['compile time']
     fn $[assign] (content []T) {
         self = (
