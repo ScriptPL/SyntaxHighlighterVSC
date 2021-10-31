@@ -69,7 +69,7 @@ RawList(T) {
 
 List(T) {
     $['compile time']
-    fn $[assign] (content ()T) {
+    fn $[assign] (content []T) {
         self = (
             len = content.len,
             #_list = [tree ????] ????

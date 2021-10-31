@@ -103,7 +103,7 @@ fn primes (max uint) []uint {
 #######################################
 
 # This function will run indefinitely.
-fn fibonacci () [uint] {
+fn fibonacci () []uint {
    be f = (0, 1)
    ret f
 
@@ -357,7 +357,7 @@ $$ {
    }
 
    fn parser(content str) [str] {
-      be tokens [str] = []
+      be tokens []str = ()
 
       loop {
          if content * '^2' {

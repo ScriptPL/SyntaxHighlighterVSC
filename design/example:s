@@ -46,7 +46,7 @@ fn factorial (n uint) uint {
 
 use '@lib/thread'
 
-fn fibonacci () uint() {
+fn fibonacci () []uint {
    ret be f = (0, 1)
 
    for {
@@ -144,7 +144,7 @@ string += ' Add more!'      # "Hello World! Add more!"              += add strin
 
 ######################################### ARRAYS #########################################
 
-array int() = (1, 2, 3, 4)
+array []int = (1, 2, 3, 4)
 
 array += 5                  # (1, 2, 3, 4, 5)                       += push
 array /= I == 0 || V > 3    # (2, 3); I is index, V is element      /= quick filter
@@ -171,8 +171,8 @@ k %= 990    # 0
 #########                             PRIME GENERATION                           #########
 ##########################################################################################
 
-fn genPrimes (total int) int() {
-    primes int() = (2, 3)
+fn genPrimes (total int) []int {
+    primes []int = (2, 3)
 
     for i in (begin = 5, end = total, jump = 2) {
         isPrime = true
