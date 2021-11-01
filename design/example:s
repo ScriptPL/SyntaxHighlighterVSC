@@ -74,7 +74,7 @@ out: 'Hello, World!'
 # hello: params     # Method
 #
 
-fn print_element (params <(...)>) { # params <...any>
+fn print_element (params [...]) {
     for i, e in params {
         if e {
             case:t str
@@ -90,47 +90,6 @@ fn print_element (params <(...)>) { # params <...any>
 }
 
 print_element: 'Hello', 5, false
-
-##########################################################################################
-#########                         ENTITY COMPONENT SYSTEM                        #########
-##########################################################################################
-#
-# A built-in entity system is provided. To create a new entity, use the keyword new with
-# a set of type structures.
-#
-
-be:g id uint = 0
-
-fn entity (components <(...)T>) {
-    ret id += 1
-    # Something to organise components i suppose
-}
-
-fn query (components <(...)T>) func {
-    
-    ret fn (i uint) uint {
-
-    }
-}
-
-type Player
-
-type Position (x int, y int)
-
-type Velocity (x int, y int)
-
-player = entity (
-    Player,
-    Position (
-        x = 0,
-        y = 5
-    )
-)
-
-for be eid uint in query (Player, Position, Velocity) {
-   Position(eid).x += Velocity(eid).x
-   Position(eid).y += Velocity(eid).y
-}
 
 ##########################################################################################
 #########                               OPERATIONS                               #########
@@ -203,7 +162,7 @@ out: genPrimes (500)
 App {
     be canvas HTMLCanvasElement
     be x, y int
-    be keys Tags<str>
+    be keys Tags(str)
 
     fn init() {
         canvas = document.getElementById('#canvas')
@@ -254,15 +213,15 @@ window.onload: {
 #########            IMPROVED REGEX CAPABILITIES ~ QUICK HTML PARSER             #########
 ##########################################################################################
 
-type HtmlElement (name str, content (List<self> | str))
+type HtmlElement (name str, content (List(self) | str))
 
 be text = '<b><i>Hello</i>, <u>World</u>!</b>'
 
-fn parseHTML (t str) List<HtmlElement> {
-    be output List<HtmlElement> = ()
+fn parseHTML (t str) List(HtmlElement) {
+    be output List(HtmlElement) = ()
 
-    be tokens = t.tokenize(´<\w>|<\/\w>|[/<]+´) # List<str>
-    be position @List<HtmlElement> = output
+    be tokens = t.tokenize(´<\w>|<\/\w>|[/<]+´) # List(str)
+    be position @List(HtmlElement) = output
 
     for _, e in tokens {
         be k str

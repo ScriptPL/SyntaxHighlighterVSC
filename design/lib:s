@@ -3,10 +3,10 @@
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-type Option : T (*Some(T), Null)
+type Option : Value (*Some(Value), Null)
 
-Option<T> {
-    fn unwrap() T {
+Option(Value) {
+    fn unwrap() Value {
         if be Option.Some(value) = self {
             exit value
         }
@@ -19,19 +19,19 @@ Option<T> {
 ##########################################################################################
 
 $[prim "list"]
-type List : T (
-    _list RawList(T)
+type List : ElementType (
+    _list RawList(ElementType)
     len uint
 )
 
-type RawList : T (
-    *Element(T, self) |
+type RawList : ElT (
+    *Element(ElT, self) |
     *Endpoint
 )
 
-RawList<T> {
-    fn getElementAtPos (pos uint) T {
-        be latestChild @List<T> = self
+RawList(ElementType) {
+    fn getElementAtPos (pos uint) ElementType {
+        be latestChild @List(ElementType) = self
         for i in (begin = 0, end = pos) {
             # Bypasses the parser force-assuming a boolean to be true
             $[trust] be List.Element = latestChild.1
@@ -41,8 +41,8 @@ RawList<T> {
         exit latestChild.0
     }
 
-    fn<a> push (element T) {
-        be latestChild @List<T> = self
+    fn<a> push (element ElementType) {
+        be latestChild @List(ElementType) = self
         for {
             if be List.Element = latestChild.1 { # while the next child is an element, update the pointer.
                 latestChild = latestChild.1
@@ -53,8 +53,8 @@ RawList<T> {
         }
     }
 
-    fn<a> pop () T {
-        be latestChild @List<T> = self
+    fn<a> pop () ElementType {
+        be latestChild @List(ElementType) = self
         for {
             if be List.Element = latestChild.1 { # while the next child is an element, update the pointer.
                 latestChild = latestChild.1
@@ -67,9 +67,9 @@ RawList<T> {
     }
 }
 
-List<T> {
+List(ElT) {
     $['compile time']
-    fn $[assign] (content []T) {
+    fn $[assign] (content []ElT) {
         self = (
             len = content.len,
             #_list = [tree ????] ????
@@ -77,14 +77,14 @@ List<T> {
     }
 
     # fn self: SELF.()
-    fn self (pos <uint>) <T> {
+    fn self (pos uint) ElT {
         $['compile time'] if pos > self.len {
             throw "Index out of range!"
         }
         exit self._list.getElementAtPos(pos)
     }
 
-    fn push (element <T>) {
+    fn push (element ElT) {
         self._list.push(element)
         exit self.len += 1
     }
@@ -97,7 +97,7 @@ List<T> {
 }
 
 # Usage:
-be k List<uint> = ()
+be k List(uint) = ()
 k.push(50)  # 0
 k.push(100) # 1
 k.push(150) # 2

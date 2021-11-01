@@ -39,9 +39,6 @@
 					"name": "keyword.sc"
 				}]
 			}, {
-				"match": "(?<![\\w_])_(?![\\w_])",
-				"name": "keyword.control.sc"
-			}, {
 				"include": "#words"
 			}]
 		},
@@ -307,7 +304,7 @@
 		"words": {
 			"patterns": [{
 				"name": "keyword.sc",
-				"match": "\\b(fn|type|exit|ret|next|(el)?if|el|case|for|throw)(:[A-Za-z_][A-Za-z_0-9]*)*\\b",
+				"match": "\\b(fn|type|exit|ret|next|(el)?if|el|case|for|throw|T|V|_)(:[A-Za-z_0-9]*)*\\b",
 				"captures": {
 					"1": {
 						"name": "keyword.control.sc"
