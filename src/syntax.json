@@ -318,7 +318,7 @@
 				"match": "\\b(document|window|process)\\b"
 			}, {
 				"name": "support.type.sc",
-				"match": "\\b(any|u?int\\d*|num|str|regex|char|bool|byte|func|code)\\b"
+				"match": "\\b(u?int|u?num|str|char|bool|byte|func|code)\\b"
 			}, {
 				"match": "([A-Za-z_][a-zA-Z0-9_]*)(\\-(for|exit|ret)\\b|\\-\\-)",
 				"captures": {

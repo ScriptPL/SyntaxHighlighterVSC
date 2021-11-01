@@ -61,6 +61,19 @@ fn example () int, str, bool {
 
 be a, b, c = example()
 
+################################# STACKABLE OPTIMIZATION #################################
+
+out: 'Hello!'
+out: 'How are you?', 'I\'m fine!'
+out: 'You?'
+
+# optimised compile time into out: 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
+
+$[opt stack]
+fn out (params [...]str) {
+    ...
+}
+
 ##########################################################################################
 #########                                 LOOPS                                  #########
 ##########################################################################################
@@ -488,14 +501,14 @@ out: map.('h') .. ', ' .. map.('g')    # Hello, World!
 
 Entity {
     be id uint = 0
-    be map Map(T<C>, Map(uint, C))
+    be map Map(T, Map(uint, _))
 
     fn self() {
         exit id += 1
     }
 
     # Add Component
-    fn add(comp any) {
+    fn add(comp _) {
         $[compile time] {
             # Compile time make sure that the map object has a proper hierarchy
             be map.(T(comp)) Map(uint, T(comp))
