@@ -7,7 +7,7 @@
 fn gdc(a uint, b uint) {
     # JS: https://stackoverflow.com/a/17445307/16002144
     if a == 0
-        exit b
+        ret b
 
     for b != 0 {
         if a > b
@@ -16,7 +16,7 @@ fn gdc(a uint, b uint) {
             b -= a
     }
 
-    exit a
+    ret a
 }
 
 out: gcd(2, 5)
@@ -27,9 +27,9 @@ out: gcd(2, 5)
 
 fn factorial (n uint) uint {
     if n <= 1
-        exit 1
+        ret 1
     el # this line can be comment technically
-        exit this(n - 1) * n # you can "exit self( ..." to indicate calling yourself
+        ret self(n - 1) * n
 }
 
 fn factorial (n uint) uint {
@@ -47,11 +47,13 @@ fn factorial (n uint) uint {
 use '@lib/thread'
 
 fn fibonacci () List<uint> {
-   ret be f = (0, 1) # Automatically converted to List, since return type
+   be f = (0, 1) # Automatically converted to List, since return type
 
-   for {
-      f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
-   }
+    for {
+        f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
+    }
+
+    ret f
 }
 
 be k = fibonacci()
@@ -139,7 +141,7 @@ fn genPrimes (total int) List(int) {
         for j, e in primes {
             if e % i == 0 {
                 isPrime = false
-                exit
+                ret
             }
         }
 
@@ -148,7 +150,7 @@ fn genPrimes (total int) List(int) {
         }
     }
 
-    exit primes
+    ret primes
 }
 
 out: genPrimes (500)
@@ -236,7 +238,7 @@ fn parseHTML (t str) List(HtmlElement) {
         }
     }
 
-    exit output
+    ret output
 }
 
 out: parseHTML(text)
@@ -268,7 +270,7 @@ type Vector (num * 3)
 
 Vector {
     fn:sum (self, v Vector) Vector {
-        exit Vector (self.0 + v.0, self.1 + v.1, self.2 + v.2)
+        ret Vector (self.0 + v.0, self.1 + v.1, self.2 + v.2)
     }
 }
 

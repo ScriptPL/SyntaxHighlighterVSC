@@ -15,22 +15,14 @@ of:
 - The return type
 - The function body.
 
-Functions will have two ways of sending output. One of them is
-the "exit" keyword, which acts as regular "return" in most
-languages.
-
-The "if" keyword usually requires a code body, but it is not
-needed if followed by 'methods', in this case, the exit-method.
-Example of if block which is followed by setting:
-if x == 5 do x := 4
-
+ret = return
 *#
 
 fn factorial (n uint) int {
    if n <= 1
-      exit 1
+      ret 1
    # elif
-      exit factorial(n - 1) * n
+      ret factorial(n - 1) * n
 }
 
 #####################################
@@ -74,30 +66,6 @@ outln: 'Hello, World!'
 with_parameters: 5, 5, 5
 without_parameters:
 
-##################################
-######### RETURN vs EXIT #########
-##################################
-
-#*
-
-As mentioned previously, to quit function, you write "exit".
-Alternatively you can "return" a value and keep the function
-running in a separate thread.
-
-The function below returns a referenced variable (declaration)
-"prime_list", that is an array containing the numbers 2 and 3
-
-*#
-
-fn primes (max uint) []uint {
-   be prime_list = (2, 3)
-   ret prime_list
-
-   for i in 5 -> max +> 2 {
-      # Generate primes here
-   }
-}
-
 #######################################
 ######### FIBONACCI GENERATOR #########
 #######################################
@@ -105,11 +73,12 @@ fn primes (max uint) []uint {
 # This function will run indefinitely.
 fn fibonacci () []uint {
    be f = (0, 1)
-   ret f
 
    for {
       f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
    }
+
+   ret f
 }
 
 array.l # returns array length
@@ -131,7 +100,7 @@ out: x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
 ##################################################
 
 fn f (x) {
-   exit 2 * x + 5
+   ret 2 * x + 5
 }
 
 out: f(2)
@@ -139,7 +108,7 @@ out: f(2)
 # the function is is the same as
 
 fn f (x) -> {
-   exit 2 * x + 5
+   ret 2 * x + 5
 }
 
 # is the same as
@@ -312,7 +281,7 @@ js (
 />
 
 fn getHtml() {
-   exit </<b>Hello, World!</b>/>
+   ret </<b>Hello, World!</b>/>
 }
 
 # Assembly Writing
@@ -320,74 +289,3 @@ asm (
    mov %eax, %edx
    add %eax, 2
 )
-
-#############################
-# ABSOLUTE META PROGRAMMING #
-#############################
-#
-# Meta program parse-time
-
-$$ {
-
-   # You can declare some state variables here, for example,
-   # you could make some sort of calculation how much a variable was used.
-
-   $emit (c str) bool {
-      # c is the substring: current parse location to end
-      # called every parse event
-      # return true if claimed
-
-      exit c * r'^start_here'
-   }
-   
-   # Return how many characters you have read.
-   $parse (c str) int {
-      be x := 0
-
-      loop {
-         if c * r'^end_or_so' exit
-
-         x += 1
-         c := c.sub(1)
-
-         if c == '' exit
-      }
-
-      exit x
-   }
-
-   fn parser(content str) [str] {
-      be tokens []str = ()
-
-      loop {
-         if content * '^2' {
-            tokens.push('2')
-            next
-         } else if content * '^\+' {
-            tokens.push('\+')
-            next
-         }
-
-         content := content.sub(1)
-         if content == '' exit
-      }
-
-      exit tokens
-   }
-
-   # You can also return a string, and raw Script code.
-   $execute (content str) code {
-      be tokens = parser(content)
-      exit {
-         out tokens.filter(e -> e == '2').len
-      }
-   }
-}
-
-start_here
-   2 + 2
-end_or_so
-
-# outputs 4
-
-# you could write api's with that, for example something like rest.

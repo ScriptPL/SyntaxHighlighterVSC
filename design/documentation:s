@@ -48,15 +48,13 @@ fn a.b.f () {
 ##########################################################################################
 
 fn name (parameter int = default, ...) return_type {
-    # do smt
     ret return_value
-    exit exit_value
 }
 
 ###################################### MANY OUTPUTS ######################################
 
 fn example () int, str, bool {
-    exit 5, 'Hi!', true
+    ret 5, 'Hi!', true
 }
 
 be a, b, c = example()
@@ -94,9 +92,9 @@ for be i = start_value; i < end_value; i += 1 {
     # traditional for loop
 }
 
-i int = 5                 # for ( i = s;
+i int = 5                   # for ( i = s;
 for {                       # standalone; for {} is a while true loop
-    if i < end_value exit   # i < end_value ;
+    if i < end_value ret    # i < end_value ;
     # Content
     i += 1                  # i ++
 }
@@ -114,10 +112,11 @@ for iterable {
     # for over an iterable function
 }
 
-{
-    next    # continue
-    ret     # break, but keep running in a nameless thread
-    exit    # break
+# <a> becomes the "lifetime" and "label" of the loop, per default ret returns the function
+# it's in.
+for<a> {
+    next<a> # continue
+    ret<a>  # break
 }
 
 for i in (begin = 5, jump = 2) {
@@ -130,7 +129,7 @@ be value
 
 for<x> y {
     for z {
-        exit<x> value
+        ret<x> value
     }
 }
 
@@ -184,9 +183,9 @@ if value {
 
 fn str.equalsSize(i int) bool, str {
     if self.len == i {
-        exit true, 'v is this string'
+        ret true, 'v is this string'
     }
-    exit false, ''
+    ret false, ''
 }
 
 if 'Hello, World!'.equalsSize {
@@ -437,7 +436,7 @@ fn iter(a int = 0, b int = 10) int, int {
 
     $["before"]
     fn {
-        exit a < b  # if true, continue looping, otherwise, break
+        ret a < b  # if true, continue looping, otherwise, break
     }
 
     $["after"]
@@ -518,7 +517,7 @@ Entity {
     be map Map(T, Map(uint, _))
 
     fn self() {
-        exit id += 1
+        ret id += 1
     }
 
     # Add Component
@@ -531,7 +530,7 @@ Entity {
             # Creates Position.(uint) for Position if Position is passed into here.
             T(comp) {
                 fn self (id uint) T(comp) {
-                    exit map.(T(comp)).(id)
+                    ret map.(T(comp)).(id)
                 }
             }
         }
@@ -551,7 +550,7 @@ Entity {
             # Hmm
         }
 
-        exit entities.iterator
+        ret entities.iterator
     }
 }
 
