@@ -3,19 +3,27 @@
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-type Option : Value (*Some(Value), Null)
+type Option : Value (*Some(Value), None)
 
 Option(Value) {
     fn unwrap() Value {
         if be Option.Some(value) = self {
             exit value
         }
-        throw:p 'Panicked! Unwrapped value is `Null`'
+        throw:p 'Panicked! Unwrapped value is None.'
+    }
+
+    fn is_none() bool {
+        exit be Option.None = self
+    }
+
+    fn is_some() bool {
+        exit !self.is_none()
     }
 }
 
 ##########################################################################################
-#########                               THE ARRAY                                #########
+#########                                THE LIST                                #########
 ##########################################################################################
 
 $[prim "list"]
@@ -68,8 +76,8 @@ RawList(ElementType) {
 }
 
 List(ElT) {
-    $['compile time']
-    fn $[assign] (content []ElT) {
+    $[compile time]
+    fn $[assign] (content ()ElT) {
         self = (
             len = content.len,
             #_list = [tree ????] ????
@@ -78,7 +86,7 @@ List(ElT) {
 
     # fn self: SELF.()
     fn self (pos uint) ElT {
-        $['compile time'] if pos > self.len {
+        $[compile time] if pos > self.len {
             throw "Index out of range!"
         }
         exit self._list.getElementAtPos(pos)

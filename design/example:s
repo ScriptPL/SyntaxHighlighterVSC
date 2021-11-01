@@ -46,8 +46,8 @@ fn factorial (n uint) uint {
 
 use '@lib/thread'
 
-fn fibonacci () []uint {
-   ret be f = (0, 1)
+fn fibonacci () List<uint> {
+   ret be f = (0, 1) # Automatically converted to List, since return type
 
    for {
       f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
@@ -74,7 +74,7 @@ out: 'Hello, World!'
 # hello: params     # Method
 #
 
-fn print_element (params [...]) {
+fn print_element (params (...)) {
     for i, e in params {
         if e {
             case:t str
@@ -103,7 +103,7 @@ string += ' Add more!'      # "Hello World! Add more!"              += add strin
 
 ######################################### ARRAYS #########################################
 
-array []int = (1, 2, 3, 4)
+be array List(int) = (1, 2, 3, 4)
 
 array += 5                  # (1, 2, 3, 4, 5)                       += push
 array /= I == 0 || V > 3    # (2, 3); I is index, V is element      /= quick filter
@@ -130,8 +130,8 @@ k %= 990    # 0
 #########                             PRIME GENERATION                           #########
 ##########################################################################################
 
-fn genPrimes (total int) []int {
-    primes []int = (2, 3)
+fn genPrimes (total int) List(int) {
+    be primes List(int) = (2, 3)
 
     for i in (begin = 5, end = total, jump = 2) {
         isPrime = true

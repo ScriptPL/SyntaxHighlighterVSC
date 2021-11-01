@@ -44,7 +44,7 @@ fn a.b.f () {
 }
 
 ##########################################################################################
-#########                               FUNCTIONS                               #########
+#########                               FUNCTIONS                                #########
 ##########################################################################################
 
 fn name (parameter int = default, ...) return_type {
@@ -70,7 +70,7 @@ out: 'You?'
 # optimised compile time into out: 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
 
 $[opt stack]
-fn out (params [...]str) {
+fn out (params (...) str) {
     ...
 }
 
@@ -244,7 +244,9 @@ be k Values = 'Hello!'
 
 type Struct (
     abc Type1
-    def Type2
+    def Type2 = 'default value'
+        # Types are not options, and a null value doesn't exist. you must specify all
+        # attributes, but you can leave out some if they have a "default" value.
 )
 
 be k Struct = Struct (abc = ..., def = ...)
@@ -258,6 +260,8 @@ type Tuple (Type1, Type2, Type3)
 be k Tuple = Tuple (a, b, ...)
 be k Tuple = (a, b, ...)
 be k = Tuple (a, b, ...)
+
+be k (int * 3) = (1, 2, 3)
 
 ###################################### COMPLEX TYPE ######################################
 
@@ -359,8 +363,18 @@ k.(T(ABC)).(0) = ABC (de = 5, fg = 10)
 
 #
 # type Type     = a type, acts like one
+# T(Value)      = a type (upper border) of the value
 # T(Type)       = the type id, typeof uint
 #
+
+############################### TUPLE CONVERSION ARRAY TYPE ##############################
+# (...)
+
+fn anything_literally (any (...) Type) {
+    for i, e in any {}
+}
+
+fn anything_literally ('Everything', 'will', 'be', 'converted', 2, 'an', 'array')
 
 ##########################################################################################
 #########                               EXAMPLE SCOPE                            #########
@@ -530,7 +544,7 @@ Entity {
     }
 
     # Query
-    fn capture(comps [... T]) func {
+    fn capture(comps (...) T]) func {
         be entities List(uint)
 
         for _, e in comps {
