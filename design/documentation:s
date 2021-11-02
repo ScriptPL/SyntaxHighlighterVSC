@@ -621,7 +621,10 @@ to(str) # returns str
 to(int) # returns int
 
 # Pre-run code compile time
+be k List<List<int>>
 $[compile time] {
     # Execute code or next statement compile time. This could be preparing dynamic values
     # for code execution. 
+    k = (())
+    # Can be quite handful in more complex logic.
 }
