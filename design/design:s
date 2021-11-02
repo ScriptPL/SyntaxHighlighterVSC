@@ -222,56 +222,6 @@ Vector {
 
 out: v1 + v2 # Vector (5, 7, 9)
 
-############################
-######### ASSEMBLY #########
-############################
-
-use (*asm)
-
-#
-# (f - full, optional), h - half, q - quarter
-#
-
-rA-f  # First FULL Register     1111 (4 bytes)
-rB-h  # Second HALF Register    0011 (2 bytes)
-rC-q  # Third QUARTER Register  0001 (1 byte)
-rD    # Fourth Register (full by default)
-
-#
-# Assembly Flags
-#
-
-fO # Overflow Flag:        High-order bit overflow after arithmetic operation
-fD # Direction Flag:
-fI # Interrupt Flag:
-fT # Trap Flag:
-fS # Sign Flag:            Sign of result of arithmetic operation
-fZ # Zero Flag:            Result of arihtmetic operation is zero
-fA # Auxiliary Carry Flag: 
-fP # Parity Flag:          Amount of zeros after arithmetic operation
-fC # Carry Flag:           Overflow/ Carry:   1010 + 1011 = 1, 0101
-
-#
-# OTHER LANGUAGES BUILT IN
-#
-
-# JavaScript Built-In
-js (
-   function k {
-      let k = 'Hello, World!'
-      console.log(k)
-   }
-)
-
-# Lua Built-In (or not)
-#*lua (
-   function k ()
-      local k = "Hello, World!"
-      print (k)
-   end
-)*#
-
-# Html Built-In
 </
    <tag attribute="value">
       <b>Hello, {{
@@ -283,9 +233,3 @@ js (
 fn getHtml() {
    ret </<b>Hello, World!</b>/>
 }
-
-# Assembly Writing
-asm (
-   mov %eax, %edx
-   add %eax, 2
-)

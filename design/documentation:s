@@ -628,3 +628,42 @@ $[compile time] {
     k = (())
     # Can be quite handful in more complex logic.
 }
+
+##########################################################################################
+#########                                ASSEMBLY                                #########
+##########################################################################################
+
+eax = edx   # mov eax, edx
+eax += 2    # add eax, 2
+
+#
+# Assembly Flags
+#
+
+OF # Overflow Flag:        Overflow of SIGN bit: (int4) 0100 + 0100 = 1000; 4 + 4 = 8, but here: -7
+DF # Direction Flag:
+IF # Interrupt Flag:
+TF # Trap Flag:
+SF # Sign Flag:            Sign of result of arithmetic operation
+ZF # Zero Flag:            Result of arihtmetic operation is zero
+AF # Auxiliary Carry Flag: 
+PF # Parity Flag:          Amount of zeros after arithmetic operation
+CF # Carry Flag:           Carry:   1010 + 1011 = 1, 0101
+
+#
+# Fibonacci Sequence
+# https://www.youtube.com/watch?v=yOyaJXpAYZQ ????
+#
+
+eax = 1
+ebx = 1
+
+for {
+    ecx = eax + ebx
+    eax = ebx
+    ebx = ecx
+}
+
+#
+# Terminate code
+#

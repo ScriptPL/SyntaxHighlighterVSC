@@ -16,60 +16,11 @@
 				"name": "keyword.operator.new.sc",
 				"match": "\\bb[A-F0-9]{1,2}\\b"
 			}, {
-				"include": "#langs"
+				"include": "#html"
 			}, {
-				"begin": "(\\$)\\[",
-				"end": "\\]",
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control.sc"
-					}
-				},
-				"patterns": [{
-					"include": "#comments"
-				}, {
-					"include": "#strings"
-				}, {
-					"include": "#numeric"
-				}, {
-					"match": "\\b(prim|opt|if|trust|ret)\\b",
-					"name": "keyword.control.sc"
-				}, {
-					"match": "\\b[A-Za-z_0-9\\-]+\\b",
-					"name": "keyword.sc"
-				}, {
-					"begin": "\\(",
-					"end": "\\)",
-					"patterns": [{
-						"include": "#*"
-					}]
-				}]
+				"include": "#attr"
 			}, {
 				"include": "#words"
-			}]
-		},
-		"asm": {
-			"patterns": [{
-				"include": "#comments"
-			}, {
-				"include": "#strings"
-			}, {
-				"include": "#numeric"
-			}, {
-				"match": "\\b(mov|int|add)\\b",
-				"name": "keyword.control.sc"
-			}, {
-				"match": "\\b([abcd][hl]|e?[abcd]x)\\b",
-				"name": "keyword.sc"
-			}, {
-				"name": "keyword.operator.new.sc",
-				"match": "\\b[ODITSZAPC]F\\b"
-			}, {
-				"name": "constant.numeric.sc",
-				"match": "\\bb[A-F0-9]{1,2}\\b"
-			}, {
-				"name": "variable",
-				"match": "[A-Za-z_][A-Za-z0-9_]*"
 			}]
 		},
 		"comments": {
@@ -238,26 +189,14 @@
 				}]
 			}]
 		},
-		"langs": {
+		"html": {
+			"begin": "<\\/",
+			"end": "\\/>",
 			"patterns": [{
-				"begin": "<\\/",
-				"end": "\\/>",
+				"begin": "\\{\\{",
+				"end": "\\}\\}",
 				"patterns": [{
-					"begin": "\\{\\{",
-					"end": "\\}\\}",
-					"patterns": [{
-						"include": "#*"
-					}],
-					"beginCaptures": {
-						"0": {
-							"name": "keyword.sc"
-						}
-					},
-					"endCaptures": {
-						"0": {
-							"name": "keyword.sc"
-						}
-					}
+					"include": "#*"
 				}],
 				"beginCaptures": {
 					"0": {
@@ -269,39 +208,17 @@
 						"name": "keyword.sc"
 					}
 				}
-			}, {
-				"begin": "(?<!\\w)js\\s*\\(",
-				"end": "\\)",
-				"patterns": [{
-					"include": "source.js"
-				}],
-				"beginCaptures": {
-					"0": {
-						"name": "keyword.control.sc"
-					}
-				},
-				"endCaptures": {
-					"0": {
-						"name": "keyword.control.sc"
-					}
+			}],
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.sc"
 				}
-			}, {
-				"begin": "\\b(asm\\s*\\()",
-				"end": "\\)",
-				"patterns": [{
-					"include": "#asm"
-				}],
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control.sc"
-					}
-				},
-				"endCaptures": {
-					"0": {
-						"name": "keyword.control.sc"
-					}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "keyword.sc"
 				}
-			}]
+			}
 		},
 		"numeric": {
 			"name": "constant.numeric.sc",
@@ -319,6 +236,9 @@
 			}, {
 				"name": "keyword.sc",
 				"match": "\\b(use|self|super|in|true|false|be)(:[A-Za-z_][A-Za-z_0-9]*)*\\b"
+			}, {
+				"name": "keyword.asm",
+				"match": "\\b([abcd][hl]|e?[abcd]x|[ODITSZAPC]F)\\b"
 			}, {
 				"name": "variable.other.constant.sc",
 				"match": "\\b(document|window|process)\\b"
@@ -351,6 +271,34 @@
 						"name": "keyword.sc"
 					}
 				}
+			}]
+		},
+		"attr": {
+			"begin": "(\\$)\\[",
+			"end": "\\]",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.sc"
+				}
+			},
+			"patterns": [{
+				"include": "#comments"
+			}, {
+				"include": "#strings"
+			}, {
+				"include": "#numeric"
+			}, {
+				"match": "\\b(prim|opt|if|trust|ret)\\b",
+				"name": "keyword.control.sc"
+			}, {
+				"match": "\\b[A-Za-z_0-9\\-]+\\b",
+				"name": "keyword.sc"
+			}, {
+				"begin": "\\(",
+				"end": "\\)",
+				"patterns": [{
+					"include": "#*"
+				}]
 			}]
 		}
 	},
