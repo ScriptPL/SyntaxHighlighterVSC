@@ -45,7 +45,7 @@ fn factorial (n uint) uint {
 ##########################################################################################
 
 fn fibonacci () List<uint> {
-   be f = (0, 1) # Automatically converted to List, since return type
+   be f #*List<uint>*# = (0, 1)
 
     for {
         f += f.(f.l - 1) + f.(f.l) # push to f: sum of last two values
@@ -89,41 +89,6 @@ fn print_element (params (...)) {
 print_element: 'Hello', 5, false
 
 ##########################################################################################
-#########                               OPERATIONS                               #########
-##########################################################################################
-
-######################################### STRINGS ########################################
-
-be string str = 'Hello, World!'
-
-string += ' Add more!'      # "Hello World! Add more!"              += add string
-
-######################################### ARRAYS #########################################
-
-be array List(int) = (1, 2, 3, 4)
-
-array += 5                  # (1, 2, 3, 4, 5)                       += push
-array /= I == 0 || V > 3    # (2, 3); I is index, V is element      /= quick filter
-array += 4, 5, 6            # (2, 3, 4, 5, 6)
-array -= 2, 3               # (2, 3, 6)                             -= remove elements at pos
-
-######################################### BOOLEAN ########################################
-
-k = true
-
-k!  # Set the boolean to the opposite 
-
-######################################### NUMERIC ########################################
-
-k = 50000
-
-k +=   500  # each represent arithmetic operations
-k -=  1000
-k *= 2
-k /= 100
-k %= 990    # 0
-
-##########################################################################################
 #########                             PRIME GENERATION                           #########
 ##########################################################################################
 
@@ -141,7 +106,7 @@ fn genPrimes (total int) List(int) {
         }
 
         if isPrime {
-            primes += i
+            primes += i # insert i to the primes list
         }
     }
 
