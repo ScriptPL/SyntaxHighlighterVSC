@@ -13,14 +13,11 @@
 			}, {
 				"include": "#numeric"
 			}, {
-				"name": "keyword.operator.new.sc",
-				"match": "\\bb[A-F0-9]{1,2}\\b"
-			}, {
 				"include": "#html"
 			}, {
 				"include": "#attr"
 			}, {
-				"include": "#words"
+				"include": "#symbols"
 			}]
 		},
 		"comments": {
@@ -221,11 +218,19 @@
 			}
 		},
 		"numeric": {
-			"name": "constant.numeric.sc",
-			"match": "(\\-)?(\\.\\d+|\\d+(\\.\\d+)?)"
-		},
-		"words": {
 			"patterns": [{
+				"name": "keyword.operator.new.sc",
+				"match": "\\bb[A-F0-9]{1,2}\\b"
+			}, {
+				"name": "constant.numeric.sc",
+				"match": "(\\-)?(\\.\\d+|\\d+(\\.\\d+)?)"
+			}]
+		},
+		"symbols": {
+			"patterns": [{
+				"match": "=>",
+				"name": "keyword.sc"
+			}, {
 				"name": "keyword.sc",
 				"match": "\\b(fn|type|ret|next|(el)?if|el|case|for|throw|T|V|_)(:[A-Za-z_0-9]*)*\\b",
 				"captures": {

@@ -66,35 +66,6 @@ outln: 'Hello, World!'
 with_parameters: 5, 5, 5
 without_parameters:
 
-#######################################
-######### FIBONACCI GENERATOR #########
-#######################################
-
-# This function will run indefinitely.
-fn fibonacci () []uint {
-   be f = (0, 1)
-
-   for {
-      f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
-   }
-
-   ret f
-}
-
-array.l # returns array length
-array.len # too
-
-# Behind them are getters. Functions that are called without brackets.
-# More about structure-methods/ functions/ getters later.
-
-# Here's an exmple how to force the end of a function
-
-be x = fibonacci()  # Start a fibonacci collector
-sleep: 1000          # Sleep main thread for 1000 milliseconds
-x.leave:             # End x's function thread. This is a method on a
-                     # type. More about them, later.
-out: x               # [0, 1, 1, 2, 3, 5, 8, 13, 21, ... ]
-
 ##################################################
 ######### INLINE FUNCTIONS - MATH SYNTAX #########
 ##################################################

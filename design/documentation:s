@@ -310,7 +310,7 @@ Array(Content) {
 
 arr #*Array(str)*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)))
 arr.push()  # Array(T).push fn push {}
-arr(0)      # Array(T)()    fn self (int) {}
+arr.(0)      # Array(T)()    fn self (int) {}
 
 ########################################## ARRAYS ########################################
 
@@ -503,73 +503,6 @@ for key, value in k * ´(\w)${1}="(\w)${2}";´ {
 }
 
 out: map.('h') .. ', ' .. map.('g')    # Hello, World!
-
-##########################################################################################
-#########                         ENTITY COMPONENT SYSTEM                        #########
-##########################################################################################
-#
-# A built-in entity system is provided. To create a new entity, use the keyword new with
-# a set of type structures.
-#
-
-Entity {
-    be id uint = 0
-    be map Map(T, Map(uint, _))
-
-    fn self() {
-        ret id += 1
-    }
-
-    # Add Component
-    fn add(comp _) {
-        $[compile time] {
-            # Compile time make sure that the map object has a proper hierarchy
-            be map.(T(comp)) Map(uint, T(comp))
-
-            # Writes into the type as if it's controlling it:
-            # Creates Position.(uint) for Position if Position is passed into here.
-            T(comp) {
-                fn self (id uint) T(comp) {
-                    ret map.(T(comp)).(id)
-                }
-            }
-        }
-
-        # Trust what we did in compile time: The following won't panic!
-        $[trust] be Map(uint, T(comp)) = map.(T(comp))
-
-        # Set the component
-        be map.(T(comp)).(self.id) = comp # map.comp_type.eid = comp
-    }
-
-    # Query
-    fn capture(comps (...) T]) func {
-        be entities List(uint)
-
-        for _, e in comps {
-            # Hmm
-        }
-
-        ret entities.iterator
-    }
-}
-
-type Player
-type Position (x int, y int)
-type Velocity (x int, y int)
-
-be player = Entity.()
-
-player.add(Player)
-player.add(Position (x = 50, y = 50))
-player.add(Velocity (x = -1, y = -1))
-
-be entities = Entity.capture (Player, Position, Velocity)
-
-for eid uint in entities {
-   Position.(eid).x += Velocity.(eid).x
-   Position.(eid).y += Velocity.(eid).y
-}
 
 ##########################################################################################
 #########                          COMPILE TIME CHECKS                           #########

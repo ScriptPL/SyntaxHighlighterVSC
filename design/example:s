@@ -44,22 +44,17 @@ fn factorial (n uint) uint {
 #########                               FIBONACCI                                #########
 ##########################################################################################
 
-use '@lib/thread'
-
 fn fibonacci () List<uint> {
    be f = (0, 1) # Automatically converted to List, since return type
 
     for {
-        f += f(f.l - 1) + f(f.l) # push to f: sum of last two values
+        f += f.(f.l - 1) + f.(f.l) # push to f: sum of last two values
     }
 
     ret f
 }
 
-be k = fibonacci()
-
-thread.sleep: 5000
-out: k.to(str)
+out: fibonacci().to(str)
 
 ##########################################################################################
 #########                               OUTPUT PRINT                             #########

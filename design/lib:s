@@ -141,3 +141,73 @@ num {
         }
     }
 }
+
+##########################################################################################
+#########                         ENTITY COMPONENT SYSTEM                        #########
+##########################################################################################
+
+ECS {
+    be _id uint = 0
+    be _map Map(T, Map(uint, _)) = Map()
+
+    fn entity() uint {
+        ret _id += 1
+    }
+
+    # entity.add(CompType (value))
+    fn add(comp _) {
+        # The following will be executed ONLY during compilation and disappears in runtime
+        $[compile time] {
+            # Compile time make sure that the map object has a proper hierarchy
+            _map.(T(comp)) = Map(uint, T(comp))
+
+            # Writes into the type as if it's controlling it:
+            # CompType.self is created => CompType.(int) becomes possible
+            T(comp) {
+                fn self (id uint) T(comp) {
+                    ret _map.(T(comp)).(id)
+                }
+            }
+        }
+
+        # Type Logic goes here:
+        $[trust] be Map(uint, T(comp)) = _map.(T(comp))
+
+        be _map.(T(comp)).(self.id) = comp # _map.comp_type.eid = comp, alternatively, V(comp) can be used
+    }
+
+    fn query(comps (...) T]) func {
+        if comps.len == 0 ret fn () {}
+
+        be entities Set(uint) # Sets are hashmaps without content: You just add keys and remove them
+        _map.(comps.shift()).iter((key uint, value _) => entities.add(key))
+
+        # Remove entities from set that don't have one of the component types
+        for _, e1 T in comps
+            for _, e2 uint in entities
+                if !_map.(e1).has(e2)
+                    entities.del(e2)
+
+        # Return the entities iterator
+        ret entities.iterator
+    }
+}
+
+# Usage:
+
+be {entity, query} = use '@lib/ecs'
+
+type Player
+type Position (x int, y int)
+
+be player = entity()
+
+player.add(Player)
+player.add(Position (x = 50, y = 50))
+player.add(Velocity (x = -1, y = -1))
+
+be iter = query (Player, Position) # iter is a function
+for eid uint in iter {
+   Position.(eid).x += Velocity.(eid).x
+   Position.(eid).y += Velocity.(eid).y
+}
