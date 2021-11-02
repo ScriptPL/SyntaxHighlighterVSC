@@ -570,3 +570,58 @@ for eid uint in entities {
    Position.(eid).x += Velocity.(eid).x
    Position.(eid).y += Velocity.(eid).y
 }
+
+##########################################################################################
+#########                          COMPILE TIME CHECKS                           #########
+##########################################################################################
+
+#
+# Compile time assume a boolean defined by values to be true. Risk Zone!
+#
+$[trust] be Type(AnotherType) = value
+$[trust] a == b == c
+
+##########################################################################################
+# Optimization algorithms to use for the next code block. Comes at higher compile times. #
+##########################################################################################
+
+# Optimize a function with indefinite inputs (...) and no outputs to compile into one
+# function call.
+$[opt stack]
+fn print (p (...)) {
+    for i, e in p {
+        out: e
+    }
+}
+
+print: a, b, c
+print: d, e
+print: f, g
+
+# becomes
+print: a, b, c, d, e, f, g
+
+# Additionally you can add a break element inbetween separate function calls.
+$[opt stack(break = '\n')]
+fn print (p (...)) {
+    for i, e in p {
+        out: e
+    }
+}
+
+# makes
+print: a, b, c, '\n', d, e, '\n', f, g
+
+# Set the return type based on variable logic
+fn to (conversionType T) T {
+    $[ret type] conversionType
+}
+
+to(str) # returns str
+to(int) # returns int
+
+# Pre-run code compile time
+$[compile time] {
+    # Execute code or next statement compile time. This could be preparing dynamic values
+    # for code execution. 
+}

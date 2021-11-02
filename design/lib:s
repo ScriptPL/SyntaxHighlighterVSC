@@ -122,3 +122,22 @@ type str = List(char)
 str {
 
 }
+
+##########################################################################################
+#########                               THE NUMBER                               #########
+##########################################################################################
+
+$[prim "number"]
+type num = (byte * 2) # Sort of
+
+num {
+    fn to (conversion T) T {
+        $[ret type] = conversion
+
+        if conversion {
+            # you don't need case:t in case of type comparisons
+            case str
+                # 
+        }
+    }
+}

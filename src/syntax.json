@@ -32,11 +32,17 @@
 				}, {
 					"include": "#numeric"
 				}, {
-					"match": "\\b(prim|opt|if|trust|true|false)\\b",
+					"match": "\\b(prim|opt|if|trust|ret)\\b",
 					"name": "keyword.control.sc"
 				}, {
 					"match": "\\b[A-Za-z_0-9\\-]+\\b",
 					"name": "keyword.sc"
+				}, {
+					"begin": "\\(",
+					"end": "\\)",
+					"patterns": [{
+						"include": "#*"
+					}]
 				}]
 			}, {
 				"include": "#words"
