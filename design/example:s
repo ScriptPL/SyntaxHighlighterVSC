@@ -7,7 +7,7 @@
 fn gdc(a uint, b uint) {
     # JS: https://stackoverflow.com/a/17445307/16002144
     if a == 0
-        ret b
+        ret b # Transforms into python syntax "technically"
 
     for b != 0 {
         if a > b
@@ -25,12 +25,11 @@ out: gcd(2, 5)
 #########                           FACTORIAL FUNCTION                           #########
 ##########################################################################################
 
-fn factorial (n uint) uint {
+fn factorial (n uint) uint
     if n <= 1
         ret 1
     el # this line can be comment technically
         ret self(n - 1) * n
-}
 
 fn factorial (n uint) uint {
     be r = 1
@@ -44,7 +43,7 @@ fn factorial (n uint) uint {
 #########                               FIBONACCI                                #########
 ##########################################################################################
 
-fn fibonacci () List<uint> {
+fn fibonacci () List(uint) {
    be f #*List<uint>*# = (0, 1)
 
     for {

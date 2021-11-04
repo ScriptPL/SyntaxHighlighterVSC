@@ -404,7 +404,7 @@ if be Result.Err(m) = k {
 
 ##################################### TYPE AND VALUE #####################################
 
-type TypeValuePair = Map<Comp>(T(Comp), Map(uint, Comp)) #??????
+type TypeValuePair = Map (T, Map(uint, _))
 
 type ABC (de int, fg int)
 
@@ -607,7 +607,7 @@ to(str) # returns str
 to(int) # returns int
 
 # Pre-run code compile time
-be k List<List<int>>
+be k List(List(int))
 $[compile time] {
     # Execute code or next statement compile time. This could be preparing dynamic values
     # for code execution. 
@@ -653,3 +653,32 @@ for {
 #
 # Terminate code
 #
+
+##########################################################################################
+#########                            PYTHON SPACE CHECK                          #########
+##########################################################################################
+
+# Undoubtedly smt => a
+if  smt {
+    a
+}
+
+# also smt => a
+if  smt
+    a
+
+if  condition
+    statement1
+    statement2 # statement2 begins at the same as statement1, hence belongs to the code blocks
+
+statement3 # This statement doesn't belong to the if clause
+
+##########################################################################################
+#########                              UNPACK OBJECTS                            #########
+##########################################################################################
+
+be (a, b, c) = struct
+be (a, b, c) = use smt
+
+be (a = b, c = d, e = f) = struct
+be (a = b, c = d, e = f) = use smt

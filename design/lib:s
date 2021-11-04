@@ -5,7 +5,11 @@
 
 type Option : Value (*Some(Value), None)
 
-Option(Value) {
+Option(Value)
+
+# You can leave out the brackets to make it python like "indent based" syntax
+# {
+
     fn unwrap() Value {
         if be Option.Some(value) = self {
             ret value
@@ -20,7 +24,8 @@ Option(Value) {
     fn is_some() bool {
         ret !self.is_none()
     }
-}
+
+# }
 
 ##########################################################################################
 #########                                THE LIST                                #########
@@ -38,7 +43,8 @@ type RawList : ElT (
     *Endpoint
 )
 
-RawList(ElementType) {
+RawList(ElementType) # {
+
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
         for i in (begin = 0, end = pos) {
@@ -76,9 +82,13 @@ RawList(ElementType) {
             }
         }
     }
-}
 
-List(ElT) {
+# }
+
+List(ElT)
+
+# {
+
     $[compile time]
     fn $[assign] (content ()ElT) {
         self = (
@@ -122,7 +132,8 @@ List(ElT) {
         self._last.1 = list._list
         # Some collection of garbage
     }
-}
+
+# }
 
 # Usage:
 be k List(uint) = ()
@@ -139,13 +150,13 @@ out: k.(1)  # 100
 $[prim "string"] # prim stays for primitive
 type str = List(char)
 
-str {
+str
+
     # k self is the same as k str; indicates str + str 
     fn:sum(k self) {
         # Call List methods
         self.combine(k)
     }
-}
 
 ##########################################################################################
 #########                               THE NUMBER                               #########
@@ -154,7 +165,8 @@ str {
 $[prim "number"]
 type num = (byte * 2) # Sort of
 
-num {
+num #{
+
     fn to (conversion T) T {
         $[ret type] = conversion
 
@@ -164,13 +176,15 @@ num {
                 # 
         }
     }
-}
+
+#}
 
 ##########################################################################################
 #########                         ENTITY COMPONENT SYSTEM                        #########
 ##########################################################################################
 
-ECS {
+ECS
+
     be _id uint = 0
     be _map Map(T, Map(uint, _)) = Map()
 
@@ -215,11 +229,11 @@ ECS {
         # Return the entities iterator
         ret entities.iterator
     }
-}
+
 
 # Usage:
 
-be {entity, query, add} = use '@lib/ecs'
+be (entity, query, add) = use '@lib/ecs'
 
 type Player
 type Position (x int, y int)
