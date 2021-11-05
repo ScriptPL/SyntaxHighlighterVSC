@@ -118,7 +118,7 @@ out: genPrimes (500)
 #########                        READABLE GAMEDEV SETUP                          #########
 ##########################################################################################
 
-# use html
+use 'lib/html'
 
 App {
     be canvas HTMLCanvasElement

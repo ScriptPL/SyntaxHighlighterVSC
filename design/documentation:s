@@ -32,6 +32,22 @@ use 'strict', 'asm'
 - asm unlocks coding with registers
 *#
 
+use 'lib/____'
+
+#*
+- Use modules provided by the library
+*#
+
+use 'mod/www.link-to-repo.com/path/to/.git'
+
+#*
+- use imported/downloaded modules
+*#
+
+use 'src/path/to/file'  # use from source
+use './path/to/file'    # . to use relative
+use '../path/to/file'   # .. to navigate parent
+
 ##########################################################################################
 #########                                 SCOPES                                 #########
 ##########################################################################################
