@@ -669,7 +669,12 @@ if  smt
 
 if  condition
     statement1
-    statement2 # statement2 begins at the same as statement1, hence belongs to the code blocks
+    statement2 # statement2 begins at the same indent as statement1, hence belongs to the code blocks
+
+if
+    condition # here code is just scanned till a condition is found
+        statement # and then code is scanned for statement
+    statement # doesn't belong to the if-block, since the statement is outdented.
 
 statement3 # This statement doesn't belong to the if clause
 
