@@ -410,8 +410,8 @@ type ABC (de int, fg int)
 
 be k TypeValuePair
 
-k.(T(ABC)) = Map(uint, ABC)
-k.(T(ABC)).(0) = ABC (de = 5, fg = 10)
+k.(ABC) = Map(uint, ABC)
+k.(ABC).(0) = ABC (de = 5, fg = 10)
 
 #
 # type Type     = a type, acts like one
