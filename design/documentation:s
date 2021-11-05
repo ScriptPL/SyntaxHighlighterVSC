@@ -32,10 +32,12 @@ use 'strict', 'asm'
 - asm unlocks coding with registers
 *#
 
-use 'lib/____'
+use 'lib/html', 'lib/ecs'
 
 #*
 - Use modules provided by the library
+- e.g. 'html' provides html elements
+- e.g. 'ecs' provides an entity component system
 *#
 
 use 'mod/www.link-to-repo.com/path/to/.git'
