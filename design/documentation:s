@@ -137,8 +137,8 @@ for {                       # standalone; for {} is a while true loop
 }
 
 
-for i, e in arr {
-    # for elements of an array
+for i, e in tup {
+    # for elements of a tuple
 }
 
 for ... in iter {
@@ -149,15 +149,16 @@ for iterable {
     # for over an iterable function
 }
 
-# <a> becomes the "lifetime" and "label" of the loop, per default ret returns the function
-# it's in.
+# <a> becomes the "lifetime" and "label" of the loop, per default ret returns the function it's in.
 for<a> {
     next<a> # continue
     ret<a>  # break
 }
 
+# for i in Range (...)
 for i in (begin = 5, jump = 2) {
     # for in <struct>: begin: start; end: last accepted value or inf; jump: increment
+    # This is called to the 'range' primitive
 }
 
 ###################################### SCOPE LABEL #######################################
@@ -502,22 +503,21 @@ for query (Player, Position, Velocity) {
 ##########################################################################################
 
 # iterable functions
-fn iter(a int = 0, b int = 10) int, int {
-    be:g i = a
+fn iter(i int = 0, b int = 10) int, int {
+    next
 
-    $["before"]
-    fn {
-        ret a < b  # if true, continue looping, otherwise, break
+    fn next {
+        i += 1
+        if i >= b {
+            ret
+        }
+        next
     }
 
-    $["after"]
-    fn {
-        a += 1
-    }
 }
 
-for a, b in iter {
-    out: i  # 0, 1, 9
+for i in iter {
+    out: i  # 
 }
 
 ##########################################################################################

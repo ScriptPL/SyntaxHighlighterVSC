@@ -31,7 +31,7 @@ Option(Value)
 #########                                THE LIST                                #########
 ##########################################################################################
 
-$[prim "list"]
+$[prim 'list']
 type List : ElementType (
     _list RawList(ElementType)
     _last @RawList(ElementType)
@@ -121,7 +121,7 @@ List(ElT)
         ret self
     }*#
 
-    fn:sum:assign (values (...) ElT) {
+    fn:assign:sum (values (...) ElT) {
         for _, e in values {
             self.push(values)
         }
@@ -147,7 +147,7 @@ out: k.(1)  # 100
 #########                               THE STRING                               #########
 ##########################################################################################
 
-$[prim "string"] # prim stays for primitive
+$[prim 'string'] # prim stays for primitive
 type str = List(char)
 
 str
@@ -162,7 +162,7 @@ str
 #########                               THE NUMBER                               #########
 ##########################################################################################
 
-$[prim "number"]
+$[prim 'number']
 type num = (byte * 2) # Sort of
 
 num #{
@@ -262,4 +262,38 @@ add(e, Asset(Image(w = 50, h = 50)))
 
 for eid in query (Position, Asset) {
    Asset.(eid).render()
+}
+
+##########################################################################################
+#########                             RANGE ITERATOR                             #########
+##########################################################################################
+
+$[prim 'range']
+type Range (
+    start num
+    end Option(num) = Option.None
+    jump num = 1
+)
+
+# Range { fn self () {...} }
+fn Range.self (i num = self.start) num {
+    if be Option.Some(k) = end {
+        if k >= self.end {
+            ret
+        }
+    }
+
+    fn next {
+        i += self.jump
+        if be Option.Some(k) = end {
+            if k >= self.end {
+                ret
+            }
+            next
+        }
+    }
+}
+
+for i in Range (start = 1) {
+    out: i.to(str) # 1, 2, 3, 4, ...
 }
