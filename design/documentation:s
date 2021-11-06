@@ -109,6 +109,12 @@ fn out (params (...) str) {
     ...
 }
 
+########################### LAST LINE IS RETURN - RUST INSPIRED ##########################
+
+fn smt() num {
+    a + b
+}
+
 ##########################################################################################
 #########                                 LOOPS                                  #########
 ##########################################################################################
@@ -695,6 +701,15 @@ if
     statement # doesn't belong to the if-block, since the statement is outdented.
 
 statement3 # This statement doesn't belong to the if clause
+
+fn smt ()
+    code_block
+    if statement
+        condition_block
+        for
+            loop
+        condition
+    code_block
 
 ##########################################################################################
 #########                              UNPACK OBJECTS                            #########
