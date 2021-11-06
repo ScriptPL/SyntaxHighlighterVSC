@@ -11,14 +11,14 @@
     ],
     "contributes": {
         "languages": [{
-            "id": "sc",
+            "id": "script",
             "aliases": ["Script", "sc"],
-            "extensions": [":s", ".script"],
+            "extensions": [".script"],
             "configuration": "./src/lang-config.json"
         }],
         "grammars": [{
-            "language": "sc",
-            "scopeName": "source.sc",
+            "language": "script",
+            "scopeName": "source.script",
             "path": "./src/syntax.json"
         }]
     }

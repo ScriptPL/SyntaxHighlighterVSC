@@ -24,12 +24,12 @@
 			"patterns": [{
 				"begin": "#\\*",
 				"end": "\\*#",
-				"name": "comment.block.sc",
+				"name": "comment.block.script",
 				"patterns": [{
 					"include": "#comments"
 				}]
 			}, {
-				"name": "comment.line.sc",
+				"name": "comment.line.script",
 				"match": "#.*\n"
 			}]
 		},
@@ -39,7 +39,7 @@
 				"begin": "'",
 				"end": "\n|(?<!\\\\)'",
 				"patterns": [{
-					"name": "constant.character.escape.sc",
+					"name": "constant.character.escape.script",
 					"match": "\\\\."
 				}]
 			}, {
@@ -47,7 +47,7 @@
 				"begin": "\"",
 				"end": "\n|(?<!\\\\)\"",
 				"patterns": [{
-					"name": "constant.character.escape.sc",
+					"name": "constant.character.escape.script",
 					"match": "\\\\."
 				}]
 			}, {
@@ -55,12 +55,12 @@
 				"end": "\n|(?<!\\\\)`",
 				"beginCaptures": {
 					"0": {
-						"name": "string.sc"
+						"name": "string.script"
 					}
 				},
 				"endCaptures": {
 					"0": {
-						"name": "string.sc"
+						"name": "string.script"
 					}
 				},
 				"patterns": [{
@@ -80,30 +80,30 @@
 						}
 					}
 				}, {
-					"name": "constant.character.escape.sc",
+					"name": "constant.character.escape.script",
 					"match": "\\\\."
 				}, {
 					"match": ".",
-					"name": "string.sc"
+					"name": "string.script"
 				}]
 			}, {
 				"begin": "´",
 				"end": "\n|(?<!\\\\)´",
 				"beginCaptures": {
 					"0": {
-						"name": "string.regexp.sc"
+						"name": "string.regexp.script"
 					}
 				},
 				"endCaptures": {
 					"0": {
-						"name": "string.regexp.sc"
+						"name": "string.regexp.script"
 					}
 				},
 				"patterns": [{
-					"name": "constant.regexp.escape.sc",
+					"name": "constant.regexp.escape.script",
 					"match": "\\\\\\w"
 				}, {
-					"name": "constant.regexp.escape.sc",
+					"name": "constant.regexp.escape.script",
 					"match": "(?<!\\\\)[\\.]"
 				}, {
 					"begin": "(\\$\\()",
@@ -125,22 +125,22 @@
 					"match": "(\\{)(?:(\\d*)|([A-Za-z_][a-zA-Z0-9_]*))?(?:\\-(\\d*)|([A-Za-z_][a-zA-Z0-9_]*))?(\\})",
 					"captures": {
 						"1": {
-							"name": "keyword.sc"
+							"name": "keyword.script"
 						},
 						"2": {
-							"name": "constant.numeric.sc"
+							"name": "constant.numeric.script"
 						},
 						"3": {
-							"name": "variable.sc"
+							"name": "variable.script"
 						},
 						"4": {
-							"name": "constant.numeric.sc"
+							"name": "constant.numeric.script"
 						},
 						"5": {
-							"name": "variable.sc"
+							"name": "variable.script"
 						},
 						"6": {
-							"name": "keyword.sc"
+							"name": "keyword.script"
 						}
 					}
 				}, {
@@ -148,41 +148,41 @@
 					"end": "\\}",
 					"patterns": [{
 						"match": "\\d+",
-						"name": "constant.numeric.sc"
+						"name": "constant.numeric.script"
 					}, {
 						"match": "\\b[lsb]\\s*:\\s*([A-Za-z_][a-zA-Z0-9_]*)",
 						"captures": {
 							"1": {
-								"name": "keyword.control.sc"
+								"name": "keyword.control.script"
 							},
 							"2": {
-								"name": "variable.sc"
+								"name": "variable.script"
 							}
 						}
 					}],
 					"beginCaptures": {
 						"0": {
-							"name": "keyword.sc"
+							"name": "keyword.script"
 						}
 					},
 					"endCaptures": {
 						"0": {
-							"name": "keyword.sc"
+							"name": "keyword.script"
 						}
 					}
 				}, {
-					"name": "constant.character.escape.sc",
+					"name": "constant.character.escape.script",
 					"match": "(?<!\\\\)[\\(\\)\\[\\]\\{\\}\\|\\/]"
 				}, {
 					"match": "(\\\\).",
 					"captures": {
 						"0": {
-							"name": "constant.regexp.escape.sc"
+							"name": "constant.regexp.escape.script"
 						}
 					}
 				}, {
 					"match": ".",
-					"name": "string.regexp.sc"
+					"name": "string.regexp.script"
 				}]
 			}]
 		},
@@ -197,83 +197,83 @@
 				}],
 				"beginCaptures": {
 					"0": {
-						"name": "keyword.sc"
+						"name": "keyword.script"
 					}
 				},
 				"endCaptures": {
 					"0": {
-						"name": "keyword.sc"
+						"name": "keyword.script"
 					}
 				}
 			}],
 			"beginCaptures": {
 				"0": {
-					"name": "keyword.sc"
+					"name": "keyword.script"
 				}
 			},
 			"endCaptures": {
 				"0": {
-					"name": "keyword.sc"
+					"name": "keyword.script"
 				}
 			}
 		},
 		"numeric": {
 			"patterns": [{
-				"name": "keyword.operator.new.sc",
+				"name": "keyword.operator.new.script",
 				"match": "\\bb[A-F0-9]{1,2}\\b"
 			}, {
-				"name": "constant.numeric.sc",
+				"name": "constant.numeric.script",
 				"match": "(\\-)?(\\.\\d+|\\d+(\\.\\d+)?)"
 			}]
 		},
 		"symbols": {
 			"patterns": [{
 				"match": "=>",
-				"name": "keyword.sc"
+				"name": "keyword.script"
 			}, {
-				"name": "keyword.sc",
+				"name": "keyword.script",
 				"match": "\\b(fn|type|ret|next|if|el|case|for|throw|T|V|_)(:[A-Za-z_0-9]*)*\\b",
 				"captures": {
 					"1": {
-						"name": "keyword.control.sc"
+						"name": "keyword.control.script"
 					}
 				}
 			}, {
-				"name": "keyword.sc",
+				"name": "keyword.script",
 				"match": "\\b(use|self|super|in|true|false|be)(:[A-Za-z_][A-Za-z_0-9]*)*\\b"
 			}, {
 				"name": "keyword.asm",
 				"match": "\\b([abcd][hl]|e?[abcd]x|[ODITSZAPC]F)\\b"
 			}, {
-				"name": "variable.other.constant.sc",
+				"name": "variable.other.constant.script",
 				"match": "\\b(document|window|process)\\b"
 			}, {
-				"name": "support.type.sc",
-				"match": "\\b(u?int|u?num|str|char|bool|byte|func|code)\\b"
+				"name": "support.type.script",
+				"match": "\\b(u?int|u?num|str|char|bool|byte|reg|func|code)\\b"
 			}, {
 				"match": "([A-Za-z_][a-zA-Z0-9_]*)(\\-(for|exit|ret)\\b|\\-\\-)",
 				"captures": {
 					"1": {
-						"name": "keyword.sc"
+						"name": "keyword.script"
 					},
 					"3": {
-						"name": "keyword.control.sc"
+						"name": "keyword.control.script"
 					}
 				}
 			}, {
-				"name": "support.type.sc",
+				"name": "support.type.script",
 				"match": "(_)?[A-Z][a-zA-Z0-9_]*",
 				"captures": {
 					"1": {
-						"name": "keyword.sc"
+						"name": "keyword.script"
 					}
 				}
 			}, {
-				"name": "variable.sc",
+				"name": "variable.script",
 				"match": "(_)?[a-z][a-zA-Z0-9_]*",
 				"captures": {
 					"1": {
-						"name": "keyword.sc"
+						"name": "keyword.script"
 					}
 				}
 			}]
@@ -283,7 +283,7 @@
 			"end": "\\]",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.sc"
+					"name": "keyword.control.script"
 				}
 			},
 			"patterns": [{
@@ -294,10 +294,10 @@
 				"include": "#numeric"
 			}, {
 				"match": "\\b(prim|opt|if|trust|ret)\\b",
-				"name": "keyword.control.sc"
+				"name": "keyword.control.script"
 			}, {
 				"match": "\\b[A-Za-z_0-9\\-]+\\b",
-				"name": "keyword.sc"
+				"name": "keyword.script"
 			}, {
 				"begin": "\\(",
 				"end": "\\)",
@@ -307,5 +307,5 @@
 			}]
 		}
 	},
-	"scopeName": "source.sc"
+	"scopeName": "source.script"
 }
