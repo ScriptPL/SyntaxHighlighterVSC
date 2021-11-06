@@ -225,9 +225,23 @@ a > b < c         # therefore... could be legal?
 # if statement
 if c {}
 # else if statement
-elif c {}
+el if c {}
 # else statement
 el {}
+
+# for in an if
+for smt {
+    # loop while smt
+} el if smt {
+    # if not smt
+    # if smt was NEVER true
+}
+
+if smt {
+    # if smt
+} el for smt2 {
+    # if not smt
+}
 
 ###################################### SWITCH CASE ######################################
 
@@ -295,7 +309,7 @@ k = Enum.Member2(More)
 
 if be Enum.Member2(content) = k {
     # Unpacks content from the enum
-} elif be Enum.Member1 = k {
+} el if be Enum.Member1 = k {
     # k = Enum.Member1
 }
 

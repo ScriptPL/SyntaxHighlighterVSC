@@ -189,7 +189,7 @@ fn parseHTML (t str) List(HtmlElement) {
         if e * ´<(\w)${s:k}>´ {
             position.push(name = k, content = ())
             position = position.last().content
-        } elif e *´<\/(\w)${s:k}>´ {
+        } el if e *´<\/(\w)${s:k}>´ {
             position = position.super
             if position.name != k throw `</$(k)> closes <$(position.name)>`
         } el {

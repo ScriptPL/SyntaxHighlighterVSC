@@ -21,7 +21,7 @@ ret = return
 fn factorial (n uint) int {
    if n <= 1
       ret 1
-   # elif
+   # el if
       ret factorial(n - 1) * n
 }
 
