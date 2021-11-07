@@ -596,14 +596,15 @@ for key, value in k * ´(\w)${1}="(\w)${2}";´ {
 out: map.('h') .. ', ' .. map.('g')    # Hello, World!
 
 ##########################################################################################
-#########                          COMPILE TIME CHECKS                           #########
+#########                           COMPILE TIME PROOF                           #########
 ##########################################################################################
+#
+# Compile time make sure a boolean to be true. If not, it will throw an error.
+# proof bool
+#
 
-#
-# Compile time assume a boolean defined by values to be true. Risk Zone!
-#
-$[trust] be Type(AnotherType) = value
-$[trust] a == b == c
+proof Type(AnotherType) = value
+proof a == b == c
 
 ##########################################################################################
 # Optimization algorithms to use for the next code block. Comes at higher compile times. #

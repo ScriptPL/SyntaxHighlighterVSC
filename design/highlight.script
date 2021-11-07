@@ -59,12 +59,13 @@ fn              # universal declaration of code: first-class function, attribute
 type            # universal structure/enum/type declaration
 for, in, next   # repetetive control flow
 ret             # return scope
-if, elif, el    # conditional control flow
-case
+if, el, case    # conditional control flow
 
 true, false     # values
 be              # other
 self, super     # recursive self or parent reference
+
+proof           # compile time check for booleans to be true
 
 T, V, _         # Type, Value, "null"
 

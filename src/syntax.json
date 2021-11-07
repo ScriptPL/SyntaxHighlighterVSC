@@ -232,7 +232,7 @@
 				"name": "keyword.script"
 			}, {
 				"name": "keyword.script",
-				"match": "\\b(fn|type|ret|next|if|el|case|for|throw|T|V|_)(:[A-Za-z_0-9]*)*\\b",
+				"match": "\\b(fn|type|ret|next|if|el|case|for|throw|proof|T|V|_)(:[A-Za-z_0-9]*)*\\b",
 				"captures": {
 					"1": {
 						"name": "keyword.control.script"
