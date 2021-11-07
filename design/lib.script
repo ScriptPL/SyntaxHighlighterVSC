@@ -295,3 +295,28 @@ fn Range.self (i num = self.start) num {
 for i in Range (start = 1) {
     out: i.to(str) # 1, 2, 3, 4, ...
 }
+
+##########################################################################################
+#########                       WINDOW, DOCUMENT, PROCESS                        #########
+##########################################################################################
+
+window {
+    fn init () {
+        # Initialize the window
+        # ...
+    }
+}
+
+document {
+    fn init () {
+        # Initialize the window
+        # ...
+    }
+}
+
+process {
+    env {
+        # Environment variables
+        # ...
+    }
+}
