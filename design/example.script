@@ -73,13 +73,15 @@ out: 'Hello, World!'
 fn print_element (params (...)) {
     for i, e in params {
         if e {
-            case:t str
+            # value case type checks if the value is of the type
+            # type case type checks for type equality
+            case str
                 out: e, b0A
             
-            case:t int
+            case int
                 out: e.to(str), b0A
 
-            case:t bool
+            case bool
                 out: e ? 'true' ~ false, b0A
         }
     }
@@ -219,7 +221,6 @@ out: parseHTML(text)
 ##########################################################################################
 
 throw 'Throwing an error'
-throw:d 'This will only output a deprecation warning!'
 
 ##########################################################################################
 #########            ADDING DEFAULT ARITHMETIC OPERATIONS TO A CLASS             #########
@@ -228,7 +229,7 @@ throw:d 'This will only output a deprecation warning!'
 type Vector (num * 3)
 
 Vector {
-    fn:sum (self, v Vector) Vector {
+    fn __plus (self, v Vector) Vector {
         ret Vector (self.0 + v.0, self.1 + v.1, self.2 + v.2)
     }
 }

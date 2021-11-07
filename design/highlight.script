@@ -40,7 +40,7 @@ abcdef012345, _hello_world
 # usually types (but not hardcoded)
 Abcdef012345, _HelloWorld
 
-var_iable := y
+var_iable = y
 _private_var = y
 xXXXXXx => y
 Xxxxxxx()

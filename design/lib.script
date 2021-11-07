@@ -14,7 +14,12 @@ Option(Value)
         if be Option.Some(value) = self {
             ret value
         }
-        throw:p 'Panicked! Unwrapped value is None.'
+        throw 'Unwrapped value is None.'
+
+        # or:
+
+        # out: 'Panicked! Unwrapped value is None.'
+        # ret Value.new()
     }
 
     fn is_none() bool {
@@ -26,6 +31,16 @@ Option(Value)
     }
 
 # }
+
+##########################################################################################
+#########                               THE RESULT                               #########
+##########################################################################################
+
+type Result : V1, V2 (*Ok(V1), *Err(V2))
+
+# k Result(uint, uint)
+be k = Result.Ok(200)
+k = Result.Err(404)
 
 ##########################################################################################
 #########                                THE LIST                                #########
@@ -88,7 +103,7 @@ List(ElT)
 # {
 
     $[compile time]
-    fn:assign (content ()ElT) {
+    fn __assign (content ()ElT) {
         self = (
             len = content.len,
             #_list = [tree ????] ????
@@ -114,12 +129,12 @@ List(ElT)
         ret self.len -= 1
     }
 
-    #*fn:sum (value ElT) self {
+    #*fn __plus (value ElT) self {
         self.push(value)
         ret self
     }*#
 
-    fn:assign:sum (values (...) ElT) {
+    fn __assign_plus (values (...) ElT) {
         for _, e in values {
             self.push(values)
         }
@@ -151,7 +166,7 @@ type str = List(char)
 str
 
     # k self is the same as k str; indicates str + str 
-    fn:sum(k self) {
+    fn __plus(k self) {
         # Call List methods
         self.combine(k)
     }
@@ -169,7 +184,7 @@ num #{
         $[ret type] = conversion
 
         if conversion {
-            # you don't need case:t in case of type comparisons
+            # type-type comparison
             case str
                 # 
         }

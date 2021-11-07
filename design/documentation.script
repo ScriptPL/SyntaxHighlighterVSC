@@ -14,13 +14,6 @@
 call(params)
 call: params
 
-be:g    # declare a global
-be:c    # declare a constant
-be:g:c  # declare a global constant
-
-case value
-case:t type
-
 ##########################################################################################
 #########                                IMPORTS                                 #########
 ##########################################################################################
@@ -113,6 +106,39 @@ fn out (params (...) str) {
 
 fn smt() num {
     a + b
+}
+
+################################# SPECIAL TYPE FUNCTIONS #################################
+
+Type {
+    # Type = ...
+    fn __assign(value _) {
+        self = ...
+    }
+
+    # Type += ...
+    fn __assign_plus(value _) {
+        self = ...
+    }
+
+    fn __assign_minus(v _)       # -=
+    fn __assign_multiply(v _)    # *=
+    fn __assign_division(v _)    # /=
+    fn __assign_mod(v _)         # %=
+    fn __assign_power(v _)       # ^=
+    # ...
+
+    # Type + ...
+    fn __plus(value _) {
+        self = ...
+    }
+
+    fn __minus(v _)       # -=
+    fn __multiply(v _)    # *=
+    fn __division(v _)    # /=
+    fn __mod(v _)         # %=
+    fn __power(v _)       # ^=
+    # ...
 }
 
 ##########################################################################################
@@ -256,7 +282,7 @@ if value {
     case val1, val2, val3
         # Match val1, val2 or val3
 
-    case:t Type
+    case Type
         # Match if is type
 
     el
@@ -566,9 +592,9 @@ be w = ´[01]´
 ####################################### AAA BBB CCC ######################################
 
 be n int
-be proof = 'aaabbbccc'
+be string_to_proof = 'aaabbbccc'
 
-out: proof * ´(a)${l:n}(b){n}(c){n}´  # true
+out: string_to_proof * ´(a)${l:n}(b){n}(c){n}´  # true
 out: n                          # 3
 
 #
@@ -666,7 +692,8 @@ j += 2  # add  j, 2
 
 # The set method = between two variables
 # => set requires an assembly register
-fn:set (c, d) {
+fn __assign (c @_, d _) {
+    proof T(c) == T(d)
     be a reg(32)
     a = d
     c = a
@@ -700,6 +727,8 @@ CF # Carry Flag:           Carry:   1010 + 1011 = 1, 0101
         a = b
         b = c
     }
+
+    # lifetime of a, b, c ends here
 }
 
 ##########################################################################################
