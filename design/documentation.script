@@ -657,7 +657,7 @@ $[compile time] {
 #########                                ASSEMBLY                                #########
 ##########################################################################################
 
-be k, j reg[8]
+be k, j reg(8)
 
 k = 5   # move k, 5
 j = k   # move j, k
@@ -666,7 +666,7 @@ j += 2  # add  j, 2
 # The set method = between two variables
 # => set requires an assembly register
 fn:set (c, d) {
-    be a reg[32]
+    be a reg(32)
     a = d
     c = a
 }
@@ -691,7 +691,7 @@ CF # Carry Flag:           Carry:   1010 + 1011 = 1, 0101
 #
 
 {
-    be a = 1, b = 1, c reg[16]
+    be a = 1, b = 1, c reg(16)
 
     for {
         c = a + b
