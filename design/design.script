@@ -50,7 +50,7 @@ out factorial(5)
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
-fn outln (params [... _]) {
+fn outln (params (...) _]) {
    out params, b0A
 }
 
