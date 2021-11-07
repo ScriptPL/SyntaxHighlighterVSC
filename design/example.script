@@ -19,7 +19,7 @@ fn gdc(a uint, b uint) {
     ret a
 }
 
-out: gcd(2, 5)
+out gcd(2, 5)
 
 ##########################################################################################
 #########                           FACTORIAL FUNCTION                           #########
@@ -53,13 +53,13 @@ fn fibonacci () List(uint) {
     ret f
 }
 
-out: fibonacci().to(str)
+out fibonacci().to(str)
 
 ##########################################################################################
 #########                               OUTPUT PRINT                             #########
 ##########################################################################################
 
-out: 'Hello, World!'
+out 'Hello, World!'
 
 ##########################################################################################
 #########                                 METHODS                                #########
@@ -76,18 +76,21 @@ fn print_element (params (...)) {
             # value case type checks if the value is of the type
             # type case type checks for type equality
             case str
-                out: e, b0A
+                out
+                    e, b0A
             
             case int
-                out: e.to(str), b0A
+                out
+                    e.to(str), b0A
 
             case bool
-                out: e ? 'true' ~ false, b0A
+                out
+                    e ? 'true' ~ false, b0A
         }
     }
 }
 
-print_element: 'Hello', 5, false
+print_element 'Hello', 5, false
 
 ##########################################################################################
 #########                             PRIME GENERATION                           #########
@@ -114,7 +117,7 @@ fn genPrimes (total int) List(int) {
     ret primes
 }
 
-out: genPrimes (500)
+out genPrimes (500)
 
 ##########################################################################################
 #########                        READABLE GAMEDEV SETUP                          #########
@@ -133,13 +136,13 @@ App {
         x = canvas.width * .5
         y = canvas.height * .5
 
-        animationFrame:
-        addEventListeners:
+        animationFrame
+        addEventListeners
     }
 
     fn animationFrame() {
-        update:
-        render:
+        update
+        render
     }
 
     fn update() {
@@ -168,7 +171,8 @@ App {
     }
 }
 
-window.onload: {
+# window.onload is designed to be an event listener with code attaching using +=
+window.onload += () => {
     App.init()
 }
 
@@ -214,7 +218,7 @@ fn parseHTML (t str) HtmlElement {
     ret output
 }
 
-out: parseHTML(text)
+out parseHTML(text)
 
 #
 # b {
@@ -246,4 +250,4 @@ Vector {
     }
 }
 
-out: Vector(2, 3, 4) + Vector(3, 4, 5)
+out Vector(2, 3, 4) + Vector(3, 4, 5)

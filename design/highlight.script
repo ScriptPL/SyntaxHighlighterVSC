@@ -71,11 +71,3 @@ T, V, _         # Type, Value, "null"
 ######### RESERVED CONSTANTS #########
 
 window, document, process
-
-######### EXAMPLE #########
-
-@attr something
-fn name () int {
-    method: method parameters
-    ret -123456789.0
-}

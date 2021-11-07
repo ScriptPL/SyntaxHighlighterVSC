@@ -28,7 +28,7 @@ Option(Value)
 
         # or:
 
-        # out: 'Panicked! Unwrapped value is None.'
+        # out 'Panicked! Unwrapped value is None.'
         # ret Value.new()
     }
 
@@ -135,7 +135,7 @@ List(ElT)
 
     fn pop () {
         if self.len == 0 ret
-        self._list.pop:
+        self._list.pop
         ret self.len -= 1
     }
 
@@ -164,7 +164,7 @@ k.push(50)  # 0
 k.push(100) # 1
 k += 150    # 2
 
-out: k.(1)  # 100
+out k.(1)  # 100
 
 ##########################################################################################
 #########                               THE STRING                               #########
@@ -318,7 +318,7 @@ fn Range.self (i num = self.start) num {
 }
 
 for i in Range (start = 1) {
-    out: i.to(str) # 1, 2, 3, 4, ...
+    out i.to(str) # 1, 2, 3, 4, ...
 }
 
 ##########################################################################################

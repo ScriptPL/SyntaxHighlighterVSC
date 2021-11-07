@@ -12,7 +12,7 @@
 
 # Functions
 call(params)
-call: params
+call params
 
 ##########################################################################################
 #########                                IMPORTS                                 #########
@@ -91,11 +91,11 @@ be f = (x) => 2 * x + 5
 
 ################################# STACKABLE OPTIMIZATION #################################
 
-out: 'Hello!'
-out: 'How are you?', 'I\'m fine!'
-out: 'You?'
+out 'Hello!'
+out 'How are you?', 'I\'m fine!'
+out 'You?'
 
-# optimised compile time into out: 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
+# optimised compile time into out 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
 
 $[opt stack]
 fn out (params (...) str) {
@@ -203,7 +203,7 @@ for<x> y {
     }
 }
 
-out: y == value # true
+out y == value # true
 
 ##########################################################################################
 #########                               OPERATIONS                               #########
@@ -300,7 +300,7 @@ fn str.equalsSize(i int) bool, str {
 
 if 'Hello, World!'.equalsSize {
     case 13 -> v {
-        out: v
+        out v
     }
 }
 
@@ -460,7 +460,7 @@ be k Result(int, str) = Result.Ok(200)
 k = Result.Err('Could not connect!')
 
 if be Result.Err(m) = k {
-    out: m
+    out m
 }
 
 ######################################## REFERENCE #######################################
@@ -563,7 +563,7 @@ fn iter(i int = 0, b int = 10) int, int {
 }
 
 for i in iter {
-    out: i  # 
+    out i  # 
 }
 
 ##########################################################################################
@@ -594,8 +594,8 @@ be w = ´[01]´
 be n int
 be string_to_proof = 'aaabbbccc'
 
-out: string_to_proof * ´(a)${l:n}(b){n}(c){n}´  # true
-out: n                          # 3
+out string_to_proof * ´(a)${l:n}(b){n}(c){n}´  # true
+out n                          # 3
 
 #
 # a${l:n}   # Scan for "l"ength of "a"'s, write into variable n
@@ -619,7 +619,7 @@ for key, value in k * ´(\w)${1}="(\w)${2}";´ {
     map.(key) = value 
 }
 
-out: map.('h') .. ', ' .. map.('g')    # Hello, World!
+out map.('h') .. ', ' .. map.('g')    # Hello, World!
 
 ##########################################################################################
 #########                           COMPILE TIME PROOF                           #########
@@ -647,27 +647,27 @@ be (
 $[opt stack]
 fn print (p (...)) {
     for i, e in p {
-        out: e
+        out e
     }
 }
 
-print: a, b, c
-print: d, e
-print: f, g
+print a, b, c
+print d, e
+print f, g
 
 # becomes
-print: a, b, c, d, e, f, g
+print a, b, c, d, e, f, g
 
 # Additionally you can add a break element inbetween separate function calls.
 $[opt stack(break = '\n')]
 fn print (p (...)) {
     for i, e in p {
-        out: e
+        out e
     }
 }
 
 # makes
-print: a, b, c, '\n', d, e, '\n', f, g
+print a, b, c, '\n', d, e, '\n', f, g
 
 # Set the return type based on variable logic
 fn to (conversionType T) T {

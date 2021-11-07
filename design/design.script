@@ -44,14 +44,14 @@ METHOD_TYPE   PARAM1, PARAM2, ...
 
 *#
 
-out: factorial(5)
+out factorial(5)
 
 # Create a method consuming any amount of parameters.
 # Output all parameters into the "out"-method, in addition the
 # 0A-byte: newline character.
 # This is how to create a method to output a newline and content
 fn outln (params [... _]) {
-   out: params, b0A
+   out params, b0A
 }
 
 fn with_parameters (i int, j int, k int) {
@@ -62,9 +62,9 @@ fn without_parameters () {
    # Do something
 }
 
-outln: 'Hello, World!'
-with_parameters: 5, 5, 5
-without_parameters:
+outln 'Hello, World!'
+with_parameters 5, 5, 5
+without_parameters
 
 </
    <tag attribute="value">
