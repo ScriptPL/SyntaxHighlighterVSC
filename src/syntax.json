@@ -243,7 +243,7 @@
 				"match": "\\b(use|self|super|in|true|false|be)(:[A-Za-z_][A-Za-z_0-9]*)*\\b"
 			}, {
 				"name": "keyword.asm",
-				"match": "\\b([abcd][hl]|e?[abcd]x|[ODITSZAPC]F)\\b"
+				"match": "\\b[ODITSZAPC]F\\b"
 			}, {
 				"name": "variable.other.constant.script",
 				"match": "\\b(document|window|process)\\b"
