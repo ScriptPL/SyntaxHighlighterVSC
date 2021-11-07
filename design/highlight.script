@@ -62,10 +62,8 @@ ret             # return scope
 if, el, case    # conditional control flow
 
 true, false     # values
-be              # other
-self, super     # recursive self or parent reference
-
-proof           # compile time check for booleans to be true
+be              # proof a value to be true OR be a value something
+self            # recursive self or parent reference
 
 T, V, _         # Type, Value, "null"
 

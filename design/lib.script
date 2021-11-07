@@ -63,7 +63,7 @@ RawList(ElementType) # {
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
         for i in (begin = 0, end = pos) {
-            proof be List.Element = latestChild.1   # Bypasses the parser checks force-assuming a boolean to be true
+            be (be List.Element = latestChild.1)    # Bypasses the parser checks force-assuming a boolean to be true
             latestChild = latestChild.1             # Index in the array.
         }
         ret latestChild.0
@@ -222,9 +222,9 @@ ECS
         }
 
         # Type Logic goes here:
-        proof be Map(uint, T(comp)) = _map.(T(comp))
+        be (be Map(uint, T(comp)) = _map.(T(comp)))
 
-        be _map.(T(comp)).(eid) = comp # _map.comp_type.eid = comp, alternatively, V(comp) can be used
+        be _map.(T(comp)).(eid) = V(comp) # _map.comp_type.eid = comp; V stores the value without type headers.
     }
 
     fn query(comps (...) T]) func {

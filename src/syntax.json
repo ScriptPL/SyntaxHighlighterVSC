@@ -231,11 +231,11 @@
 				"match": "=>",
 				"name": "keyword.script"
 			}, {
-				"name": "keyword.script",
-				"match": "\\b(fn|type|ret|next|if|el|case|for|throw|proof|T|V|_)\\b"
+				"name": "keyword.control.script",
+				"match": "\\b(fn|type|ret|next|if|el|case|for|throw|T|V|_)\\b"
 			}, {
 				"name": "keyword.script",
-				"match": "\\b(use|self|super|in|true|false|be)\\b"
+				"match": "\\b(use|self|in|true|false|be)\\b"
 			}, {
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"

@@ -176,26 +176,38 @@ window.onload: {
 #########            IMPROVED REGEX CAPABILITIES ~ QUICK HTML PARSER             #########
 ##########################################################################################
 
-type HtmlElement (name str, content (List(self) | str))
+type HtmlElement (
+    name str
+    content (List(self) | str)
+)
 
 be text = '<b><i>Hello</i>, <u>World</u>!</b>'
 
-fn parseHTML (t str) List(HtmlElement) {
-    be output List(HtmlElement) = ()
+fn parseHTML (t str) HtmlElement {
+    be output = HtmlElement(
+        name = 'div',
+        content = ()
+    )
 
-    be tokens = t.tokenize(´<\w>|<\/\w>|[/<]+´) # List(str)
-    be position @List(HtmlElement) = output
+    be tokens List(str) = t.tokenize(´<\w>|<\/\w>|[/<]+´)
+    be position List(@List(HtmlElement)) = (output)
 
     for _, e in tokens {
         be k str
-        if e * ´<(\w)${s:k}>´ {
-            position.push(name = k, content = ())
-            position = position.last().content
-        } el if e *´<\/(\w)${s:k}>´ {
-            position = position.super
-            if position.name != k throw `</$(k)> closes <$(position.name)>`
-        } el {
-            position.push(e)
+
+        if e.match {
+            case ´<(\w)${s:k}>´
+                # last() gets outer-most element and pushes into its' reference
+                position.last().push(name = k, content = ())
+                position = position.last().content
+
+            case ´<\/(\w)${s:k}>´
+                position.pop()
+                if position.name != k
+                    throw `</$(k)> closes <$(position.name)>`
+
+            el
+                position.push(e)
         }
     }
 

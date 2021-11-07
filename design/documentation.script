@@ -625,12 +625,18 @@ out: map.('h') .. ', ' .. map.('g')    # Hello, World!
 #########                           COMPILE TIME PROOF                           #########
 ##########################################################################################
 #
-# Compile time make sure a boolean to be true. If not, it will throw an error.
-# proof bool
+# Compile time make sure a boolean is true. If not, it will throw an error. This will help
+# proving certain values to be e.g. an enum member.
 #
 
-proof Type(AnotherType) = value
-proof a == b == c
+be (
+    Type(AnotherType) = value
+    a == b == c
+)
+
+be (
+    boolean
+)
 
 ##########################################################################################
 # Optimization algorithms to use for the next code block. Comes at higher compile times. #
@@ -693,7 +699,9 @@ j += 2  # add  j, 2
 # The set method = between two variables
 # => set requires an assembly register
 fn __assign (c @_, d _) {
-    proof T(c) == T(d)
+    # Compile time proof
+    be (T(c) == T(d))
+
     be a reg(32)
     a = d
     c = a
