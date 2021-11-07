@@ -232,16 +232,16 @@
 				"name": "keyword.script"
 			}, {
 				"name": "keyword.control.script",
-				"match": "\\b(fn|type|ret|next|if|el|case|for|throw|T|V|_)\\b"
+				"match": "\\b(fn|type|for|ret|throw)\\b"
 			}, {
 				"name": "keyword.script",
-				"match": "\\b(use|self|in|true|false|be)\\b"
+				"match": "\\b(use|self|in|be|next|if|el|case|T|V|_)\\b"
 			}, {
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"
 			}, {
 				"name": "variable.other.constant.script",
-				"match": "\\b(document|window|process)\\b"
+				"match": "\\b(document|window|process|true|false)\\b"
 			}, {
 				"name": "support.type.script",
 				"match": "\\b(u?int|u?num|str|char|bool|byte|reg|func|code)\\b"

@@ -61,9 +61,10 @@ for, in, next   # repetetive control flow
 ret             # return scope
 if, el, case    # conditional control flow
 
-true, false     # values
 be              # proof a value to be true OR be a value something
 self            # recursive self or parent reference
+
+true, false     # values
 
 T, V, _         # Type, Value, "null"
 
