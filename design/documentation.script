@@ -66,6 +66,58 @@ fn a.b.f () {
 }
 
 ##########################################################################################
+#########                               VARIABLES                                #########
+##########################################################################################
+
+be k uint = 0
+be k = 0
+
+be k List(T) = (str, int)
+be k = List(T) (str, int)
+be k List(T) = List(T) (str, int)
+
+be k List(str) = ('sup', 'ppl')
+be k = List(str) ('sup', 'ppl')
+be k List(str) = List(str) ('sup', 'ppl')
+
+# EXECUTED ONLY COMPILE TIME
+for 'compile time' be smt = value
+
+for 'compile time' {
+    code
+}
+
+# Unpack values
+
+be (a, b, c) = struct
+be (a, b, c) = use smt
+
+be (a = b, c = d, e = f) = struct
+be (a = b, c = d, e = f) = use smt
+
+# be () not followed by "="
+# forces a boolean to give true, or throws error
+be (bool)
+
+
+####################################### POINTERS #########################################
+
+be k int = 5
+be j @int = k
+
+j = 6   # k and its' reference j are 6
+
+be k int = 5
+be z int 10
+be j @int = k
+
+j @= z  # set j to be z's reference, k is still 5
+
+be k int = 5
+be z @int = k
+be j @int = k
+
+##########################################################################################
 #########                               FUNCTIONS                                #########
 ##########################################################################################
 
@@ -204,6 +256,12 @@ for<x> y {
 }
 
 out y == value # true
+
+######################################## SPECIAL #########################################
+
+for 'special event' {
+    # SPECIAL
+}
 
 ##########################################################################################
 #########                               OPERATIONS                               #########
@@ -478,6 +536,8 @@ be k TypeValuePair
 k.(ABC) = Map(uint, ABC)
 k.(ABC).(0) = ABC (de = 5, fg = 10)
 
+T(ret) # return type in a function
+
 #
 # type Type     = a type, acts like one
 # T(Value)      = a type (upper border) of the value
@@ -627,16 +687,12 @@ out map.('h') .. ', ' .. map.('g')    # Hello, World!
 #
 # Compile time make sure a boolean is true. If not, it will throw an error. This will help
 # proving certain values to be e.g. an enum member.
+# Usage:
+check bool
 #
 
-be (
-    Type(AnotherType) = value
-    a == b == c
-)
-
-be (
-    boolean
-)
+check Type(AnotherType) = value
+check a == b == c
 
 ##########################################################################################
 # Optimization algorithms to use for the next code block. Comes at higher compile times. #
@@ -671,7 +727,7 @@ print a, b, c, '\n', d, e, '\n', f, g
 
 # Set the return type based on variable logic
 fn to (conversionType T) T {
-    $[ret type] conversionType
+    T(ret) = conversionType
 }
 
 to(str) # returns str
@@ -679,7 +735,7 @@ to(int) # returns int
 
 # Pre-run code compile time
 be k List(List(int))
-$[compile time] {
+for 'compile time' {
     # Execute code or next statement compile time. This could be preparing dynamic values
     # for code execution. 
     k = (())
@@ -700,7 +756,7 @@ j += 2  # add  j, 2
 # => set requires an assembly register
 fn __assign (c @_, d _) {
     # Compile time proof
-    be (T(c) == T(d))
+    check T(c) == T(d)
 
     be a reg(32)
     a = d
@@ -771,13 +827,3 @@ fn smt ()
             loop
         condition
     code_block
-
-##########################################################################################
-#########                              UNPACK OBJECTS                            #########
-##########################################################################################
-
-be (a, b, c) = struct
-be (a, b, c) = use smt
-
-be (a = b, c = d, e = f) = struct
-be (a = b, c = d, e = f) = use smt

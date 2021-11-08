@@ -56,16 +56,17 @@ k = Result.Err(404)
 #########                                THE LIST                                #########
 ##########################################################################################
 
-$[prim 'list']
-type List : ElementType (
-    _list RawList(ElementType)
-    _last @RawList(ElementType)
-    len uint
-)
-
 type RawList : ElT (
     *Element(ElT, self) |
     *Endpoint
+)
+
+$[prim 'list']
+type List : ElementType (
+    _list RawList(ElementType)
+    _last @RawList(ElementType) = @self._list               # Last -> Endpoint
+    _prelast Option(@RawList(ElementType)) = Option.None    # Prelast -> Element or None
+    len uint
 )
 
 RawList(ElementType) # {
@@ -79,20 +80,18 @@ RawList(ElementType) # {
         ret latestChild.0
     }
 
-    fn<a> push (element ElementType) {
-        be latestChild @List(ElementType) = self
-        for {
-            if be List.Element = latestChild.1 {    # while the next child is an element, update the pointer.
-                latestChild = latestChild.1
-            } el {                                  # if the next child isn't an element, make it one.
-                latestChild = RawList.Element(element, RawList.Endpoint)
-                self._last = latestChild.1
-                ret<a>
-            }
-        }
+    fn push (element ElementType) {
+        self._last = List.Element(element, RawList.Endpoint)
+        self._prelast @= self._last
+        self._last = self._last.1
     }
 
-    fn<a> pop () ElementType {
+    fn<a> pop () {
+        if be Option.Some(v) = self._prelast {
+            ret 
+        }
+        ret Option.None
+
         be latestChild @List(ElementType) = self
         for {
             if be List.Element = latestChild.1 { # while the next child is an element, update the pointer.
@@ -112,19 +111,25 @@ List(ElT)
 
 # {
 
-    $[compile time]
+    fn __new () List(ElT) {
+        ret List(ElT) {
+            _list = RawList(ElT)
+            len = 0
+        }
+    }
+
+    for 'compile time'
     fn __assign (content ()ElT) {
-        self = (
-            len = content.len,
-            #_list = [tree ????] ????
-        )
+        for i, e in content {
+            self.push(e)
+        }
     }
 
     # fn self: SELF.()
     fn self (pos uint) ElT {
-        $[compile time] if pos > self.len {
+        for 'compile time'
+        if pos > self.len
             throw "Index out of range!"
-        }
         ret self._list.getElementAtPos(pos)
     }
 
@@ -191,7 +196,8 @@ type num = (byte * 2) # Sort of
 num #{
 
     fn to (conversion T) T {
-        $[ret type] = conversion
+        # Compile time makes sure that the return type is the same as the input type.
+        T(ret) = conversion
 
         if conversion {
             # type-type comparison
@@ -217,28 +223,31 @@ ECS
 
     # entity.add(CompType (value))
     fn add(eid uint, comp _) {
-        # The following will be executed ONLY during compilation and disappears in runtime
-        $[compile time] {
+        #
+        # The following will be executed ONLY during compilation and disappears in runtime.
+        #
+        for 'compile time' {
             # Compile time make sure that the map object has a proper hierarchy
             _map.(T(comp)) = Map(uint, T(comp))
 
-            # Writes into the type as if it's controlling it:
-            # CompType.self is created => CompType.(int) becomes possible
-            T(comp) {
-                fn self (id uint) T(comp) {
-                    ret _map.(T(comp)).(id)
-                }
+            # Creates a type function that will be used to add the component to the entity
+            T(comp).self = (id uint) T(comp) => {
+                ret _map.(T(comp)).(id)
             }
+
+            # Type Logic goes here:
+            be (Map(uint, T(comp)) = _map.(T(comp)))
         }
 
-        # Type Logic goes here:
-        be (be Map(uint, T(comp)) = _map.(T(comp)))
+        #
+        # The following is compiled to the runtime
+        #
 
-        be _map.(T(comp)).(eid) = V(comp) # _map.comp_type.eid = comp; V stores the value without type headers.
+        _map.(T(comp)).(eid) = V(comp) # _map.comp_type.eid = comp; V stores the value without type headers.
     }
 
     fn query(comps (...) T]) func {
-        if comps.len == 0 ret fn () {}
+        if comps.len == 0 ret fn # () {}
 
         be entities Set(uint) # Sets are hashmaps without content: You just add keys and remove them
         _map.(comps.shift()).iter((key uint, value _) => entities.add(key))
