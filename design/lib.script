@@ -13,9 +13,9 @@ be false bool = b00
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-type Option : Value (*Some(Value), None)
+type Option<Value> (*Some(Value), None)
 
-Option(Value)
+Option<Value>
 
 # You can leave out the brackets to make it python like "indent based" syntax
 # {
@@ -46,7 +46,7 @@ Option(Value)
 #########                               THE RESULT                               #########
 ##########################################################################################
 
-type Result : V1, V2 (*Ok(V1), *Err(V2))
+type Result<V1, V2> (*Ok(V1), *Err(V2))
 
 # k Result(uint, uint)
 be k = Result.Ok(200)
@@ -56,20 +56,20 @@ k = Result.Err(404)
 #########                                THE LIST                                #########
 ##########################################################################################
 
-type RawList : ElT (
+type RawList<ElT> (
     *Element(ElT, self) |
     *Endpoint
 )
 
 $[prim 'list']
-type List : ElementType (
+type List<ElementType> (
     _list RawList(ElementType)
     _last @RawList(ElementType) = @self._list               # Last -> Endpoint
     _prelast Option(@RawList(ElementType)) = Option.None    # Prelast -> Element or None
     len uint
 )
 
-RawList(ElementType) # {
+RawList<ElementType> # {
 
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
@@ -107,9 +107,7 @@ RawList(ElementType) # {
 
 # }
 
-List(ElT)
-
-# {
+List<ElT> {
 
     fn __new () List(ElT) {
         ret List(ElT) {
@@ -161,7 +159,7 @@ List(ElT)
         # Some collection of garbage
     }
 
-# }
+}
 
 # Usage:
 be k List(uint) = (50, 100, 200)
@@ -212,7 +210,7 @@ num #{
 #########                         ENTITY COMPONENT SYSTEM                        #########
 ##########################################################################################
 
-ECS
+ECS {
 
     be _id uint = 0
     be _map Map(T, Map(uint, _)) = Map()
@@ -262,6 +260,7 @@ ECS
         ret entities.iterator
     }
 
+}
 
 # Usage:
 

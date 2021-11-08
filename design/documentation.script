@@ -43,6 +43,11 @@ use 'src/path/to/file'  # use from source
 use './path/to/file'    # . to use relative
 use '../path/to/file'   # .. to navigate parent
 
+# no need for commas
+use 'a'
+    'b'
+    'c'
+
 ##########################################################################################
 #########                                 SCOPES                                 #########
 ##########################################################################################
@@ -97,6 +102,7 @@ be (a = b, c = d, e = f) = use smt
 
 # be () not followed by "="
 # forces a boolean to give true, or throws error
+# COMPILE TIME PROOF
 be (bool)
 
 
@@ -132,6 +138,15 @@ fn example () int, str, bool {
 }
 
 be a, b, c = example()
+
+######################################### CALLS ##########################################
+
+fn call (params) {
+
+}
+
+call (params)
+call params
 
 ################################ ARROW FUNCTIONS / LAMBDA ################################
 
@@ -453,9 +468,9 @@ k = (Type, SecondType, ...)
 
 ####################################  RECURSIVE TYPES ####################################
 
-type Array: Content (*M(Content, self) | * E)
+type Array<Content> (*M(Content, self) | * E)
 
-Array(Content) {
+Array<Content> {
     fn self (pos uint) Content {
         # Get element at pos
     }
@@ -512,7 +527,7 @@ be o = m + n                # (3, 5, 7)
 
 #################################### COLLECTIVE ENUM ####################################
 
-type Result: Success, Error (*Ok(Success), *Err(Error))
+type Result<Success, Error> (*Ok(Success), *Err(Error))
 
 be k Result(int, str) = Result.Ok(200)
 k = Result.Err('Could not connect!')
@@ -537,6 +552,7 @@ k.(ABC) = Map(uint, ABC)
 k.(ABC).(0) = ABC (de = 5, fg = 10)
 
 T(ret) # return type in a function
+T(ret) = smt # set return type
 
 #
 # type Type     = a type, acts like one
@@ -682,17 +698,20 @@ for key, value in k * ´(\w)${1}="(\w)${2}";´ {
 out map.('h') .. ', ' .. map.('g')    # Hello, World!
 
 ##########################################################################################
-#########                           COMPILE TIME PROOF                           #########
+#########                                HTML SYNTAX                             #########
 ##########################################################################################
-#
-# Compile time make sure a boolean is true. If not, it will throw an error. This will help
-# proving certain values to be e.g. an enum member.
-# Usage:
-check bool
-#
 
-check Type(AnotherType) = value
-check a == b == c
+be s str = 'an extended string, technically'
+be k str = </
+    <div>
+        <h1>Hello World!</h1>
+        <p>This is {{s}}.</p>
+    </div>
+/>
+
+fn getHtml() {
+    ret </<b>Hello, World!</b>/>
+}
 
 ##########################################################################################
 # Optimization algorithms to use for the next code block. Comes at higher compile times. #
