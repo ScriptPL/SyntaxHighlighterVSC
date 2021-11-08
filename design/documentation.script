@@ -1,18 +1,38 @@
 
 
 ##########################################################################################
-#########                                  BASICS                                #########
+#########                                 BASICS                                 #########
 ##########################################################################################
 
 # Brackets
 {code}
-(value)
-(type)
+(V)
+type (T)
 <labels>
 
-# Functions
-call(params)
-call params
+public
+_private # visible to the scope only
+__special
+
+##########################################################################################
+#########                                SUMMARY                                 #########
+##########################################################################################
+
+# Code block is under the k-scope
+k {}
+
+# Code block under k-scope with Ty label
+k<Ty> {}
+
+# Function with l label (which is also the tag and lifetime of the function)
+fn<l> name (variable T, ...) (ret T) {
+    # code block
+}
+
+# Define / Initialize
+be k T
+be k = V
+be k T = V
 
 ##########################################################################################
 #########                                IMPORTS                                 #########
