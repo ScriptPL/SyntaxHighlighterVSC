@@ -55,6 +55,20 @@ fn fibonacci () List(uint) {
 
 out fibonacci().to(str)
 
+############################## DEFINING RECURSIVE FIBONACCI ##############################
+
+#* be fibonacci func(uint -> uint) = (n uint) uint => if n {
+    n <= 1 => 1
+    el self(n - 1) + self(n - 2)
+} *#
+
+be fibonacci func(uint -> uint) = (n uint) uint => {
+    be a, b, c reg(64)
+    for n {
+        i += j
+    }
+}
+
 ##########################################################################################
 #########                               OUTPUT PRINT                             #########
 ##########################################################################################
@@ -90,6 +104,17 @@ fn print_element (params (...)) {
     }
 }
 
+# arrow syntax
+fn print_element (params (...)) {
+    for i, e in params {
+        if e {
+            str => out e, b0A
+            int => out e.to(str), b0A
+            bool => out e ? 'true' ~ false, b0A
+        }
+    }
+}
+
 print_element 'Hello', 5, false
 
 ##########################################################################################
@@ -103,9 +128,9 @@ fn genPrimes (total int) List(int) {
         isPrime = true
 
         for j, e in primes {
-            if e % i == 0 {
+            if e \mod i == 0 {
                 isPrime = false
-                ret
+                ret # indicated the inner-most loop "for j, e in primes"
             }
         }
 

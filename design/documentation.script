@@ -34,6 +34,26 @@ be k T
 be k = V
 be k T = V
 
+function params1, 2
+function(params1, 2)
+function
+    params1, 2
+function
+    params1,
+    2
+params1 \function 2 #arithmetic notation
+
+function
+function
+function
+
+# BAD
+function function
+
+V = V # set operator => not a function call
+
+
+
 ##########################################################################################
 #########                                IMPORTS                                 #########
 ##########################################################################################
@@ -165,8 +185,15 @@ fn call (params) {
 
 }
 
+# arithmetic
+fn plus (a int, b int) int {
+    ret a + b
+}
+
 call (params)
 call params
+
+a \plus b
 
 ################################ ARROW FUNCTIONS / LAMBDA ################################
 
@@ -372,7 +399,7 @@ if value { # s stays for switch
 }
 
 if value {
-    case val1, val2, val3
+    case val1 | val2 | val3
         # Match val1, val2 or val3
 
     case Type
@@ -380,6 +407,12 @@ if value {
 
     el
         # Nothing matched
+}
+
+# Arrow syntax
+if value {
+    val1 | val2 => code
+    el # else code
 }
 
 ############################### SWITCH CASE WITH FUNCTIONS ###############################
