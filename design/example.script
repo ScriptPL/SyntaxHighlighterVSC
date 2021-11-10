@@ -99,7 +99,7 @@ fn print_element (params (...)) {
 
             case bool
                 out
-                    e ? 'true' ~ false, b0A
+                    e ? 'true' : false, b0A
         }
     }
 }
@@ -110,7 +110,7 @@ fn print_element (params (...)) {
         if e {
             str => out e, b0A
             int => out e.to(str), b0A
-            bool => out e ? 'true' ~ false, b0A
+            bool => out e ? 'true' : false, b0A
         }
     }
 }
