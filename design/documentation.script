@@ -357,7 +357,7 @@ k %= 990    # 0
 
 ################################### BOOLEAN STATEMENTS ###################################
 
-a < b <= c < d    # equivalent to:     a < b && b <= c && c < d
+a < b <= c < d    # equivalent to:     a < b && b <= c && c < d (&& is & in here)
 a == b == c       # equivalent to:     a == b && b == c
 a < b == c < d    # equivalent to:     a < b && b == c && c < d
 a > b > c         # also possible
@@ -365,6 +365,11 @@ a > b > c         # also possible
 # ILLEGAL
 a < b > c         # but: could technically be interpreted as a < b && b > a
 a > b < c         # therefore... could be legal?
+
+####################################### AND | OR ########################################
+
+a | b             # a or b
+a & b             # a and b
 
 ##################################### CONTROL FLOW ######################################
 
