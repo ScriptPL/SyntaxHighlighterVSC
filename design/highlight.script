@@ -19,7 +19,7 @@
 
 "Strings can be opened/closed with double quotation marks or"
 'single quotation marks. Escaping them \' works as flawless.'
-`Template strings $(are) included.`
+`Template strings (are) included.`
 ´RegEx´
 ´\w[\.\w]{0-}@\w[\.\w]{0-*1}\.com´
 

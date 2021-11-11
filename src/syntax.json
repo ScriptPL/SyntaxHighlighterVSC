@@ -18,6 +18,14 @@
 				"include": "#attr"
 			}, {
 				"include": "#symbols"
+			}, {
+				"begin": "\\(",
+				"end": "\\)",
+				"patterns": [{"include": "#*"}]
+			}, {
+				"begin": "\\{",
+				"end": "\\}",
+				"patterns": [{"include": "#*"}]
 			}]
 		},
 		"comments": {
@@ -64,24 +72,24 @@
 					}
 				},
 				"patterns": [{
-					"begin": "(\\$\\()",
-					"end": "(\\))",
+					"name": "constant.character.escape.script",
+					"match": "\\\\."
+				}, {
+					"begin": "\\(",
+					"end": "\\)",
 					"patterns": [{
 						"include": "#*"
 					}],
 					"beginCaptures": {
-						"1": {
+						"0": {
 							"name": "keyword"
 						}
 					},
 					"endCaptures": {
-						"1": {
+						"0": {
 							"name": "keyword"
 						}
 					}
-				}, {
-					"name": "constant.character.escape.script",
-					"match": "\\\\."
 				}, {
 					"match": ".",
 					"name": "string.script"

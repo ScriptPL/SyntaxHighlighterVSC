@@ -233,7 +233,7 @@ fn parseHTML (t str) HtmlElement {
             case ´<\/(\w)${s:k}>´
                 position.pop()
                 if position.name != k
-                    throw `</$(k)> closes <$(position.name)>`
+                    throw `</(k)> closes <(position.name)>`
 
             el
                 position.push(e)
