@@ -396,6 +396,11 @@ if smt {
 
 ###################################### SWITCH CASE ######################################
 
+# case <values> <code>
+# case <values> { <code> }
+#
+# for switch statements more python-like syntax is considered culture
+
 if value { # s stays for switch
     case k
         # code
@@ -553,7 +558,7 @@ arr #*Array(str)*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)
 arr.push()  # Array(T).push fn push {}
 arr.(0)      # Array(T)()    fn self (int) {}
 
-########################################## ARRAYS ########################################
+########################################## LISTS #########################################
 
 s = (2, 4, 104, 12) # Upon compile time reads as value = (2, 4, 104, 12).
                     # You can then make a [int, uint, int7 (or more) or uint7 (or
@@ -561,7 +566,15 @@ s = (2, 4, 104, 12) # Upon compile time reads as value = (2, 4, 104, 12).
                     # integer array with 4 elements unless it is extended
                     # Limit of extension: <()num>
 
-be k List(str) = ('Hello!', 'Za Warudo!', 'World!')
+be k List(str)  = ('Hello!', 'Za Warudo!', 'World!')
+be k (str ^ 1)     = (...)
+
+# 2D Lists:
+be k List(List(str)) = (('a', ...), ...)
+be k (str ^ 2)
+
+# 3D Lists:
+be k (str ^ 3)
 
 ######################################### TUPLES #########################################
 
@@ -573,6 +586,11 @@ y = Tuple (5, 'Something', true)   # conversion vs assignment
 type AnotherTuple (int, str * 3)
 
 be z AnotherTuple = (5, 'A', 'BC', 'DEF')
+
+# Counter meanings:
+
+type k = (Element * 5) # 5 times element tuple
+type k = (Element ^ 1) # one dimensional element list
 
 ##################################### VECTOR TUPLES #####################################
 
@@ -597,7 +615,7 @@ if be Result.Err(m) = k {
 ############################## OPTIONAL VALUE = OPTION TYPE ##############################
 
 # In an struct:
-type A : D (
+type A<D> (
     b B?
     c C(D)?
 )
@@ -938,6 +956,37 @@ fn smt ()
 # NOTE!
 # Type implementations and scopes obligate following code brackets:
 
-TypeImplementation : ... {
+TypeImplementation <...> {
     # methods
 }
+
+##########################################################################################
+#########                              DATA PARADIGM                             #########
+##########################################################################################
+#
+# Rust inspired ownership
+#
+
+{
+    be k = 0
+    # lifetime of k starts here
+    #
+    {
+        be z = 0
+        # lifetime of z starts here
+        #
+        # lifetime of z ends here
+    }
+    #
+    # lifetime of k ends here
+}
+
+fn factorial (n uint) uint {
+    if n {
+        case 0 | 1 {
+
+        }
+    }
+}
+
+be k () = ()
