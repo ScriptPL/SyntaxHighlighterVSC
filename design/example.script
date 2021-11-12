@@ -98,8 +98,7 @@ fn print_element (params (...)) {
                     e.to(str), b0A
 
             case bool
-                out
-                    e ? 'true' : false, b0A
+                out (if e : 'true' el false), b0A
         }
     }
 }
@@ -110,7 +109,7 @@ fn print_element (params (...)) {
         if e {
             str => out e, b0A
             int => out e.to(str), b0A
-            bool => out e ? 'true' : false, b0A
+            bool => out (if e : 'true' el false), b0A
         }
     }
 }
@@ -171,8 +170,8 @@ App {
     }
 
     fn update() {
-        be xDir = keys.has('a') ? -1 : 0 + keys.has('d') ? 1 : 0
-        be yDir = keys.has('w') ? -1 : 0 + keys.has('s') ? 1 : 0
+        be xDir = if keys.has('a') : -1 el 0 + if keys.has('d') : 1 el 0
+        be yDir = if keys.has('w') : -1 el 0 + if keys.has('s') : 1 el 0
 
         x, y += xDir, yDir
     }

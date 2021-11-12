@@ -668,7 +668,10 @@ if k {
 #########                               QUICK SYNTAX                             #########
 ##########################################################################################
 
-k = true ? 'True' : 'False'
+# Ternary Operator
+
+k = if true : 'True' el 'False'
+j = if a : a_ el if b : b_ el c_
 
 ############################## SHORT ENTITY COMPONENT SYSTEM #############################
 
