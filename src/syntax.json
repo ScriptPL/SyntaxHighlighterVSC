@@ -249,7 +249,7 @@
 				"match": "\\b[ODITSZAPC]F\\b"
 			}, {
 				"name": "variable.other.constant.script",
-				"match": "\\b(document|window|process|true|false)\\b"
+				"match": "\\b(document|window|process|true|false|null)\\b"
 			}, {
 				"name": "support.type.script",
 				"match": "\\b(u?int|u?num|str|char|bool|byte|reg|func|code)\\b"

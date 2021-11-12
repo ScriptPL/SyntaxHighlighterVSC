@@ -594,6 +594,33 @@ if be Result.Err(m) = k {
     out m
 }
 
+############################## OPTIONAL VALUE = OPTION TYPE ##############################
+
+# In an struct:
+type A : D (
+    b B?
+    c C(D)?
+)
+
+# In a function as a return type:
+
+fn function(int) int? {
+    if k > 0
+        ret k
+    # no return counts as empty return
+}
+
+a = function(500)
+b = function(-5)
+
+if null = a {
+    # If a is null (no value)
+}
+
+if a? {
+    # If a contains a value
+}
+
 ######################################## REFERENCE #######################################
 
 @Type # a pointer
@@ -907,3 +934,10 @@ fn smt ()
             loop
         condition
     code_block
+
+# NOTE!
+# Type implementations and scopes obligate following code brackets:
+
+TypeImplementation : ... {
+    # methods
+}

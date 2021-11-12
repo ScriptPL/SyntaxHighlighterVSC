@@ -64,7 +64,8 @@ if, el, case    # conditional control flow
 be              # proof a value to be true OR be a value something
 self            # recursive self or parent reference
 
-true, false     # values
+true, false,    # values
+null
 
 T, V, _         # Type, Value, "null"
 
