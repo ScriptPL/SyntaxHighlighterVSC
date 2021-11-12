@@ -1,0 +1,63 @@
+
+
+##########################################################################################
+#########                         RUST INSPIRED OWNERSHIP                        #########
+##########################################################################################
+
+# Lifetimes of variables
+
+{
+    be k = 0
+    # lifetime of k starts here
+    #
+    {
+        be z = 0
+        # lifetime of z starts here
+        #
+        # lifetime of z ends here
+    }
+    #
+    # lifetime of k ends here
+}
+
+# Functions
+
+be string = '1 + 5- 700 + 55'
+be tokens (str ^ 1) = ()
+
+fn parse (s @str, t (str ^ 1)) {
+    for c in s {
+        if c in '+-'
+            t += c
+        el
+
+    }
+}
+
+# you pass string and tokens into the function
+# the string is passed by reference
+# the tokens list is passed by ownership
+parse(@string, tokens)
+
+# Closures
+
+be i = 0
+
+fn tab() {
+    ret ' '.rep(@i)
+    
+    # i is taken from environment as a reference
+    # -> function CAN NOT outlive variable
+}
+
+for t in ('a', 'indent', 'b', 'c', 'indent', 'd', 'outdent', 'e', 'outdent', 'f') {
+    if t {
+        case 'indent'
+            i += 1
+
+        case 'outdent'
+            i -= 1
+    } el {
+        out tab(), t
+    }
+}

@@ -394,6 +394,15 @@ if smt {
     # if not smt
 }
 
+################################### in AS ELEMENT OF ####################################
+
+# ELEMENT in LIST/ARRAY
+# CHAR in STRING/CHAR ARRAY/STRING ARRAY
+
+out 'a' in 'abc' # true
+out 'a' in 'bc'  # false
+out 'hello' in ('hello', 'world') # true
+
 ###################################### SWITCH CASE ######################################
 
 # case <values> <code>
@@ -981,36 +990,3 @@ fn smt ()
 TypeImplementation <...> {
     # methods
 }
-
-##########################################################################################
-#########                              DATA PARADIGM                             #########
-##########################################################################################
-#
-# Rust inspired ownership
-#
-
-{
-    be k = 0
-    # lifetime of k starts here
-    #
-    {
-        be z = 0
-        # lifetime of z starts here
-        #
-        # lifetime of z ends here
-    }
-    #
-    # lifetime of k ends here
-}
-
-fn factorial (n uint) uint {
-    if n {
-        case 0 | 1 {
-            ret 1
-        }
-    } el {
-        ret self(n - 1) * n
-    }
-}
-
-be k () = ()
