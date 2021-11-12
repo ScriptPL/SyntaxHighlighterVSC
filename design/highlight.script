@@ -49,8 +49,6 @@ Xxxxxxx()
 
 uint(64), int, int(32), unum, num, str, bool, byte, func, code, reg(8), reg(16)
 
-
-
 ######### RESERVED KEYWORDS #########
 
 use             # package management

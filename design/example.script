@@ -233,9 +233,8 @@ fn parseHTML (t str) HtmlElement {
                 position.pop()
                 if position.name != k
                     throw `</(k)> closes <(position.name)>`
-
-            el
-                position.push(e)
+        } el {
+            position.push(e)
         }
     }
 
