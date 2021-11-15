@@ -1,0 +1,58 @@
+
+
+##########################################################################################
+#########                     THREADING IN SCRIPT IS AUTOMATED                   #########
+##########################################################################################
+
+#*
+        a   b
+       /|  / 
+      / | /  
+     /  |/   
+    c   x
+    |  / 
+    | /
+    |/  
+    g
+*#
+
+fn something_random (a, b) {
+    c = (a + b) / 2
+    x = b ^ 2 / 2
+    g = c + x
+    ret g + 1
+}
+
+out: something_random(5, 10)
+
+# No code block runs synchronously in script, everything is asynchronous by default,
+# rather you have to explicitly make it synchronous by adding the `sync` keyword.
+# In the example above c and x are calculated simultanously on two threads and g is
+# calculated when c and x are ready.
+
+fn hello () {
+    for be i = 10
+        out: i
+}
+
+for 10
+    hello()
+
+# Ten times starts hello() 10 times in parallel.
+
+fn hello () {
+    for be i = 10
+        out: i
+}
+
+for 10
+    hello()
+
+# Ten times starts hello() 10 times in parallel.
+
+# However, while automatically threaded variables are a thing, output will still
+# be treated synchronously on a buffer.
+
+sync    # synchronous code
+!sync   # asynchronous code (NOT operator + sync keyword)
+

@@ -243,7 +243,7 @@
 				"match": "\\b(fn|type|for|ret|throw)\\b"
 			}, {
 				"name": "keyword.script",
-				"match": "\\b(use|self|in|be|next|if|el|case|T|V|_)\\b"
+				"match": "\\b(use|self|in|be|next|if|el|case|sync|T|V|_)\\b"
 			}, {
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"
