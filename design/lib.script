@@ -22,7 +22,7 @@ fn exp (a num, b num) num {
     # a ^ b
 }
 
-out a \mod b
+out: a \mod b
 
 ##########################################################################################
 #########                               THE OPTION                               #########
@@ -37,13 +37,13 @@ be k int? = null
 k = 500
 
 if k? && k > 0 {
-    out 'k is positive'
+    out: 'k is positive'
 } el if k? && k < 0 {
-    out 'k is negative'
+    out: 'k is negative'
 } el if k? && k == 0 {
-    out 'k is zero'
+    out: 'k is zero'
 } el if null = k {
-    out 'k is not defined'
+    out: 'k is not defined'
 }
 
 ##########################################################################################
@@ -171,7 +171,7 @@ k.push(50)  # 0
 k.push(100) # 1
 k += 150    # 2
 
-out k.(1)  # 100
+out: k.(1)  # 100
 
 # Quick usage:
 be k (uint ^ 1)
@@ -295,6 +295,10 @@ add(e, Player)
 add(e, Position (x = 50, y = 50))
 add(e, Asset(Image(w = 50, h = 50)))
 
+# add: e, Player
+# add: e, Position (x = 50, y = 50)
+# add: e, Asset(Image(w = 50, h = 50))
+
 for eid in query (Position, Asset) {
    Asset.(eid).render()
 }
@@ -330,7 +334,7 @@ fn Range.self (i num = self.start) num {
 }
 
 for i in Range (start = 1) {
-    out i.to(str) # 1, 2, 3, 4, ...
+    out: i.to(str) # 1, 2, 3, 4, ...
 }
 
 ##########################################################################################

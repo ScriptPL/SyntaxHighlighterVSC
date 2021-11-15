@@ -19,7 +19,7 @@ fn gdc(a uint, b uint) {
     ret a
 }
 
-out gcd(2, 5)
+out: gcd(2, 5)
 
 ##########################################################################################
 #########                           FACTORIAL FUNCTION                           #########
@@ -44,7 +44,7 @@ fn factorial (n uint) uint {
 ##########################################################################################
 
 fn fibonacci () List(uint) {
-   be f #*List<uint>*# = (0, 1)
+    be f #*List<uint>*# = (0, 1)
 
     for 1000 {
         f += f.(f.l - 1) + f.(f.l) # push to f: sum of last two values
@@ -53,7 +53,7 @@ fn fibonacci () List(uint) {
     ret f
 }
 
-out fibonacci().to(str)
+out: fibonacci().to(str)
 
 ############################## DEFINING RECURSIVE FIBONACCI ##############################
 
@@ -73,7 +73,7 @@ be fibonacci func(uint -> uint) = (n uint) uint => {
 #########                               OUTPUT PRINT                             #########
 ##########################################################################################
 
-out 'Hello, World!'
+out: 'Hello, World!'
 
 ##########################################################################################
 #########                                 METHODS                                #########
@@ -90,15 +90,15 @@ fn print_element (params (...)) {
             # value case type checks if the value is of the type
             # type case type checks for type equality
             case str
-                out
+                out:
                     e, b0A
             
             case int
-                out
+                out:
                     e.to(str), b0A
 
             case bool
-                out (if e : 'true' el false), b0A
+                out: (if e : 'true' el false), b0A
         }
     }
 }
@@ -107,14 +107,14 @@ fn print_element (params (...)) {
 fn print_element (params (...)) {
     for i, e in params {
         if e {
-            str => out e, b0A
-            int => out e.to(str), b0A
-            bool => out (if e : 'true' el false), b0A
+            str => out: e, b0A
+            int => out: e.to(str), b0A
+            bool => out: (if e : 'true' el false), b0A
         }
     }
 }
 
-print_element 'Hello', 5, false
+print_element: 'Hello', 5, false
 
 ##########################################################################################
 #########                             PRIME GENERATION                           #########
@@ -141,7 +141,7 @@ fn genPrimes (total int) List(int) {
     ret primes
 }
 
-out genPrimes (500)
+out: genPrimes (500)
 
 ##########################################################################################
 #########                        READABLE GAMEDEV SETUP                          #########
@@ -160,13 +160,13 @@ App {
         x = canvas.width * .5
         y = canvas.height * .5
 
-        animationFrame
-        addEventListeners
+        animationFrame:
+        addEventListeners:
     }
 
     fn animationFrame() {
-        update
-        render
+        update:
+        render:
     }
 
     fn update() {
@@ -241,7 +241,7 @@ fn parseHTML (t str) HtmlElement {
     ret output
 }
 
-out parseHTML(text)
+out: parseHTML(text)
 
 #
 # b {
@@ -273,4 +273,4 @@ Vector {
     }
 }
 
-out Vector(2, 3, 4) + Vector(3, 4, 5)
+out: Vector(2, 3, 4) + Vector(3, 4, 5)

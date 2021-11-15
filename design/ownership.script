@@ -38,6 +38,7 @@ fn parse (s @str, t (str ^ 1)) {
 # the string is passed by reference
 # the tokens list is passed by ownership
 parse(@string, tokens)
+# parse: @string, tokens
 
 # Closures
 
@@ -58,6 +59,6 @@ for t in ('a', 'indent', 'b', 'c', 'indent', 'd', 'outdent', 'e', 'outdent', 'f'
         case 'outdent'
             i -= 1
     } el {
-        out tab(), t
+        out: tab(), t
     }
 }

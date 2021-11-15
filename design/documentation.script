@@ -34,21 +34,21 @@ be k T
 be k = V
 be k T = V
 
-function params1, 2
+function: params1, 2
 function(params1, 2)
-function
+function:
     params1, 2
-function
+function:
     params1,
     2
 params1 \function 2 #arithmetic notation
 
-function
-function
-function
+function:
+function:
+function:
 
-# BAD
-function function
+# FUNCTION THAT TAKES A FUNCTION AS ARGUMENT
+function: function
 
 V = V # set operator => not a function call
 
@@ -191,7 +191,7 @@ fn plus (a int, b int) int {
 }
 
 call (params)
-call params
+call: params
 
 a \plus b
 
@@ -205,9 +205,9 @@ be f = (x) => 2 * x + 5
 
 ################################# STACKABLE OPTIMIZATION #################################
 
-out 'Hello!'
-out 'How are you?', 'I\'m fine!'
-out 'You?'
+out: 'Hello!'
+out: 'How are you?', 'I\'m fine!'
+out: 'You?'
 
 # optimised compile time into out 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
 
@@ -317,7 +317,7 @@ for<x> y {
     }
 }
 
-out y == value # true
+out: y == value # true
 
 ######################################## SPECIAL #########################################
 
@@ -399,9 +399,9 @@ if smt {
 # ELEMENT in LIST/ARRAY
 # CHAR in STRING/CHAR ARRAY/STRING ARRAY
 
-out 'a' in 'abc' # true
-out 'a' in 'bc'  # false
-out 'hello' in ('hello', 'world') # true
+out: 'a' in 'abc' # true
+out: 'a' in 'bc'  # false
+out: 'hello' in ('hello', 'world') # true
 
 ###################################### SWITCH CASE ######################################
 
@@ -619,7 +619,7 @@ be k Result(int, str) = Result.Ok(200)
 k = Result.Err('Could not connect!')
 
 if be Result.Err(m) = k {
-    out m
+    out: m
 }
 
 ############################## OPTIONAL VALUE = OPTION TYPE ##############################
@@ -705,7 +705,7 @@ self {
     }
 
     fn out () {
-        out self
+        out: self
     }
 }
 
@@ -776,7 +776,7 @@ fn iter(i int = 0, b int = 10) int, int {
 }
 
 for i in iter {
-    out i  # 
+    out: i  # 
 }
 
 ##########################################################################################
@@ -807,8 +807,8 @@ be w = ´[01]´
 be n int
 be string_to_proof = 'aaabbbccc'
 
-out string_to_proof * ´(a)${l:n}(b){n}(c){n}´  # true
-out n                          # 3
+out: string_to_proof * ´(a)${l:n}(b){n}(c){n}´  # true
+out: n                          # 3
 
 #
 # a${l:n}   # Scan for "l"ength of "a"'s, write into variable n
@@ -832,7 +832,7 @@ for key, value in k * ´(\w)${1}="(\w)${2}";´ {
     map.(key) = value 
 }
 
-out map.('h') .. ', ' .. map.('g')    # Hello, World!
+out: map.('h') .. ', ' .. map.('g')    # Hello, World!
 
 ##########################################################################################
 #########                                HTML SYNTAX                             #########
@@ -863,9 +863,9 @@ fn print (p (...)) {
     }
 }
 
-print a, b, c
-print d, e
-print f, g
+print: a, b, c
+print: d, e
+print: f, g
 
 # becomes
 print a, b, c, d, e, f, g
@@ -912,7 +912,7 @@ j += 2  # add  j, 2
 # => set requires an assembly register
 fn __assign (c @_, d _) {
     # Compile time proof
-    check T(c) == T(d)
+    be (T(c) == T(d))
 
     be a reg(32)
     a = d
