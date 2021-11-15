@@ -259,22 +259,20 @@ Type {
 #########                                 LOOPS                                  #########
 ##########################################################################################
 
-for {
-    # loop indefinitely
-}
+# loop indefinitely
+for
 
-for number {
-    # repeat n times
-}
+# repeat  n (number) times
+for number
+for be i = number
 
-for condition {
-    # while condition
-}
+# while
+for condition
 
-for be i = start_value; i < end_value; i += 1 {
-    # traditional for loop
-}
+# traditional for loop
+for be i = start_value; i < end_value; i += 1
 
+# alternative
 i int = 5                   # for ( i = s;
 for {                       # standalone; for {} is a while true loop
     if i < end_value ret    # i < end_value ;
@@ -282,18 +280,12 @@ for {                       # standalone; for {} is a while true loop
     i += 1                  # i ++
 }
 
+# for elements of a tuple
+for i, e in tuple
 
-for i, e in tup {
-    # for elements of a tuple
-}
-
-for ... in iter {
-    # for over an iterable
-}
-
-for iterable {
-    # for over an iterable function
-}
+# for over an iterable
+for ... in iterable
+for iterable
 
 # <a> becomes the "lifetime" and "label" of the loop, per default ret returns the function it's in.
 for<a> {
