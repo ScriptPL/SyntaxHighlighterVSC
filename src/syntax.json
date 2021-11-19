@@ -248,6 +248,16 @@
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"
 			}, {
+				"match": "(_*)([A-Za-z][a-zA-Z0-9_]*):",
+				"captures": {
+					"1": {
+						"name": "keyword.script"
+					},
+					"2": {
+						"name": "support.function.script"
+					}
+				}
+			}, {
 				"name": "variable.other.constant.script",
 				"match": "\\b(document|window|process|true|false|null)\\b"
 			}, {

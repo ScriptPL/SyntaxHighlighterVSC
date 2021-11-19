@@ -37,8 +37,8 @@ fn parse (s @str, t (str ^ 1)) {
 # you pass string and tokens into the function
 # the string is passed by reference
 # the tokens list is passed by ownership
-parse(@string, tokens)
-# parse: @string, tokens
+parse: @string, tokens
+# parse(@string, tokens)
 
 # Closures
 

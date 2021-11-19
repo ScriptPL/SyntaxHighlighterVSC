@@ -13,7 +13,7 @@
     |  / 
     | /
     |/  
-    g
+    g + 1
 *#
 
 fn something_random (a, b) {
@@ -40,6 +40,7 @@ for 10
 
 # Ten times starts hello() 10 times in parallel.
 
+!sync
 fn hello () {
     for be i = 10
         out: i
@@ -55,4 +56,16 @@ for 10
 
 sync    # synchronous code
 !sync   # asynchronous code (NOT operator + sync keyword)
+
+# Await asynchronous processes
+
+!sync {
+    be k1 = process1()
+    be k2 = process2()
+
+    # Interpret wordly: "Synchronize values k1 and k2" => await k1 and k2
+    sync k1, k2
+
+    out: 'k1 and k2 are received'
+}
 
