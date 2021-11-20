@@ -15,8 +15,6 @@
 			}, {
 				"include": "#html"
 			}, {
-				"include": "#attr"
-			}, {
 				"include": "#symbols"
 			}, {
 				"begin": "\\(",
@@ -279,34 +277,6 @@
 						"name": "keyword.script"
 					}
 				}
-			}]
-		},
-		"attr": {
-			"begin": "(\\$)\\[",
-			"end": "\\]",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.script"
-				}
-			},
-			"patterns": [{
-				"include": "#comments"
-			}, {
-				"include": "#strings"
-			}, {
-				"include": "#numeric"
-			}, {
-				"match": "\\b(prim|opt|if|trust|ret)\\b",
-				"name": "keyword.control.script"
-			}, {
-				"match": "\\b[A-Za-z_0-9\\-]+\\b",
-				"name": "keyword.script"
-			}, {
-				"begin": "\\(",
-				"end": "\\)",
-				"patterns": [{
-					"include": "#*"
-				}]
 			}]
 		}
 	},

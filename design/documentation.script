@@ -210,7 +210,6 @@ out: 'You?'
 
 # optimised compile time into out 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
 
-$[opt stack]
 fn out (params (...) str) {
     ...
 }
@@ -571,8 +570,8 @@ arr.(0)      # Array(T)()    fn self (int) {}
 ########################################## LISTS #########################################
 
 s = (2, 4, 104, 12) # Upon compile time reads as value = (2, 4, 104, 12).
-                    # You can then make a [int, uint, int7 (or more) or uint7 (or
-                    # more) or num] <()int>, <(4)int>: It will keep acting like a
+                    # You can then make a (int, uint, int7 (or more) or uint7 (or
+                    # more) or num) <()int>, <(4)int>: It will keep acting like a
                     # integer array with 4 elements unless it is extended
                     # Limit of extension: <()num>
 
@@ -848,54 +847,6 @@ be k str = </
 
 fn getHtml() {
     ret </<b>Hello, World!</b>/>
-}
-
-##########################################################################################
-# Optimization algorithms to use for the next code block. Comes at higher compile times. #
-##########################################################################################
-
-# Optimize a function with indefinite inputs (...) and no outputs to compile into one
-# function call.
-$[opt stack]
-fn print (p (...)) {
-    for i, e in p {
-        out e
-    }
-}
-
-print: a, b, c
-print: d, e
-print: f, g
-
-# becomes
-print a, b, c, d, e, f, g
-
-# Additionally you can add a break element inbetween separate function calls.
-$[opt stack(break = '\n')]
-fn print (p (...)) {
-    for i, e in p {
-        out e
-    }
-}
-
-# makes
-print a, b, c, '\n', d, e, '\n', f, g
-
-# Set the return type based on variable logic
-fn to (conversionType T) T {
-    T(ret) = conversionType
-}
-
-to(str) # returns str
-to(int) # returns int
-
-# Pre-run code compile time
-be k List(List(int))
-for 'compile time' {
-    # Execute code or next statement compile time. This could be preparing dynamic values
-    # for code execution. 
-    k = (())
-    # Can be quite handful in more complex logic.
 }
 
 ##########################################################################################

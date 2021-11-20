@@ -3,7 +3,6 @@
 #########                              THE BOOLEAN                               #########
 ##########################################################################################
 
-$[prim 'boolean']
 type bool = byte
 
 be true bool = b01
@@ -28,7 +27,6 @@ out: a \mod b
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-$[prim 'option']
 type Option<Value> (*Some(Value), None)
 
 # Usage:
@@ -71,7 +69,6 @@ type RawList<ElT> (
     *Endpoint
 )
 
-$[prim 'list']
 type List<ElementType> (
     _list RawList(ElementType)
     _last @RawList(ElementType) = @self._list               # Last -> Endpoint
@@ -190,7 +187,6 @@ be k (uint ^ 1)
 #########                               THE STRING                               #########
 ##########################################################################################
 
-$[prim 'string'] # prim stays for primitive
 type str = List(char)
 
 str {
@@ -205,7 +201,6 @@ str {
 #########                               THE NUMBER                               #########
 ##########################################################################################
 
-$[prim 'number']
 type num = (byte * 2) # Sort of
 
 num {
@@ -319,7 +314,6 @@ for eid in query (Position, Asset) {
 #########                             RANGE ITERATOR                             #########
 ##########################################################################################
 
-$[prim 'range']
 type Range (
     start num
     end Option(num) = Option.None
