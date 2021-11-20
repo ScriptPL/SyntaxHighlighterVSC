@@ -41,12 +41,7 @@ if k? {
         out: 'k is negative'
     case: k == 0
         out: 'k is zero'
-} el {
-    out: 'k is not defined'
-}
-
-# not k existent: !(k?)
-if !k? {
+} el if !k? {
     out: 'k is not defined'
 }
 

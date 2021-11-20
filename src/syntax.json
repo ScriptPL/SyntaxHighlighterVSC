@@ -243,8 +243,28 @@
 				"name": "keyword.script",
 				"match": "\\b(use|self|in|be|next|if|el|case|sync|T|V|_)\\b"
 			}, {
+				"name": "variable.other.constant.script",
+				"match": "\\b(document|window|process|true|false|null)\\b"
+			}, {
+				"name": "support.type.script",
+				"match": "\\b(u?int|u?num|str|char|bool|byte|reg|func|code)\\b"
+			}, {
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"
+			}, {
+				"begin": "(_*)([a-z][a-zA-Z0-9_]*)\\s*\\(",
+				"end": "\\)",
+				"beginCaptures": {
+					"1": {
+						"name": "keyword.script"
+					},
+					"2": {
+						"name": "support.function.script"
+					}
+				},
+				"patterns": [{
+					"include": "#*"
+				}]
 			}, {
 				"match": "(_*)([A-Za-z][a-zA-Z0-9_]*):",
 				"captures": {
@@ -255,12 +275,6 @@
 						"name": "support.function.script"
 					}
 				}
-			}, {
-				"name": "variable.other.constant.script",
-				"match": "\\b(document|window|process|true|false|null)\\b"
-			}, {
-				"name": "support.type.script",
-				"match": "\\b(u?int|u?num|str|char|bool|byte|reg|func|code)\\b"
 			}, {
 				"name": "support.type.script",
 				"match": "(_*)[A-Z][a-zA-Z0-9_]*",
