@@ -252,30 +252,6 @@
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"
 			}, {
-				"begin": "(_*)([a-z][a-zA-Z0-9_]*)\\s*\\(",
-				"end": "\\)",
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.script"
-					},
-					"2": {
-						"name": "support.function.script"
-					}
-				},
-				"patterns": [{
-					"include": "#*"
-				}]
-			}, {
-				"match": "(_*)([A-Za-z][a-zA-Z0-9_]*):",
-				"captures": {
-					"1": {
-						"name": "keyword.script"
-					},
-					"2": {
-						"name": "support.function.script"
-					}
-				}
-			}, {
 				"name": "support.type.script",
 				"match": "(_*)[A-Z][a-zA-Z0-9_]*",
 				"captures": {
