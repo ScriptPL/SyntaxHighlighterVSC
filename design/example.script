@@ -149,7 +149,7 @@ out: genPrimes (500)
 
 use 'lib/html'
 
-App {
+sc App {
     be canvas HTMLCanvasElement
     be x, y int
     be keys Tags(str)
@@ -267,7 +267,7 @@ throw 'Throwing an error'
 
 type Vector (num * 3)
 
-Vector {
+sc Vector {
     fn __plus (self, v Vector) Vector {
         ret Vector (self.0 + v.0, self.1 + v.1, self.2 + v.2)
     }

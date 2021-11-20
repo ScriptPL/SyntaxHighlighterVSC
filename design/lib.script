@@ -27,7 +27,7 @@ out: a \mod b
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-type Option<Value> (*Some(Value), None)
+type Option: Value (*Some(Value), None)
 
 # Usage:
 
@@ -49,7 +49,7 @@ if k? {
 #########                               THE RESULT                               #########
 ##########################################################################################
 
-type Result<V1, V2> (*Ok(V1), *Err(V2))
+type Result: V1, V2 (*Ok(V1), *Err(V2))
 
 # k Result(uint, uint)
 be k = Result.Ok(200)
@@ -59,19 +59,19 @@ k = Result.Err(404)
 #########                                THE LIST                                #########
 ##########################################################################################
 
-type RawList<ElT> (
+type RawList: ElT (
     *Element(ElT, self) |
     *Endpoint
 )
 
-type List<ElementType> (
+type List: ElementType (
     _list RawList(ElementType)
     _last @RawList(ElementType) = @self._list               # Last -> Endpoint
     _prelast Option(@RawList(ElementType)) = Option.None    # Prelast -> Element or None
     len uint
 )
 
-RawList<ElementType> {
+sc RawList: ElementType {
 
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
@@ -112,7 +112,7 @@ RawList<ElementType> {
     }
 }
 
-List<ElT> {
+sc List: ElT {
 
     fn __new () List(ElT) {
         ret List(ElT) {
@@ -184,7 +184,7 @@ be k (uint ^ 1)
 
 type str = List(char)
 
-str {
+sc str {
     # k self is the same as k str; indicates str + str 
     fn __plus(k self) {
         # Call List methods
@@ -198,7 +198,7 @@ str {
 
 type num = (byte * 2) # Sort of
 
-num {
+sc num {
     fn to (conversion T) T {
         # Compile time makes sure that the return type is the same as the input type.
         T(ret) = conversion
@@ -215,15 +215,13 @@ num {
 #########                         ENTITY COMPONENT SYSTEM                        #########
 ##########################################################################################
 
-ECS {
+sc ECS {
     be _id uint = 0
     be _map Map(T, Map(uint, _)) = Map()
 
     fn entity() uint {
         ret _id += 1
     }
-
-    
 
     # entity.add(CompType (value))
     fn add(eid uint, comp _) {

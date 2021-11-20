@@ -262,7 +262,7 @@ type Array<Content> (
     *E
 )
 
-Array<Content> {
+sc Array: Content {
     fn self (pos uint) Content {
         be latest @Array(Content) = self
         for pos if latest {

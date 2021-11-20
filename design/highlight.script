@@ -52,6 +52,7 @@ uint(64), int, int(32), unum, num, str, bool, byte, func, code
 ######### RESERVED KEYWORDS #########
 
 use             # package management
+sc              # declaring scopes
 
 fn              # universal declaration of code: first-class function, attributes, etc.
 type            # universal structure/enum/type declaration
