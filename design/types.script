@@ -103,7 +103,7 @@ k = (Type, SecondType, ...)
 # Recursive types
 #
 
-type Array<Content> (
+type Array: Content (
     *M(Content, self) |
     *E
 )
@@ -137,7 +137,7 @@ be o = m + n                # (3, 5, 7)
 
 #################################### COLLECTIVE ENUM ####################################
 
-type Result<Success, Error> (*Ok(Success), *Err(Error))
+type Result: Success, Error (*Ok(Success), *Err(Error))
 
 be k Result(int, str) = Result.Ok(200)
 k = Result.Err('Could not connect!')
@@ -149,7 +149,7 @@ if be Result.Err(m) = k {
 ############################## OPTIONAL VALUE = OPTION TYPE ##############################
 
 # In an struct:
-type A<D> (
+type A: D (
     b B?
     c C(D)?
 )
@@ -241,7 +241,7 @@ if be Enum.Member2(content) = k {
 type Values (
     str |
     num |
-    bool |
+    bool
 )
 
 be k Values = 'Hello!'
@@ -257,7 +257,7 @@ if T(k) {
 # Working with recursive types
 #
 
-type Array<Content> (
+type Array: Content (
     *M(Content, self) |
     *E
 )
