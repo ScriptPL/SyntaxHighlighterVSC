@@ -44,7 +44,7 @@ fn factorial (n uint) uint {
 ##########################################################################################
 
 fn fibonacci () List(uint) {
-    be f #*List<uint>*# = (0, 1)
+    be f = (0, 1)
 
     for 1000 {
         f += f.(f.l - 1) + f.(f.l) # push to f: sum of last two values

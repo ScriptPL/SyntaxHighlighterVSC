@@ -1,0 +1,298 @@
+
+
+##########################################################################################
+#########                            TYPE DEFINITION                             #########
+##########################################################################################
+
+#
+# Tag Type (= only one value, nothing more than a tag)
+#
+
+type AbstractType
+
+#
+# Type = Specific Type
+#
+
+type Type = DifferentType(More)
+
+#
+# Enum Type
+#
+
+type Enum (
+    *Member1
+    | *Member2(More)
+    | *Member3(AndMore)
+)
+
+type Enum =
+    *Member1
+    | *Member2(More)
+    | *Member3(AndMore)
+
+be k Enum = Enum.Member1
+be k = Enum.Member1 # This language is not to be verbose! Everything that's obvious is obvious!!!
+
+#
+# Collection (quick enum)
+#
+
+type Values (
+    str |
+    num |
+    bool |
+)
+
+#
+# Structs
+#
+
+type Struct (
+    abc Type1,
+    def Type2 = 'default value'
+)
+
+be k Struct = Struct (abc = ..., def = ...)
+be k Struct = (abc = ..., def = ...)
+be k = Struct (abc = ..., def = ...)
+
+#
+# Tuples
+#
+
+type Tuple (Type1, Type2, Type3)
+
+be k Tuple = Tuple (a, b, ...)
+be k Tuple = (a, b, ...)
+be k = Tuple (a, b, ...)
+
+be k (int * 3) = (1, 2, 3)
+
+type k = (Element * 5) # 5 times element tuple
+type k = (Element ^ 1) # one dimensional element list
+
+# Note! A tuple with one element is just a setter!
+type A (B)
+# is the same as
+type A = B
+
+#
+# Combinations: Complex Type structuring
+#
+
+type ComplexType (
+    str | int | *Hello
+
+    |
+    var Type,
+    anotherVar DifferentType
+
+    |
+    Type, SecondType, str
+)
+
+be k ComplexType
+k = 'string'
+k = 500
+k = ComplexType.Hello
+k = (var = ..., anotherVar = ...)
+k = (Type, SecondType, ...)
+
+#
+# Recursive types
+#
+
+type Array<Content> (
+    *M(Content, self) |
+    *E
+)
+
+########################################## LISTS #########################################
+
+s = (2, 4, 104, 12) # Upon compile time reads as value = (2, 4, 104, 12).
+                    # You can then make a (int, uint, int7 (or more) or uint7 (or
+                    # more) or num) <()int>, <(4)int>: It will keep acting like a
+                    # integer array with 4 elements unless it is extended
+                    # Limit of extension: <()num>
+
+be k List(str)  = ('Hello!', 'Za Warudo!', 'World!')
+be k (str ^ 1)     = (...)
+
+# 2D Lists:
+be k List(List(str)) = (('a', ...), ...)
+be k (str ^ 2)
+
+# 3D Lists:
+be k (str ^ 3)
+
+################################# EXAMPLE: VEC3 TUPLES ##################################
+
+be m (int * 3) = (1, 2, 3)
+be n (int * 3) = (2, 3, 4)
+
+be o = m + n                # (3, 5, 7)
+
+# Tuples of the same length under simple arithmetics act like a quick for loop for all values.
+
+#################################### COLLECTIVE ENUM ####################################
+
+type Result<Success, Error> (*Ok(Success), *Err(Error))
+
+be k Result(int, str) = Result.Ok(200)
+k = Result.Err('Could not connect!')
+
+if be Result.Err(m) = k {
+    out: m
+}
+
+############################## OPTIONAL VALUE = OPTION TYPE ##############################
+
+# In an struct:
+type A<D> (
+    b B?
+    c C(D)?
+)
+
+# In a function as a return type:
+
+fn function(int) int? {
+    if k > 0
+        ret k
+    # no return counts as empty return
+}
+
+a = function(500)
+b = function(-5)
+
+if null = a {
+    # If a is null (no value)
+}
+
+if a? {
+    # If a contains a value
+}
+
+######################################## REFERENCE #######################################
+
+@Type # a pointer
+
+##################################### TYPE AND VALUE #####################################
+
+type TypeValuePair = Map (T, Map(uint, _))
+
+type ABC (de int, fg int)
+
+be k TypeValuePair
+
+k.(ABC) = Map(uint, ABC)
+k.(ABC).(0) = ABC (de = 5, fg = 10)
+
+T(ret) # return type in a function
+T(ret) = smt # set return type
+
+#
+# type Type     = a type, acts like one
+# T(Value)      = a type (upper border) of the value
+# T(Type)       = the type id, typeof uint
+#
+
+############################### TUPLE CONVERSION ARRAY TYPE ##############################
+# (...)
+
+fn anything_literally (any (...) Type) {
+    for i, e in any {}
+}
+
+fn anything_literally ('Everything', 'will', 'be', 'converted', 2, 'an', 'array')
+
+##########################################################################################
+#########                      WORKING WITH DIFFERENT TYPES                      #########
+##########################################################################################
+
+#
+# Setting Enums
+#
+
+type Enum =
+    *Member1
+    | *Member2(More)
+    | *Member3(AndMore)
+
+be k Enum = Enum.Member1
+be k = Enum.Member1 # This language is not to be verbose! Everything that's obvious is obvious!!!
+
+#
+# Unpacking enums in conditional flow
+#
+
+k = Enum.Member2(More)
+
+if be Enum.Member2(content) = k {
+    # Unpacks content from the enum
+} el if be Enum.Member1 = k {
+    # k = Enum.Member1
+}
+
+#
+# Working with collections
+#
+
+type Values (
+    str |
+    num |
+    bool |
+)
+
+be k Values = 'Hello!'
+
+if T(k) {
+    case str
+        # as easy as that
+    case num
+    case bool
+}
+
+#
+# Working with recursive types
+#
+
+type Array<Content> (
+    *M(Content, self) |
+    *E
+)
+
+Array<Content> {
+    fn self (pos uint) Content {
+        be latest @Array(Content) = self
+        for pos if latest {
+            case Array.M {
+                latest = latest.1
+            }
+
+            case Array.E {
+                latest = Array.M(element, Array.E)
+            }
+        }
+        ret latest.1
+    }
+
+    fn push (element Content) {
+        be latest @Array(Content) = self
+        for {
+            if latest {
+                case Array.M {
+                    latest = latest.1
+                }
+
+                case Array.E {
+                    latest = Array.M(element, Array.E)
+                }
+            }
+        }
+    }
+}
+
+arr #*Array(str)*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)))
+arr.push()  # Array(T).push fn push {}
+arr.(0)      # Array(T)()    fn self (int) {}
