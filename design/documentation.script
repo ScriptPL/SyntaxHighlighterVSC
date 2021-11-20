@@ -851,27 +851,6 @@ fn getHtml() {
 #########                                ASSEMBLY                                #########
 ##########################################################################################
 
-be k, j reg(8)
-
-k = 5   # move k, 5
-j = k   # move j, k
-j += 2  # add  j, 2
-
-# The set method = between two variables
-# => set requires an assembly register
-fn __assign (c @_, d _) {
-    # Compile time proof
-    be {T(c) == T(d)}
-
-    be a reg(32)
-    a = d
-    c = a
-}
-
-#
-# Assembly Flags
-#
-
 OF # Overflow Flag:        Overflow of SIGN bit: (int4) 0100 + 0100 = 1000; 4 + 4 = 8, but here: -7
 DF # Direction Flag:
 IF # Interrupt Flag:
@@ -882,38 +861,20 @@ AF # Auxiliary Carry Flag:
 PF # Parity Flag:          Amount of zeros after arithmetic operation
 CF # Carry Flag:           Carry:   1010 + 1011 = 1, 0101
 
-#
-# Fibonacci Sequence
-# https://www.youtube.com/watch?v=yOyaJXpAYZQ ????
-#
-
-{
-    be a = 1, b = 1, c reg(16)
-
-    for {
-        c = a + b
-        # You can use the assembly flags to check for overflow.
-        a = b
-        b = c
-    }
-
-    # lifetime of a, b, c ends here
-}
-
 ##########################################################################################
 #########                            PYTHON SPACE CHECK                          #########
 ##########################################################################################
 
 # Undoubtedly smt => a
-if  smt {
+if smt {
     a
 }
 
 # also smt => a
-if  smt
+if smt
     a
 
-if  condition
+if condition
     statement1
     statement2 # statement2 begins at the same indent as statement1, hence belongs to the code blocks
 
