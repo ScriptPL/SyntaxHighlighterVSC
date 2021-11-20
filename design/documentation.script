@@ -140,10 +140,9 @@ be (a, b, c) = use smt
 be (a = b, c = d, e = f) = struct
 be (a = b, c = d, e = f) = use smt
 
-# be () not followed by "="
-# forces a boolean to give true, or throws error
-# COMPILE TIME PROOF
-be (bool)
+# be {} forces a boolean to give true, or throws error
+# tries to be compile time
+be {bool}
 
 
 ####################################### POINTERS #########################################
@@ -904,7 +903,7 @@ j += 2  # add  j, 2
 # => set requires an assembly register
 fn __assign (c @_, d _) {
     # Compile time proof
-    be (T(c) == T(d))
+    be {T(c) == T(d)}
 
     be a reg(32)
     a = d

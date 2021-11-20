@@ -78,8 +78,12 @@ RawList<ElementType> {
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
         for i in (begin = 0, end = pos) {
-            be (be List.Element = latestChild.1)    # Bypasses the parser checks force-assuming a boolean to be true
-            latestChild = latestChild.1             # Index in the array.
+            # Bypasses the parser checks force-assuming a boolean to be true
+            be {
+                be List.Element = latestChild.1
+            }
+            # Index in the array.
+            latestChild = latestChild.1
         }
         ret latestChild.0
     }
@@ -223,6 +227,8 @@ ECS {
         ret _id += 1
     }
 
+    
+
     # entity.add(CompType (value))
     fn add(eid uint, comp _) {
         #
@@ -238,7 +244,7 @@ ECS {
             }
 
             # Type Logic goes here:
-            be (Map(uint, T(comp)) = _map.(T(comp)))
+            be {Map(uint, T(comp)) = _map.(T(comp))}
         }
 
         #
