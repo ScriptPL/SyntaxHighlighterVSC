@@ -399,12 +399,17 @@ out: 'hello' in ('hello', 'world') # true
 # case <values> <code>
 # case <values> { <code> }
 #
+# case followed by two dots awaits boolean expressions
+# case: <booleans> ...
+#
 # for switch statements more python-like syntax is considered culture
 
 if value { # s stays for switch
     case k
         # code
     case m
+        # code
+    case: value > 5
         # code
 }
 
@@ -415,12 +420,16 @@ if value {
     case Type
         # Match if is type
 
+    case: value > 5
+        # Match if value is greater than 5
+
 } el {
     # Nothing matched
 }
 
 # Arrow syntax
 if value {
+    # case val1 | val2 {code}
     val1 | val2 => code
 } el {
     # else code
