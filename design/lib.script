@@ -71,7 +71,7 @@ type List: ElementType (
     len uint
 )
 
-sc RawList: ElementType {
+RawList : ElementType {
 
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
@@ -112,7 +112,7 @@ sc RawList: ElementType {
     }
 }
 
-sc List: ElT {
+List: ElT {
 
     fn __new () List(ElT) {
         ret List(ElT) {
@@ -184,7 +184,7 @@ be k (uint ^ 1)
 
 type str = List(char)
 
-sc str {
+str {
     # k self is the same as k str; indicates str + str 
     fn __plus(k self) {
         # Call List methods
@@ -198,7 +198,7 @@ sc str {
 
 type num = (byte * 2) # Sort of
 
-sc num {
+num {
     fn to (conversion T) T {
         # Compile time makes sure that the return type is the same as the input type.
         T(ret) = conversion
@@ -215,7 +215,7 @@ sc num {
 #########                         ENTITY COMPONENT SYSTEM                        #########
 ##########################################################################################
 
-sc ECS {
+ECS {
     be _id uint = 0
     be _map Map(T, Map(uint, _)) = Map()
 

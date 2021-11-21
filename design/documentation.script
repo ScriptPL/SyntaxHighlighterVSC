@@ -19,10 +19,10 @@ __special
 ##########################################################################################
 
 # Code block is under the k-scope
-sc k {}
+k {}
 
 # Code block under k-scope with Ty label
-sc k: Ty {}
+k: Ty {}
 
 # Function with l label (which is also the tag and lifetime of the function)
 fn<l> name (variable T, ...) (ret T) {
@@ -90,11 +90,11 @@ use 'a'
 #########                                 SCOPES                                 #########
 ##########################################################################################
 
-sc a {
+a {
     # self = a
-    sc b.c {
+    b.c {
         # self = a.b.c
-        sc d {
+        d {
             # self = a.b.c.d
         }
     }
@@ -220,7 +220,7 @@ fn smt() num {
 
 ################################# SPECIAL TYPE FUNCTIONS #################################
 
-sc Type {
+Type {
     # Type = ...
     fn __assign(value _) {
         self = ...
@@ -452,7 +452,7 @@ if 'Hello, World!'.equalsSize {
 ##########################################################################################
 
 # Just the scope "API"
-sc API {
+API {
     fn connect () {
 
     }
@@ -464,7 +464,7 @@ API.connect()
 #################################### UNIVERSAL SCOPE #####################################
 # Traits
 
-sc self {
+self {
     fn ref () T(self) {
         ret @self
     }
@@ -662,5 +662,5 @@ fn smt ()
         condition
     code_block
 
-sc TypeImplementation : ...
+TypeImplementation : ...
     # methods

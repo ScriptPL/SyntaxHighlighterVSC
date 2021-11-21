@@ -238,7 +238,7 @@
 				"name": "keyword.script"
 			}, {
 				"name": "keyword.control.script",
-				"match": "\\b(fn|type|for|sc|ret|throw)\\b"
+				"match": "\\b(fn|type|for|ret|throw)\\b"
 			}, {
 				"name": "keyword.script",
 				"match": "\\b(use|self|in|be|next|if|el|case|sync|T|V|_)\\b"
