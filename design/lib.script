@@ -114,7 +114,7 @@ RawList : ElementType {
 
 List: ElT {
 
-    fn __new () List(ElT) {
+    fn 'be' () List(ElT) {
         ret List(ElT) {
             _list = RawList(ElT)
             len = 0
@@ -122,7 +122,7 @@ List: ElT {
     }
 
     for 'compile time'
-    fn __assign (content ()ElT) {
+    fn '=' (content ()ElT) {
         for i, e in content {
             self.push(e)
         }
@@ -147,12 +147,7 @@ List: ElT {
         ret self.len -= 1
     }
 
-    #*fn __plus (value ElT) self {
-        self.push(value)
-        ret self
-    }*#
-
-    fn __assign_plus (values (...) ElT) {
+    fn '*=' (values (...) ElT) {
         for _, e in values {
             self.push(values)
         }
@@ -186,7 +181,7 @@ type str = List(char)
 
 str {
     # k self is the same as k str; indicates str + str 
-    fn __plus(k self) {
+    fn '+' (k self) {
         # Call List methods
         self.combine(k)
     }

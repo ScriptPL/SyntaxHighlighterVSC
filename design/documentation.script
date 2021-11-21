@@ -12,45 +12,6 @@ type (T)
 
 public
 _private # visible to the scope only
-__special
-
-##########################################################################################
-#########                                SUMMARY                                 #########
-##########################################################################################
-
-# Code block is under the k-scope
-k {}
-
-# Code block under k-scope with Ty label
-k: Ty {}
-
-# Function with l label (which is also the tag and lifetime of the function)
-fn<l> name (variable T, ...) (ret T) {
-    # code block
-}
-
-# Define / Initialize
-be k T
-be k = V
-be k T = V
-
-function: params1, 2
-function(params1, 2)
-function:
-    params1, 2
-function:
-    params1,
-    2
-params1 \function 2 #arithmetic notation
-
-function:
-function:
-function:
-
-# FUNCTION THAT TAKES A FUNCTION AS ARGUMENT
-function: function
-
-V = V # set operator => not a function call
 
 ##########################################################################################
 #########                                IMPORTS                                 #########
@@ -218,37 +179,52 @@ fn smt() num {
     a + b
 }
 
-################################# SPECIAL TYPE FUNCTIONS #################################
+#################################### SPECIAL FUNCTIONS ###################################
 
 Type {
-    # Type = ...
-    fn __assign(value _) {
+    # automatic declaration
+    fn 'be' () Type {
+
+    }
+
+    # assign
+    fn '=' (value _) {
         self = ...
     }
 
-    # Type += ...
-    fn __assign_plus(value _) {
+    # more specific assigns
+    fn '+=' (value _) {
+        # What you see here is the default implementation of +=
+        self = self + value
+    }
+
+    #
+    # You *can* leave the return type of arithmetic operations
+    # making it functions calls *technically*
+    #
+
+    # Type + value
+    fn '+' (value _) _ {
         self = ...
     }
 
-    fn __assign_minus(v _)       # -=
-    fn __assign_multiply(v _)    # *=
-    fn __assign_division(v _)    # /=
-    fn __assign_mod(v _)         # %=
-    fn __assign_power(v _)       # ^=
-    # ...
+    fn '-' (v _) _  # Type - value
+    fn '*' (v _) _  # Type * value
+    fn '/' (v _) _  # Type / value
+    fn '%' (v _) _  # Type % value
+    fn '^' (v _) _  # Type ^ value
 
-    # Type + ...
-    fn __plus(value _) {
-        self = ...
-    }
+    fn '!' () _  # !Type  (Conditional "not")
+    fn '?' () _  # Type?  (Option unwrap operator)
 
-    fn __minus(v _)       # -=
-    fn __multiply(v _)    # *=
-    fn __division(v _)    # /=
-    fn __mod(v _)         # %=
-    fn __power(v _)       # ^=
-    # ...
+    # Conditional and / or, etc.
+    fn '&&' (v _) _  # Type && value
+    fn '||' (v _) _  # Type || value
+
+    #
+    # Writing `for 'compile time'` before a function will make - if possible -
+    # be evaluated at compile time. 
+    #
 }
 
 ##########################################################################################
