@@ -151,8 +151,6 @@ fn plus (a int, b int) int {
 call (params)
 call: params
 
-a \plus b
-
 ################################ ARROW FUNCTIONS / LAMBDA ################################
 
 fn f (x) {
