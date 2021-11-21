@@ -129,10 +129,16 @@ fn name (parameter int = default, ...) return_type {
     ret return_value
 }
 
+########################### LAST LINE IS RETURN - RUST INSPIRED ##########################
+
+fn smt() num {
+    a + b
+}
+
 ###################################### MANY OUTPUTS ######################################
 
 fn example () int, str, bool {
-    ret 5, 'Hi!', true
+    5, 'Hi!', true
 }
 
 be a, b, c = example()
@@ -145,7 +151,7 @@ fn call (params) {
 
 # arithmetic
 fn plus (a int, b int) int {
-    ret a + b
+    a + b
 }
 
 call (params)
@@ -154,7 +160,7 @@ call: params
 ################################ ARROW FUNCTIONS / LAMBDA ################################
 
 fn f (x) {
-   ret 2 * x + 5
+   2 * x + 5
 }
 
 be f = (x) => 2 * x + 5
@@ -169,12 +175,6 @@ out: 'You?'
 
 fn out (params (...) str) {
     ...
-}
-
-########################### LAST LINE IS RETURN - RUST INSPIRED ##########################
-
-fn smt() num {
-    a + b
 }
 
 #################################### SPECIAL FUNCTIONS ###################################
@@ -400,8 +400,8 @@ if value {
 
 # Arrow syntax
 if value {
-    # case val1 | val2 {code}
-    val1 | val2 => code
+    case val1 | val2
+        code
 } el {
     # else code
 }
@@ -607,7 +607,6 @@ CF # Carry Flag:           Carry:   1010 + 1011 = 1, 0101
 #########                            PYTHON SPACE CHECK                          #########
 ##########################################################################################
 
-# Undoubtedly smt => a
 if smt {
     a
 }

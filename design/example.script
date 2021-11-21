@@ -103,13 +103,12 @@ fn print_element (params (...)) {
     }
 }
 
-# arrow syntax
 fn print_element (params (...)) {
     for i, e in params {
         if e {
-            str => out: e, b0A
-            int => out: e.to(str), b0A
-            bool => out: (if e : 'true' el false), b0A
+            case str  out: e, b0A
+            case int  out: e.to(str), b0A
+            case bool out: (if e : 'true' el false), b0A
         }
     }
 }
