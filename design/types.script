@@ -100,6 +100,28 @@ k = (var = ..., anotherVar = ...)
 k = (Type, SecondType, ...)
 
 #
+# Combinations: Complex Type structuring
+#
+
+type List: Element (
+    len uint,
+    _list (
+        # _list is treated like it's own type,
+        # self is = _list, you cannot navigate to the
+        # parent. This is treated like an unnamed type.
+        *Node(Element, self) |
+        *End
+    )
+)
+
+fn List.'be' () {
+    self = List (
+        len = 0,
+        _list = List._list.End
+    )
+}
+
+#
 # Recursive types
 #
 
