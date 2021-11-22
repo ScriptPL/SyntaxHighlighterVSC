@@ -637,3 +637,41 @@ fn smt ()
 
 TypeImplementation : ...
     # methods
+
+# You can also do it inline
+if smt: a
+for smt: a
+
+##########################################################################################
+#########                      QUICK NOTATIONS / EXPRESSIONS                     #########
+##########################################################################################
+
+# Say you have a List element full of nodes (in one direction):
+
+type List: El (
+    *Node(El, self) |
+    *End
+)
+
+# This is one way to implement a 'get at position' function:
+
+fn List.getElementAtPos (pos uint) ElementType {
+    be latestChild @List(ElementType) = self
+    for i in (begin = 0, end = pos) {
+        # Bypasses the parser checks force-assuming a boolean to be true
+        be {
+            be List.Element = latestChild.1
+        }
+        # Index in the array.
+        latestChild = latestChild.1
+    }
+    ret latestChild.0
+}
+
+# And here the short variant:
+
+fn List.getElementAtPos (pos uint) Option<ElementType> {
+    # self.len doesn't exist here but should as a possibility
+    if pos > self.len: ret Option.None
+    ret Option.Some(self .. (for pos: 1) . 0)
+}
