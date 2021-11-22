@@ -25,6 +25,10 @@ out: gcd(2, 5)
 #########                           FACTORIAL FUNCTION                           #########
 ##########################################################################################
 
+# can make it a one-liner!
+# function header | if        | ret | else | ret
+fn factorial (n)    if n <= 1   1     el     self(n-1) * n
+
 fn factorial (n uint) uint
     if n <= 1
         ret 1
@@ -57,10 +61,10 @@ out: fibonacci().to(str)
 
 ############################## DEFINING RECURSIVE FIBONACCI ##############################
 
-#* be fibonacci func(uint -> uint) = (n uint) uint => if n {
-    n <= 1 => 1
+be fibonacci func(uint -> uint) = (n uint) uint => if n {
+    case n <= 1 1
     el self(n - 1) + self(n - 2)
-} *#
+}
 
 be fibonacci func(uint -> uint) = (n uint) uint => {
     be a, b, c reg(64)
