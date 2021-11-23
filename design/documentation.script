@@ -93,11 +93,9 @@ for 'compile time' {
 
 # Unpack values
 
-be (a, b, c) = struct
-be (a, b, c) = use smt
-
-be (a = b, c = d, e = f) = struct
-be (a = b, c = d, e = f) = use smt
+be a, b, c = struct
+be a : d, b : e, c : f = struct
+be a, b, c = use smt
 
 # be {} forces a boolean to give true, or throws error
 # tries to be compile time

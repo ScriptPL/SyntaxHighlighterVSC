@@ -248,7 +248,7 @@ ECS {
 
 # Usage:
 
-be (entity, query, add) = use 'lib/ecs'
+be entity, query, add = use 'lib/ecs'
 
 type Player
 type Position (x int, y int)
