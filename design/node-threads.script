@@ -69,3 +69,21 @@ sync    # synchronous code
     out: 'k1 and k2 are received'
 }
 
+##########################################################################################
+#########                        ON THE FLOW OPTIMIZATION                        #########
+##########################################################################################
+
+type uint = (byte * 4)
+
+uint {
+    fn to (v T) T: if v {
+        case int
+            v.0 = 0
+            ret v
+    }
+}
+
+be k uint = 5
+
+out: k.to(int)  # the if-case is unpackaed compile time; all statements are
+                # transformed into a reaction chain that is optimised compile time
