@@ -238,10 +238,10 @@
 				"name": "keyword.script"
 			}, {
 				"name": "keyword.control.script",
-				"match": "\\b(fn|type|for|ret|throw)\\b"
+				"match": "\\b(fn|type|for|ret|throw|next|if|el|case|T|V)\\b"
 			}, {
 				"name": "keyword.script",
-				"match": "\\b(use|self|in|be|next|if|el|case|sync|T|V|_)\\b"
+				"match": "\\b(use|self|in|be|sync|_)\\b"
 			}, {
 				"name": "variable.other.constant.script",
 				"match": "\\b(document|window|process|true|false|null)\\b"
