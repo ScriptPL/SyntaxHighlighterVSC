@@ -1,7 +1,6 @@
 
-
 ##########################################################################################
-#########                         RUST INSPIRED OWNERSHIP                        #########
+#########                           VARIABLE LIFETIMES                           #########
 ##########################################################################################
 
 # Lifetimes of variables
@@ -19,6 +18,97 @@
     #
     # lifetime of k ends here
 }
+
+##########################################################################################
+#########                         RUST INSPIRED OWNERSHIP                        #########
+##########################################################################################
+
+#
+# Quick & Automatic pass
+#
+
+fn decipherPassingMethod (v uint) {
+    # By not noting the pass method, it's decoded.
+    # Strings, numbers and booleans are passed by cloned value.
+    # Everything else is passed by reference.
+    # The reference is garbage collected if it doesn't find a correct borrow.
+}
+
+##########################################################################################
+
+fn copyValue (v @C uint) {
+    # @C indicates a pass-by-copy
+}
+
+be k = 0
+copyValue(k)
+# k is still alive
+
+##########################################################################################
+
+#
+# Pass by mutable reference (aka borrow)
+#
+
+fn cutValue (v @X uint) {
+    # @X indicates a pass-by-ownership.
+    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
+    # In rust, it's a &mut reference, you cannot inherit two mutable references.
+}
+
+be k = 0
+cutValue(k)
+# k is still alive
+
+##########################################################################################
+
+#
+# Pass by immutable reference ("fixed reference")
+#
+
+fn cutValue (v @F uint) {
+    # @X indicates a pass-by-ownership.
+    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
+}
+
+be k = 0
+be l = @F k
+cutValue(k)
+# k is now immutable
+
+##########################################################################################
+
+#
+# Pass and count for references/ pointers. (Default: Garbage collection)
+#
+
+fn cutValue (v @uint) {
+    # @X indicates a pass-by-ownership.
+    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
+}
+
+be k = 0
+cutValue(k)
+# k is still alive
+
+##########################################################################################
+
+#
+# Pass BY OWNERSHIP
+#
+
+fn takeValue (v @O uint) {
+    # @X indicates a pass-by-ownership.
+    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
+}
+
+be k = 0
+takeValue(k)
+# k is killed
+
+##########################################################################################
+#########                                 HMMMMM                                 #########
+##########################################################################################
 
 # Functions
 
