@@ -8,134 +8,154 @@
 {
     be k = 0
     # lifetime of k starts here
-    #
+    # z is not yet declared
     {
         be z = 0
         # lifetime of z starts here
         #
-        # lifetime of z ends here
+        # z becomes invalid
     }
     #
-    # lifetime of k ends here
+    # k becomes invalid
 }
 
 ##########################################################################################
 #########                         RUST INSPIRED OWNERSHIP                        #########
 ##########################################################################################
 
-#
-# Quick & Automatic pass
-#
+own # pass by ownership. variable is moved out of scope.
+cut # pass by mutable reference, variable is borrowed out of scope but will return at the end.
+new # pass by copy, variable is cloned.
+fix # pass immutable (= by immutable reference)
 
-fn decipherPassingMethod (v uint) {
-    # By not noting the pass method, it's decoded.
-    # Strings, numbers and booleans are passed by cloned value.
-    # Everything else is passed by reference.
-    # The reference is garbage collected if it doesn't find a correct borrow.
+######################################## OWNERSHIP #######################################
+
+fn takeVariable(own k str) {
+    # k is owned
 }
 
-##########################################################################################
+be j = 'Hello!'
+takeVariable(j)
+# j is invalid
 
-fn copyValue (v @C uint) {
-    # @C indicates a pass-by-copy
+############################# PASS BY MUTABLE REFERENCE = CUT ############################
+
+fn cutValue (cut v uint) {
+    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
+    # In rust, it's a &mut reference, you cannot inherit two mutable references.
+
+    # You cannot use 'takeVariable(k)' here since it requires ownership.
+}
+
+be k = 0
+# k is valid
+cutValue(k)
+# k is valid
+takeVariable(k)
+# k is invalid
+
+###################################### PASS BY COPY ######################################
+
+fn copyValue (new v uint) {
+    # v is cloned
+    # v is the owner of the variable, you can pass it by ownership
 }
 
 be k = 0
 copyValue(k)
-# k is still alive
+# k is valid
 
-##########################################################################################
+############################### GARBAGE COLLECTION / TRACE ###############################
 
-#
-# Pass by mutable reference (aka borrow)
-#
-
-fn cutValue (v @X uint) {
-    # @X indicates a pass-by-ownership.
-    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
-    # In rust, it's a &mut reference, you cannot inherit two mutable references.
+fn traceValue (v uint) {
+    # +1 to v references count. (traces per default unless compiler is smart enough)
+    # v is considered one of mutable references here.
+    # -1 to v references count.
 }
 
-be k = 0
-cutValue(k)
-# k is still alive
-
-##########################################################################################
+################################## IMMUTABLE REFERENCES ##################################
 
 #
 # Pass by immutable reference ("fixed reference")
 #
 
-fn cutValue (v @F uint) {
+fn cutValue (fix v uint) {
     # @X indicates a pass-by-ownership.
     # Think of it like cntrl + x: cut the value into this scope, then paste it back.
 }
 
 be k = 0
-be l = @F k
+be l = fix k
 cutValue(k)
 # k is now immutable
 
 ##########################################################################################
-
-#
-# Pass and count for references/ pointers. (Default: Garbage collection)
-#
-
-fn cutValue (v @uint) {
-    # @X indicates a pass-by-ownership.
-    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
-}
-
-be k = 0
-cutValue(k)
-# k is still alive
-
+#########                                 PARSER                                 #########
 ##########################################################################################
 
-#
-# Pass BY OWNERSHIP
-#
+type Token (
+    uint
+    | *Plus
+    | *Minus
+)
 
-fn takeValue (v @O uint) {
-    # @X indicates a pass-by-ownership.
-    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
+be string = '1230 + 234 - 239 + 439 - 2349 - 23423'
+
+fn parse(cut s str) Stack<Token> {
+    be tokens = Stack<Token>()
+
+    # for all characters
+    # switch at every character
+    for c char in s if s.match
+        case ´\s´
+
+        case ´\+´
+            tokens.push(Plus)
+
+        case ´\-´
+            tokens.push(Minus)
+
+        case ´[0-9]´
+            tokens.push(parse_number(s + c))
+
 }
 
-be k = 0
-takeValue(k)
-# k is killed
+fn parse_number(cut s str) uint {
+    be buffer String
 
-##########################################################################################
-#########                                 HMMMMM                                 #########
-##########################################################################################
+    # for all characters
+    # switch at every character
+    for<l> c char in s
+        if s.match(´[0-9]´)
+            buffer += c
+        el ret<l>
+        
+    s += c
 
-# Functions
-
-be string = '1 + 5- 700 + 55'
-be tokens (str ^ 1) = ()
-
-fn parse (s @str, t (str ^ 1)) {
-    for c in s {
-        if c in '+-'
-            t += c
-        el
-
-    }
+    buffer.to(uint)
 }
 
-# you pass string and tokens into the function
-# the string is passed by reference
-# the tokens list is passed by ownership
-parse: @string, tokens
-# parse(@string, tokens)
+be tokens = parse(string)
 
-# Closures
+
+
+##########################################################################################
+#########                                CLOSURES                                #########
+##########################################################################################
+#
+# Closures are functions that can access variables from the scope they were defined in.
+#
 
 be i = 0
 
-fn tab() {
-    ret ' '.rep(@i)
+# To indicate a variable to be captured into the function, write an arrow '->'
+# Leaving the arrow will - same with leaving the pass kinds of the ownership system - 
+# make the variable be traced by references.
+
+# In here it's just indicating that it's getting captured, but it's not any sort of special
+# reference. This will have the same effect, but makes things readable.
+fn tab(-> i) {
+    ret ' '.rep(i)
     
     # i is taken from environment as a reference
     # -> function CAN NOT outlive variable

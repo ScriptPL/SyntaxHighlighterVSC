@@ -214,8 +214,8 @@ Type {
     fn '?' () _  # Type?  (Option unwrap operator)
 
     # Conditional and / or, etc.
-    fn '&&' (v _) _  # Type && value
-    fn '||' (v _) _  # Type || value
+    fn '&' (v _) _  # Type & value
+    fn '|' (v _) _  # Type | value
 
     #
     # Writing `for 'compile time'` before a function will make - if possible -

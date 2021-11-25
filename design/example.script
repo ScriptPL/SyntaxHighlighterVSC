@@ -25,15 +25,12 @@ out: gcd(2, 5)
 #########                           FACTORIAL FUNCTION                           #########
 ##########################################################################################
 
-# can make it a one-liner!
-# function header | if        | ret | else | ret
-fn factorial (n)    if n <= 1   1     el     self(n-1) * n
-
-fn factorial (n uint) uint
+fn factorial (n uint) uint {
     if n <= 1
         ret 1
     el # this line can be comment technically
         ret self(n - 1) * n
+}
 
 fn factorial (n uint) uint {
     be r = 1
