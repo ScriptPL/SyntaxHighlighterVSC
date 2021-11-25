@@ -3,14 +3,9 @@
 
 ( ... )
 
-# Reference Pointer
-
-@a
-
 # Member Access
 
 a()     # function call; note: no newline may follow between function call headers
-a: #*...*#, #*...*#, ... # "method" function call
 a . b   # member access
 a .. (b)# quick member navigation
 #a ?. b # optional chain = safe member inherit; technically two operations:

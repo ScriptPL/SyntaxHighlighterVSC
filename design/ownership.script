@@ -169,6 +169,6 @@ for t in ('a', 'indent', 'b', 'c', 'indent', 'd', 'outdent', 'e', 'outdent', 'f'
         case 'outdent'
             i -= 1
     } el {
-        out: tab(), t
+        out(tab(), t)
     }
 }

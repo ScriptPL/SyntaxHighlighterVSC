@@ -165,7 +165,7 @@ be k Result(int, str) = Result.Ok(200)
 k = Result.Err('Could not connect!')
 
 if be Result.Err(m) = k {
-    out: m
+    out(m)
 }
 
 ############################## OPTIONAL VALUE = OPTION TYPE ##############################

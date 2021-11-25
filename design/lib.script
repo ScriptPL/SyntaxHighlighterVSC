@@ -21,13 +21,13 @@ k = 500
 
 if k? {
     case: k > 0
-        out: 'k is positive'
+        out('k is positive')
     case: k < 0
-        out: 'k is negative'
+        out('k is negative')
     case: k == 0
-        out: 'k is zero'
+        out('k is zero')
 } el if !k? {
-    out: 'k is not defined'
+    out('k is not defined')
 }
 
 ##########################################################################################
@@ -153,7 +153,7 @@ k.push(50)  # 0
 k.push(100) # 1
 k += 150    # 2
 
-out: k.(1)  # 100
+out(k.(1))  # 100
 
 # Quick usage:
 be k (uint ^ 1)
@@ -313,7 +313,7 @@ fn Range.self (i num = self.start) num {
 }
 
 for i in Range (start = 1) {
-    out: i.to(str) # 1, 2, 3, 4, ...
+    out(i.to(str)) # 1, 2, 3, 4, ...
 }
 
 ##########################################################################################

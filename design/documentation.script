@@ -129,7 +129,7 @@ fn name (parameter int = default, ...) return_type {
 
 ########################### LAST LINE IS RETURN - RUST INSPIRED ##########################
 
-fn smt() num {
+fn smt(a int, b int) num {
     a + b
 }
 
@@ -141,20 +141,6 @@ fn example () int, str, bool {
 
 be a, b, c = example()
 
-######################################### CALLS ##########################################
-
-fn call (params) {
-
-}
-
-# arithmetic
-fn plus (a int, b int) int {
-    a + b
-}
-
-call (params)
-call: params
-
 ################################ ARROW FUNCTIONS / LAMBDA ################################
 
 fn f (x) {
@@ -165,9 +151,9 @@ be f = (x) => 2 * x + 5
 
 ################################# STACKABLE OPTIMIZATION #################################
 
-out: 'Hello!'
-out: 'How are you?', 'I\'m fine!'
-out: 'You?'
+out('Hello!')
+out('How are you?', 'I\'m fine!')
+out('You?')
 
 # optimised compile time into out 'Hello!', 'How are you?', 'I\'m fine', 'You?', if no statement is inbetween.
 
@@ -277,7 +263,7 @@ for<x> y {
     }
 }
 
-out: y == value # true
+out (y == value) # true
 
 ######################################## SPECIAL #########################################
 
@@ -359,9 +345,9 @@ if smt {
 # ELEMENT in LIST/ARRAY
 # CHAR in STRING/CHAR ARRAY/STRING ARRAY
 
-out: 'a' in 'abc' # true
-out: 'a' in 'bc'  # false
-out: 'hello' in ('hello', 'world') # true
+out('a' in 'abc') # true
+out('a' in 'bc')  # false
+out('hello' in ('hello', 'world')) # true
 
 ###################################### SWITCH CASE ######################################
 
@@ -415,7 +401,7 @@ fn str.equalsSize(i int) bool, str {
 
 if 'Hello, World!'.equalsSize {
     case 13 -> v {
-        out v
+        out(v)
     }
 }
 
@@ -433,21 +419,6 @@ API {
 # Access functions in the scope
 API.connect()
 
-#################################### UNIVERSAL SCOPE #####################################
-# Traits
-
-self {
-    fn ref () T(self) {
-        ret @self
-    }
-
-    fn out () {
-        out: self
-    }
-}
-
-'Hello World'.out()
-
 ##########################################################################################
 #########                              LAZY LOGIC                                #########
 ##########################################################################################
@@ -456,8 +427,6 @@ if k for if y {
     # if k  # if k  # if k equals true enter "next scope"
     # for   # for   # and loop indefinitely.
     # if y  # if y  # if y is true, run the code block, otherwise continue
-
-    ###
 }
 
 # is the same as
@@ -513,7 +482,7 @@ fn iter(i int = 0, b int = 10) int, int {
 }
 
 for i in iter {
-    out: i  # 
+    out(i)  # 
 }
 
 ##########################################################################################
@@ -544,8 +513,8 @@ be w = ´[01]´
 be n int
 be string_to_proof = 'aaabbbccc'
 
-out: string_to_proof * ´(a)${l:n}(b){n}(c){n}´  # true
-out: n                          # 3
+out(string_to_proof * ´(a)${l:n}(b){n}(c){n}´)  # true
+out(n)                          # 3
 
 #
 # a${l:n}   # Scan for "l"ength of "a"'s, write into variable n
@@ -569,7 +538,7 @@ for key, value in k * ´(\w)${1}="(\w)${2}";´ {
     map.(key) = value 
 }
 
-out: map.('h') .. ', ' .. map.('g')    # Hello, World!
+out(map.('h') + ', ' + map.('g'))    # Hello, World!
 
 ##########################################################################################
 #########                                HTML SYNTAX                             #########
@@ -624,7 +593,9 @@ if
 
 statement3 # This statement doesn't belong to the if clause
 
-fn smt ()
+# Functions and scopes need to have the code brackets
+
+fn smt () {
     code_block
     if statement
         condition_block
@@ -632,9 +603,11 @@ fn smt ()
             loop
         condition
     code_block
+}
 
-TypeImplementation : ...
+TypeImplementation : ... {
     # methods
+}
 
 # You can also do it inline
 if smt: a
