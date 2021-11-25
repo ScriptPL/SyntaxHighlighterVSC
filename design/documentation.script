@@ -17,14 +17,16 @@ _private # visible to the scope only
 #########                                IMPORTS                                 #########
 ##########################################################################################
 
-use 'strict', 'asm'
+use 'strict'
 
 #*
-- strict bans assembly and unsafe coding, some other tricks
-- asm unlocks coding with registers
+- 'strict' is a special module that:
+    - forces all values to be checked for type
+    - bans lazy typing and lazy evaluation
+    - automatic type conversions
 *#
 
-use 'lib/html', 'lib/ecs'
+use 'html', 'ecs'
 
 #*
 - Use modules provided by the library
@@ -32,20 +34,18 @@ use 'lib/html', 'lib/ecs'
 - e.g. 'ecs' provides an entity component system
 *#
 
-use 'mod/www.link-to-repo.com/path/to/.git'
+use 'www.link-to-repo.com/path/to/.git'
 
 #*
 - use imported/downloaded modules
+- must start with 'www.', 'http://' or 'https://'
+- should end with '.git'
 *#
 
-use 'src/path/to/file'  # use from source
-use './path/to/file'    # . to use relative
-use '../path/to/file'   # .. to navigate parent
-
 # no need for commas
-use 'a'
-    'b'
-    'c'
+use 'src/path/to/file'  # navigate from source
+    './path/to/file'    # . to navigate relative
+    '../path/to/file'   # .. to navigate parent
 
 ##########################################################################################
 #########                                 SCOPES                                 #########
