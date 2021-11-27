@@ -17,7 +17,7 @@ _private # visible to the scope only
 #########                                IMPORTS                                 #########
 ##########################################################################################
 
-use 'strict'
+use 'strict', 'unsafe'
 
 #*
 - 'strict' is a special module that:
@@ -100,7 +100,6 @@ be a, b, c = use smt
 # be {} forces a boolean to give true, or throws error
 # tries to be compile time
 be {bool}
-
 
 ####################################### POINTERS #########################################
 
