@@ -250,7 +250,7 @@
 				"match": "\\b(document|window|process|true|false|null)\\b"
 			}, {
 				"name": "support.type.script",
-				"match": "\\b(u?int|u?num|str|char|bool|byte|func|code)\\b"
+				"match": "\\b(u?int|u?num|str|char|bool|byte)\\b"
 			}, {
 				"name": "keyword.asm",
 				"match": "\\b[ODITSZAPC]F\\b"

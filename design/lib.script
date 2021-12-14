@@ -228,7 +228,7 @@ ECS {
         _map.(T(comp)).(eid) = V(comp) # _map.comp_type.eid = comp; V stores the value without type headers.
     }
 
-    fn query(comps (...) T]) func {
+    fn query(comps (...) T]) Fn {
         if comps.len == 0 ret fn # () {}
 
         be entities Set(uint) # Sets are hashmaps without content: You just add keys and remove them

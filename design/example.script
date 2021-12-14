@@ -58,12 +58,12 @@ out(fibonacci().to(str))
 
 ############################## DEFINING RECURSIVE FIBONACCI ##############################
 
-be fibonacci func(uint -> uint) = (n uint) uint => if n {
+be fibonacci Fn<uint -> uint> = (n uint) uint => if n {
     case n <= 1 1
     el self(n - 1) + self(n - 2)
 }
 
-be fibonacci func(uint -> uint) = (n uint) uint => {
+be fibonacci Fn<uint -> uint> = (n uint) uint => {
     be a, b, c reg(64)
     for n {
         i += j

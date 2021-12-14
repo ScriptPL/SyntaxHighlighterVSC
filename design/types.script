@@ -318,3 +318,16 @@ Array: Content {
 arr #*Array(str)*# = Array.M('Hello!', Array.M('all', Array.M('people', Array.E)))
 arr.push()  # Array(T).push fn push {}
 arr.(0)      # Array(T)()    fn self (int) {}
+
+##########################################################################################
+#########                          FUNCTION / CODE TYPE                          #########
+##########################################################################################
+
+be k Fn # k is a code block
+be k Fn<int> # k is a function that takes an integer and returns nothing
+be k Fn<int -> _>
+be k Fn<int -> int> # k is a function that takes an integer and returns an integer
+
+be k Fn = {
+    # you can write any code here
+}
