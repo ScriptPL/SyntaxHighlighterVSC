@@ -146,7 +146,10 @@ be tokens = parse(string)
 # Closures are functions that can access variables from the scope they were defined in.
 #
 
-be i = 0
+-> own # access by ownership.
+-> cut # access by mutable reference.
+-> new # access by copy, variable is cloned upon closure creation
+-> # access by mutable copy, garbage collected OR
 
 # To indicate a variable to be captured into the function, write an arrow '->'
 # Leaving the arrow will - same with leaving the pass kinds of the ownership system - 
@@ -154,6 +157,8 @@ be i = 0
 
 # In here it's just indicating that it's getting captured, but it's not any sort of special
 # reference. This will have the same effect, but makes things readable.
+be i = 0
+
 fn tab(-> i) {
     ret ' '.rep(i)
     
