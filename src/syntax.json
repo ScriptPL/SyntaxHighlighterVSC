@@ -252,9 +252,6 @@
 				"name": "support.type.script",
 				"match": "\\b(u?int|u?num|str|char|bool|byte)\\b"
 			}, {
-				"name": "keyword.asm",
-				"match": "\\b[ODITSZAPC]F\\b"
-			}, {
 				"name": "support.type.script",
 				"match": "(_*)[A-Z][a-zA-Z0-9_]*",
 				"captures": {

@@ -576,18 +576,44 @@ fn getHtml() {
 }
 
 ##########################################################################################
-#########                                ASSEMBLY                                #########
+#########                                  FLAGS                                 #########
 ##########################################################################################
 
-OF # Overflow Flag:        Overflow of SIGN bit: (int4) 0100 + 0100 = 1000; 4 + 4 = 8, but here: -7
-DF # Direction Flag:
-IF # Interrupt Flag:
-TF # Trap Flag:
-SF # Sign Flag:            Sign of result of arithmetic operation
-ZF # Zero Flag:            Result of arihtmetic operation is zero
-AF # Auxiliary Carry Flag: 
-PF # Parity Flag:          Amount of zeros after arithmetic operation
-CF # Carry Flag:           Carry:   1010 + 1011 = 1, 0101
+fn main {
+
+    # We call the arithmetic operation and handle the result
+
+    be k int = 2000000000
+    be k int = 2000000000
+
+    if be k = a + b {
+        # http://zeus.cs.pacificu.edu/shereen/OldCourses/cs430f08/Lectures/ch11bF08.pdf
+        
+        # result of a signed arithmetic operation is too large or too small to fit 
+        if k.overflow():
+            out('Overflow flag')
+
+        # result of an unsigned arithmetic operation is too large to fit
+        if k.carry():
+            out('Carry flag')
+
+        # result of an arithmetic or logical operation generates a negative result
+        if k.sign():
+            out('Sign flag')
+
+        # result of an arithmetic or logical operation generates a result of zero
+        if k.zero():
+            out('Zero flag')
+
+        # result of operation has even amount of bits
+        if k.parity():
+            out('Parity flag')
+
+        # result of 'add' on last four bits is 1
+        if k.adjust():
+            out('Auxiliary Carry flag')
+    }
+}
 
 ##########################################################################################
 #########                            PYTHON SPACE CHECK                          #########
