@@ -565,7 +565,15 @@ fn getHtml() {
 }
 
 # this is how to abort a function
-call long() # ???????
+!sync {
+    be k Fn = {long()} # by warping the function call in a code body, you make it the function call
+
+    k()
+
+    # wait some time
+
+    k.abort()
+}
 
 ##########################################################################################
 #########                                ASSEMBLY                                #########
