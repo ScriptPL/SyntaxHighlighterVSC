@@ -29,7 +29,7 @@
 -.5
 .00
 
-######### VARIABLE COLORING #########
+######### VARIABLE COLORING / CONVENTION #########
 
 # Variables need to start with a letter or underscore,
 # can follow with letters, underscore and numbers.
@@ -41,9 +41,17 @@ abcdef012345, _hello_world
 Abcdef012345, _HelloWorld
 
 var_iable = y
-_private_var = y
+_private_var = y # private variables are prefixed with an underscore
 xXXXXXx => y
 Xxxxxxx()
+
+######## CONVENTION (RECAP) #########
+
+# Brackets
+{code}
+(V)
+type (T)
+<labels>
 
 ######### RESERVED TYPES #########
 
