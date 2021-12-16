@@ -106,7 +106,7 @@ List: ElT {
         }
     }
 
-    for 'compile time'
+    # Array assignments are automatically converted to Lists
     fn '=' (content ()ElT) {
         for i, e in content {
             self.push(e)
@@ -115,8 +115,8 @@ List: ElT {
 
     # fn self: SELF.()
     fn self (pos uint) ElT {
-        for 'compile time'
-        if pos > self.len
+        # If position is smaller than length, then, throw an error.
+        if pos > self.len:
             throw "Index out of range!"
         ret self._list.getElementAtPos(pos)
     }
@@ -203,12 +203,15 @@ ECS {
         ret _id += 1
     }
 
+    #
     # entity.add(CompType (value))
+    #
+
     fn add(eid uint, comp _) {
         #
         # The following will be executed ONLY during compilation and disappears in runtime.
         #
-        for 'compile time' {
+        $'compile time' {
             # Compile time make sure that the map object has a proper hierarchy
             _map.(T(comp)) = Map(uint, T(comp))
 

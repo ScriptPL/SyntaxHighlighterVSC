@@ -72,9 +72,10 @@ be k = List(str) ('sup', 'ppl')
 be k List(str) = List(str) ('sup', 'ppl')
 
 # EXECUTED ONLY COMPILE TIME
-for 'compile time' be smt = value
+$'compile time'
+be smt = value
 
-for 'compile time' {
+$'compile time' {
     code
 }
 
@@ -193,11 +194,6 @@ Type {
     # Conditional and / or, etc.
     fn '&' (v _) _  # Type & value
     fn '|' (v _) _  # Type | value
-
-    #
-    # Writing `for 'compile time'` before a function will make - if possible -
-    # be evaluated at compile time. 
-    #
 }
 
 ##########################################################################################
@@ -255,12 +251,6 @@ for<x> y {
 }
 
 out (y == value) # true
-
-######################################## SPECIAL #########################################
-
-for 'special event' {
-    # SPECIAL
-}
 
 ##########################################################################################
 #########                               OPERATIONS                               #########
