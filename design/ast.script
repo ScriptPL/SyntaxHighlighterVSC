@@ -11,6 +11,13 @@ a .. (b)# quick member navigation
 #a ?. b # optional chain = safe member inherit; technically two operations:
         # check validation -> if valid, then do member access
 
+# Attributes
+
+own a
+new a
+cut a
+fix a
+
 # Logicals
 
 !not        # not
@@ -45,3 +52,7 @@ a != b != c # special: a != c also evaluated
 # Lowest precendence
 
 a, b
+
+# Synchronous
+
+sync a, b, ...
