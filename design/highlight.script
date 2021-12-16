@@ -59,7 +59,7 @@ for, in, next   # repetetive control flow
 ret             # return scope
 if, el, case    # conditional control flow
 
-be              # proof a value to be true OR be a value something
+be, flag        # declaration, etc.
 self            # recursive self or parent reference
 
 true, false,    # values
