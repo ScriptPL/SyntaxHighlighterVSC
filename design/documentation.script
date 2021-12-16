@@ -93,9 +93,14 @@ for 'compile time' {
 
 # Unpack values
 
-be a, b, c = struct
+be s, a, b, c = struct # s is the struct itself; a, b, c it's attributes
+be _, a = (a = 5) # _ would be the struct itself (a = 5), a is here the attribute a, which is 5
 be a : d, b : e, c : f = struct
-be a, b, c = use smt
+be a : ..b = struct # a = struct.b
+be a : ..b() = struct # a = struct.b()
+
+be _, a, b, c = use smt
+be smt = use smt
 
 # be {} forces a boolean to give true, or throws error
 # tries to be compile time
@@ -579,40 +584,54 @@ fn getHtml() {
 #########                                  FLAGS                                 #########
 ##########################################################################################
 
+#
+# The flag keyword after a declaration with arithmetic expressions indicates
+# declaration of flags that will be used in code.
+#
+
 fn main {
 
     # We call the arithmetic operation and handle the result
 
     be k int = 2000000000
-    be k int = 2000000000
+    be i int = 2000000000
 
-    if be k = a + b {
-        # http://zeus.cs.pacificu.edu/shereen/OldCourses/cs430f08/Lectures/ch11bF08.pdf
-        
-        # result of a signed arithmetic operation is too large or too small to fit 
-        if k.overflow():
-            out('Overflow flag')
+    be r int = k + i
+    flag overflow, 
+        flag_c: carry,
+        flag_s: sign,
+        flag_z: zero,
+        flag_p: parity,
+        flag_a: adjust
 
-        # result of an unsigned arithmetic operation is too large to fit
-        if k.carry():
-            out('Carry flag')
+    out(`Result: (r.to(str))`)
 
-        # result of an arithmetic or logical operation generates a negative result
-        if k.sign():
-            out('Sign flag')
+    # http://zeus.cs.pacificu.edu/shereen/OldCourses/cs430f08/Lectures/ch11bF08.pdf
+    
+    # result of a signed arithmetic operation is too large or too small to fit 
+    if overflow:
+        out('Overflow flag')
 
-        # result of an arithmetic or logical operation generates a result of zero
-        if k.zero():
-            out('Zero flag')
+    # result of an unsigned arithmetic operation is too large to fit
+    if flag_c:
+        out('Carry flag')
 
-        # result of operation has even amount of bits
-        if k.parity():
-            out('Parity flag')
+    # result of an arithmetic or logical operation generates a negative result
+    if flag_s:
+        out('Sign flag')
 
-        # result of 'add' on last four bits is 1
-        if k.adjust():
-            out('Auxiliary Carry flag')
-    }
+    # result of an arithmetic or logical operation generates a result of zero
+    if flag_z:
+        out('Zero flag')
+
+    # result of operation has even amount of bits
+    if flag_p:
+        out('Parity flag')
+
+    # result of 'add' on last four bits is 1
+    if flag_a:
+        out('Auxiliary Carry flag')
+    
 }
 
 ##########################################################################################
