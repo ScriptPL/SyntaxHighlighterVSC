@@ -222,7 +222,9 @@ for be i = number
 for condition
 
 # traditional for loop
-for be i = start_value; i < end_value; i += 1
+for be i = start_value; i <= end_value; i += 1
+for be i = start_value, end_value
+for be i = start_value, end_value, step
 
 # alternative
 i int = 5                   # for ( i = s;

@@ -141,6 +141,23 @@ fn genPrimes (total int) List(int) {
 
 out(genPrimes (500))
 
+#
+# PRIME GENERATION USING SIEVE
+#
+
+be max = 10000
+be primes List(int) = (1, ..., max)
+
+for be i = 2, max {
+    if primes(i) == 0 next
+
+    out (i)
+
+    for be j = 2 * i, max, j += i {
+        primes(j) = 0
+    }
+}
+
 ##########################################################################################
 #########                        READABLE GAMEDEV SETUP                          #########
 ##########################################################################################
