@@ -67,6 +67,8 @@ for, in, next   # repetetive control flow
 ret             # return scope
 if, el, case    # conditional control flow
 
+throw           # throw an exception
+
 be, flag        # declaration, etc.
 self            # recursive self or parent reference
 
