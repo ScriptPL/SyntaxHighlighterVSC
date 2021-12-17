@@ -113,5 +113,5 @@ uint {
 
 be k uint = 5
 
-out(k.to(int))  # the if-case is unpackaed compile time; all statements are
+out(k.to(int))  # the if-case is unpacked compile time; all statements are
                 # transformed into a reaction chain that is optimised compile time
