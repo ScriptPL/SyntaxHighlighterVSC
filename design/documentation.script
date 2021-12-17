@@ -111,6 +111,17 @@ be k int = 5
 be z @int = k
 be j @int = k
 
+################################### EQUATION SOLUTIONS ###################################
+
+be x = Math.sqrt( y ^ 2 + z ^ 2 )
+be x ^ 2 = y ^ 2 + z ^ 2
+
+# LEFT SIDE = VALUES TO BE ASSIGNED (ONE VARIABLE!)
+# RIGHT SIDE = VALUES TO BE READ
+# CONSTANTS CAN BE ANYWHERE
+
+2 ^ x = 64 # x = 8
+
 ##########################################################################################
 #########                               FUNCTIONS                                #########
 ##########################################################################################
