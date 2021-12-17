@@ -263,7 +263,7 @@
 				"match": "\\b(fn|type|for|ret|throw|next|if|el|case)\\b"
 			}, {
 				"name": "keyword.script",
-				"match": "\\b(use|self|in|be|flag|sync|own|new|cut|fix)\\b"
+				"match": "\\b(use|self|in|be|sync|own|new|cut|fix)\\b"
 			}, {
 				"name": "variable.other.constant.script",
 				"match": "\\b(document|window|process|true|false|null)\\b"

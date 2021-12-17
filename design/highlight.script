@@ -69,7 +69,7 @@ if, el, case    # conditional control flow
 
 throw           # throw an exception
 
-be, flag        # declaration, etc.
+be              # declaration, etc.
 self            # recursive self or parent reference
 
 true, false,    # values
