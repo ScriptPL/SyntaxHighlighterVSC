@@ -64,9 +64,37 @@ sync    # synchronous code
     be k2 = process2()
 
     # Interpret wordly: "Synchronize values k1 and k2" => await k1 and k2
-    sync k1, k2
+    sync = k1, k2
 
     out('k1 and k2 are received')
+}
+
+##########################################################################################
+#########                ASYNCHRONOUS PROCESSES AND RESOURCE SHARING             #########
+##########################################################################################
+
+be isResourceFree = true
+
+!sync fn thread () {
+    # do smt
+
+    # synchronize through object
+    sync isResourceFree {
+        for !isResourceFree {
+            isResourceFree = false
+        }
+
+        # use resource or so
+
+        isResourceFree = true
+    }
+
+    # do smt
+}
+
+!sync {
+    be k1 = thread()
+    be k2 = thread()
 }
 
 ##########################################################################################
