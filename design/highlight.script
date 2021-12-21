@@ -76,7 +76,6 @@ true, false,    # values
 null
 
 T, V, _         # Type, Value, "null"
-A, B, C, ... Z  # All standalone capital letters are reserved for special use.
 
 ######### RESERVED CONSTANTS #########
 

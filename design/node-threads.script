@@ -104,10 +104,12 @@ be isResourceFree = true
 type uint = (byte * 4)
 
 uint {
-    fn to (v T) T: if v {
-        case int
-            v.0 = 0
-            ret v
+    fn to (v T) T {
+        if v {
+            case int
+                v.0 = 0
+                ret v
+        }
     }
 }
 

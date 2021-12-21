@@ -12,7 +12,7 @@ be false bool = b00
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-type Option: Value (*Some(Value), None)
+type Option<Value> (*Some(Value), None)
 
 # Usage:
 
@@ -34,7 +34,7 @@ if k? {
 #########                               THE RESULT                               #########
 ##########################################################################################
 
-type Result: V1, V2 (*Ok(V1), *Err(V2))
+type Result<V1, V2> (*Ok(V1), *Err(V2))
 
 # k Result(uint, uint)
 be k = Result.Ok(200)
@@ -44,19 +44,19 @@ k = Result.Err(404)
 #########                                THE LIST                                #########
 ##########################################################################################
 
-type RawList: ElT (
-    *Element(ElT, self) |
+type RawList<E> (
+    *Element(E, self) |
     *Endpoint
 )
 
-type List: ElementType (
+type List<ElementType> (
     _list RawList(ElementType)
     _last @RawList(ElementType) = @self._list               # Last -> Endpoint
     _prelast Option(@RawList(ElementType)) = Option.None    # Prelast -> Element or None
     len uint
 )
 
-RawList : ElementType {
+RawList<ElementType> {
 
     fn getElementAtPos (pos uint) ElementType {
         be latestChild @List(ElementType) = self
@@ -97,7 +97,7 @@ RawList : ElementType {
     }
 }
 
-List: ElT {
+List<ElT> {
 
     fn 'be' () List(ElT) {
         ret List(ElT) {

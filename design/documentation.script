@@ -39,11 +39,9 @@ use 'src/path/to/file'  # navigate from source
 ##########################################################################################
 
 a {
-    # self = a
     b.c {
-        # self = a.b.c
-        d {
-            # self = a.b.c.d
+        fn d () {
+            # fn a.b.c.d
         }
     }
 
@@ -662,7 +660,7 @@ for smt: a
 
 # Say you have a List element full of nodes (in one direction):
 
-type List: El (
+type List<El> (
     *Node(El, self) |
     *End
 )
