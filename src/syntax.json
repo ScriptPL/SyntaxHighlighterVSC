@@ -51,30 +51,20 @@
 		"strings": {
 			"patterns": [{
 				"name": "string.quoted.single",
-				"begin": "(\\$)?\\s*'",
+				"begin": "\\s*'",
 				"end": "\n|(?<!\\\\)'",
 				"patterns": [{
 					"name": "constant.character.escape.script",
 					"match": "\\\\."
-				}],
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control"
-					}
-				}
+				}]
 			}, {
 				"name": "string.quoted.double",
-				"begin": "(\\$)?\\s*\"",
+				"begin": "\\s*\"",
 				"end": "\n|(?<!\\\\)\"",
 				"patterns": [{
 					"name": "constant.character.escape.script",
 					"match": "\\\\."
-				}],
-				"beginCaptures": {
-					"1": {
-						"name": "keyword.control"
-					}
-				}
+				}]
 			}, {
 				"begin": "`",
 				"end": "\n|(?<!\\\\)`",

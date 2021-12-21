@@ -69,14 +69,6 @@ be k List(str) = ('sup', 'ppl')
 be k = List(str) ('sup', 'ppl')
 be k List(str) = List(str) ('sup', 'ppl')
 
-# EXECUTED ONLY COMPILE TIME
-$'compile time'
-be smt = value
-
-$'compile time' {
-    code
-}
-
 # Unpack values
 
 be s, a, b, c = struct # s is the struct itself; a, b, c it's attributes

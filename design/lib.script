@@ -211,19 +211,18 @@ ECS {
         #
         # The following will be executed ONLY during compilation and disappears in runtime.
         #
-        $'compile time' {
-            # Compile time make sure that the map object has a proper hierarchy
-            _map.(T(comp)) = Map(uint, T(comp))
+        
+        # Compile time make sure that the map object has a proper hierarchy
+        _map.(T(comp)) = Map(uint, T(comp))
 
-            # Creates a type function that will be used to add the component to the entity
-            T(comp).self = (id uint) T(comp) => {
-                ret _map.(T(comp)).(id)
-            }
-
-            # Type Logic goes here:
-            be {Map(uint, T(comp)) = _map.(T(comp))}
+        # Creates a type function that will be used to add the component to the entity
+        T(comp).self = (id uint) T(comp) => {
+            ret _map.(T(comp)).(id)
         }
 
+        # Type Logic goes here:
+        be {Map(uint, T(comp)) = _map.(T(comp))}
+        
         #
         # The following is compiled to the runtime
         #
