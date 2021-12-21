@@ -45,6 +45,7 @@ a != b != c # special: a != c also evaluated
 # Higher Attributes
 
 T a
+fn a ()
 
 # Lowest precendence: Comma
 
