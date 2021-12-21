@@ -75,9 +75,6 @@ self            # recursive self or parent reference
 true, false,    # values
 null
 
-own, new,       # variable passing types
-cut
-
 T, V, _         # Type, Value, "null"
 A, B, C, ... Z  # All standalone capital letters are reserved for special use.
 

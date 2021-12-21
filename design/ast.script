@@ -48,8 +48,4 @@ a, b
 
 # Attributes
 
-own a
-new a
-cut a
-
 sync a, b, ...
