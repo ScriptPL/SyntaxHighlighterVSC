@@ -12,11 +12,11 @@ be false bool = b00
 #########                               THE OPTION                               #########
 ##########################################################################################
 
-type Option<Value> (*Some(Value), None)
+type Option<Value> (Some(Value), None)
 
 # Usage:
 
-be k int? = null
+be k int? = None
 k = 500
 
 if k? {

@@ -181,13 +181,13 @@ type A<D> (
 fn function(int) int? {
     if k > 0
         ret k
-    # no return counts as empty return
+    # no return counts as return None with optional types
 }
 
 a = function(500)
 b = function(-5)
 
-if null = a {
+if None = a {
     # If a is null (no value)
 }
 

@@ -72,9 +72,8 @@ be              # declaration, etc.
 self            # recursive self or parent reference
 
 true, false,    # values
-null
 
-T, _         # Type, Value, "null"
+T, _         # Type and null value
 
 ######### RESERVED CONSTANTS #########
 

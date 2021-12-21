@@ -253,7 +253,7 @@
 				"match": "\\b(use|self|in|be|sync|T)\\b"
 			}, {
 				"name": "variable.other.constant.script",
-				"match": "\\b(document|window|process|true|false|null)\\b"
+				"match": "\\b(document|window|process|true|false)\\b"
 			}, {
 				"name": "support.type.script",
 				"match": "\\b(u?int|u?num|str|char|bool|byte)\\b"
