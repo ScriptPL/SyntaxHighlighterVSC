@@ -26,7 +26,6 @@
 own # pass by ownership. variable is moved out of scope.
 cut # pass by mutable reference, variable is borrowed out of scope but will return at the end.
 new # pass by copy, variable is cloned.
-fix # pass immutable (= by immutable reference)
 
 ######################################## OWNERSHIP #######################################
 
@@ -72,22 +71,6 @@ fn traceValue (v uint) {
     # v is considered one of mutable references here.
     # -1 to v references count.
 }
-
-################################## IMMUTABLE REFERENCES ##################################
-
-#
-# Pass by immutable reference ("fixed reference")
-#
-
-fn cutValue (fix v uint) {
-    # @X indicates a pass-by-ownership.
-    # Think of it like cntrl + x: cut the value into this scope, then paste it back.
-}
-
-be k = 0
-be l = fix k
-cutValue(k)
-# k is now immutable
 
 ##########################################################################################
 #########                                 PARSER                                 #########
