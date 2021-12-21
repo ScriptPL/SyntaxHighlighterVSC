@@ -321,15 +321,14 @@ el {}
 # for in an if
 for smt {
     # loop while smt
-} el if smt {
-    # if not smt
+} el { # el if smt2, alternatively
     # if smt was NEVER true
 }
 
 if smt {
     # if smt
 } el for smt2 {
-    # if not smt
+    # if not smt, loop for smt2
 }
 
 ################################### in AS ELEMENT OF ####################################
