@@ -84,6 +84,7 @@ RawList<ElementType> {
         ret Option.None
 
         be latestChild @List(ElementType) = self
+
         for {
             if be List.Element = latestChild.1 { # while the next child is an element, update the pointer.
                 latestChild = latestChild.1
@@ -204,28 +205,38 @@ ECS {
     }
 
     #
+    # The following function will be executed ONLY during compilation and disappears
+    # in runtime due to the magic of 'for use':
+    # for every instance of the function use, execute code ahead of compile time.
+    #
+    # NOTE! ALL VARIABLES THAT ARE USED MOST BE EXPLICITLY DEFINED IN THE FUNCTION
+    # CALL AS NO CALCULATIONS HAPPENED YET.
+    #
+
+    # for use add()             OR
+    # for use fn add()          ??
+    # idea: for use type Smt    ??
+
+    for use
+    
+    fn add (_ uint, comp T) {
+        # Structure map to a proper hierarchy
+        _map.(T(comp)) = Map(uint, T(comp))
+
+        # Declare a function for the component type
+        fn T(comp).self (id uint) T(comp) {
+            ret _map.(T(comp)).(id)
+        }
+    }
+
+    #
     # entity.add(CompType (value))
     #
 
     fn add(eid uint, comp _) {
-        #
-        # The following will be executed ONLY during compilation and disappears in runtime.
-        #
-        
-        # Compile time make sure that the map object has a proper hierarchy
-        _map.(T(comp)) = Map(uint, T(comp))
-
-        # Creates a type function that will be used to add the component to the entity
-        T(comp).self = (id uint) T(comp) => {
-            ret _map.(T(comp)).(id)
+        be {
+            Map(uint, T(comp)) = _map.(T(comp))
         }
-
-        # Type Logic goes here:
-        be {Map(uint, T(comp)) = _map.(T(comp))}
-        
-        #
-        # The following is compiled to the runtime
-        #
 
         _map.(T(comp)).(eid) = comp
     }
@@ -256,6 +267,11 @@ type Player
 type Position (x int, y int)
 
 be player = entity()
+
+#
+# Player, Position, and Velocity get the function self.(uint) due to
+# ahead compiled 'for use'
+#
 
 add(player, Player)
 add(player, Position (x = 50, y = 50))
