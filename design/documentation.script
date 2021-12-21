@@ -382,7 +382,7 @@ fn str.equalsSize(i int) bool, str {
     ret false, ''
 }
 
-if 'Hello, World!'.equalsSize {
+'Hello, World!'.equalsSize.if() {
     case 13 -> v {
         out(v)
     }
