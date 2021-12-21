@@ -1,4 +1,17 @@
 # General Ideas
 
-- most short file extensions are reserved by now, script will have an extension using a double dot, hence `:s`, or alternatively `.script`
-- meta programming at limits, allow creating for any kid of API.
+- `script_name+`, the plus sign `+` can be the file extensioj
+
+# Final Ideas
+
+## 1. General
+
+### 1.1. Functions
+
+```
+fn func_name () {
+    
+}
+```
+
+Functions are declared with `fn`, followed by name (optionally), followed by brackets.
