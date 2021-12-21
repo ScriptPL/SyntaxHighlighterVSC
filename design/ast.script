@@ -42,10 +42,14 @@ a != b != c # special: a != c also evaluated
 
 %= ^= *= /= += -=
 
+# Higher Attributes
+
+T a
+
 # Lowest precendence: Comma
 
 a, b
 
-# Attributes
+# Lower Attributes
 
 sync a, b, ...

@@ -228,7 +228,7 @@ ECS {
         # The following is compiled to the runtime
         #
 
-        _map.(T(comp)).(eid) = V(comp) # _map.comp_type.eid = comp; V stores the value without type headers.
+        _map.(T(comp)).(eid) = comp
     }
 
     fn query(comps (...) T]) Fn {

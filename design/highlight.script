@@ -49,7 +49,6 @@ Xxxxxxx()
 
 # Brackets
 {code}
-(V)
 type (T)
 <labels>
 
@@ -75,7 +74,7 @@ self            # recursive self or parent reference
 true, false,    # values
 null
 
-T, V, _         # Type, Value, "null"
+T, _         # Type, Value, "null"
 
 ######### RESERVED CONSTANTS #########
 
