@@ -12,25 +12,25 @@ fn main () {
     # https://www.quantum-inspire.com/kbase/prep-y/
     # https://www.quantum-inspire.com/kbase/prep-z/
 
-    qu(0).prep_x()
-    qu(0).prep_y()
-    qu(0).prep_z()
+    qu.prep_x(0)
+    qu.prep_y(0)
+    qu.prep_z(0)
 
     # https://www.quantum-inspire.com/kbase/pauli-x
     # https://www.quantum-inspire.com/kbase/pauli-y
     # https://www.quantum-inspire.com/kbase/pauli-z
 
-    qu(0).pauli_x()
-    qu(0).pauli_y()
-    qu(0).pauli_z()
+    qu.pauli_x(0)
+    qu.pauli_y(0)
+    qu.pauli_z(0)
 
     # https://www.quantum-inspire.com/kbase/hadamard
 
-    qu(0).hadamard()
+    qu.hadamard(0)
 
     # https://www.quantum-inspire.com/kbase/identity-gate
 
-    qu(0).identity()
+    qu.identity(0)
 
     # https://www.quantum-inspire.com/kbase/90-degree-rotations
     # https://www.quantum-inspire.com/kbase/rx-gate
@@ -42,14 +42,14 @@ fn main () {
     # 0.5 radians = pi / 2 = 90°
     #
 
-    qu(0).rotate(0.5, 0.5, 0)
-    qu(0).rotate(0.5, -0.5, 0)
-    qu(0).rotate(-0.5, 0.5, 0)
-    qu(0).rotate(-0.5, -0.5, 0)
+    qu.rotate(0, 0.5, 0.5, 0)
+    qu.rotate(0, 0.5, -0.5, 0)
+    qu.rotate(0, -0.5, 0.5, 0)
+    qu.rotate(0, -0.5, -0.5, 0)
 
     # https://www.quantum-inspire.com/kbase/s-gate
     
-    qu(0).phase()
+    qu.phase(0)
 
     # https://www.quantum-inspire.com/kbase/s-dagger-gate
     # ?
@@ -59,9 +59,35 @@ fn main () {
     # ?
 
     # https://www.quantum-inspire.com/kbase/cnot
+    # https://www.quantum-inspire.com/kbase/cz-gate
 
-    qu(0).cnot(1)
+    qu.cnot(0, 1)
+    qu.cz(0, 1)
 
+    # https://www.quantum-inspire.com/kbase/swap
+    # https://www.quantum-inspire.com/kbase/cr-gate
+    # https://www.quantum-inspire.com/kbase/crk-gate
 
-    # More: https://www.quantum-inspire.com/projects/7071225
+    qu.swap(0, 1)
+    qu.cr(0, 1)
+    qu.crk(0, 1)
+
+    # Tofolli
+    # https://www.quantum-inspire.com/kbase/toffoli
+
+    qu.tofolli(0, 1, 2)
+
+    # https://www.quantum-inspire.com/kbase/measure
+    # https://www.quantum-inspire.com/kbase/measure-z
+    # https://www.quantum-inspire.com/kbase/measure-x
+    # https://www.quantum-inspire.com/kbase/measure-y
+
+    qu.m(0)
+    qu.x(0)
+    qu.y(0)
+    qu.z(0)
+
+    # https://www.quantum-inspire.com/kbase/measure-all
+
+    qu.all()
 }
