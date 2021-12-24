@@ -1,0 +1,67 @@
+
+##########################################################################################
+#########                           QUANTUM PROGRAMMING                          #########
+##########################################################################################
+
+use 'quantum_vm'
+
+fn main () {
+    be qu = Qubits(3)
+
+    # https://www.quantum-inspire.com/kbase/prep-x/
+    # https://www.quantum-inspire.com/kbase/prep-y/
+    # https://www.quantum-inspire.com/kbase/prep-z/
+
+    qu(0).prep_x()
+    qu(0).prep_y()
+    qu(0).prep_z()
+
+    # https://www.quantum-inspire.com/kbase/pauli-x
+    # https://www.quantum-inspire.com/kbase/pauli-y
+    # https://www.quantum-inspire.com/kbase/pauli-z
+
+    qu(0).pauli_x()
+    qu(0).pauli_y()
+    qu(0).pauli_z()
+
+    # https://www.quantum-inspire.com/kbase/hadamard
+
+    qu(0).hadamard()
+
+    # https://www.quantum-inspire.com/kbase/identity-gate
+
+    qu(0).identity()
+
+    # https://www.quantum-inspire.com/kbase/90-degree-rotations
+    # https://www.quantum-inspire.com/kbase/rx-gate
+    # https://www.quantum-inspire.com/kbase/ry-gate
+    # https://www.quantum-inspire.com/kbase/rz-gate
+
+    #
+    # rotate(x, y, z)
+    # 0.5 radians = pi / 2 = 90°
+    #
+
+    qu(0).rotate(0.5, 0.5, 0)
+    qu(0).rotate(0.5, -0.5, 0)
+    qu(0).rotate(-0.5, 0.5, 0)
+    qu(0).rotate(-0.5, -0.5, 0)
+
+    # https://www.quantum-inspire.com/kbase/s-gate
+    
+    qu(0).phase()
+
+    # https://www.quantum-inspire.com/kbase/s-dagger-gate
+    # ?
+
+    # https://www.quantum-inspire.com/kbase/t-gate
+    # https://www.quantum-inspire.com/kbase/t-dagger-gate
+    # ?
+
+    # https://www.quantum-inspire.com/kbase/cnot
+
+    qu(0).cnot(1)
+
+
+    # More: https://www.quantum-inspire.com/projects/7071225
+}

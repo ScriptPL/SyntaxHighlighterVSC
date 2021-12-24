@@ -122,7 +122,7 @@ fn genPrimes (total int) List(int) {
     be primes List(int) = (2, 3)
 
     for i in (begin = 5, end = total, jump = 2) {
-        isPrime = true
+        be isPrime = true
 
         for j, e in primes {
             if e % i == 0 {
