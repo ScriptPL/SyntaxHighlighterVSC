@@ -86,20 +86,32 @@ be {bool}
 
 ####################################### POINTERS #########################################
 
-be k int = 5
-be j @int = k
+#
+#   |----------------------------------------|
+#   |   VARIABLE                             |
+#   |   |----------------------------------| |
+#   |   | MEMORY ADDRESS OF ASSIGNED VALUE | |
+#   |   |----------------------------------| |
+#   |----------------------------------------|
+#
+# be something @Type = @value
+#
+# something = @different_value  # set something to the new 'different value'
+# something @= different_value  # set 'value' to 'different value'
+#
 
-j = 6   # k and its' reference j are 6
+be value = 'Hello, World!'
+be v2 = 'Nothing'
 
-be k int = 5
-be z int 10
-be j @int = k
+be k @str = @value
 
-j @= z  # set j to be z's reference, k is still 5
+k @= 'value is now something else'
 
-be k int = 5
-be z @int = k
-be j @int = k
+k = @v2
+
+# value = 'value is now something else'
+# v2 = 'Nothing'
+# k = @v2
 
 ################################### EQUATION SOLUTIONS ###################################
 
